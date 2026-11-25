@@ -7,7 +7,7 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Dejar a un docente activo como tutor de un trámite de titulación en curso, para que el estudiante tenga quién guíe su proyecto de grado  
 **Trigger:** El director de carrera decide asignar o cambiar el tutor de un trámite de titulación  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-004, FR-021, FR-022, NFR-004, NFR-005, NFR-009](../requirements.md)  
 **Layers:** UI
@@ -15,6 +15,7 @@
 ## Preconditions
 
 - El director de carrera inició sesión con el rol director de carrera.
+- El administrador del sistema registró docentes activos además del docente de taller de grado (UC-018).
 
 ## Main Success Scenario
 
@@ -38,15 +39,23 @@
 1. El sistema muestra el tutor actual y los docentes elegibles como tutor del trámite de titulación (BR-001).
 2. El director de carrera elige al nuevo tutor y confirma el cambio.
 3. El sistema reemplaza al tutor del trámite de titulación sin cambiar su fase.
-4. El sistema notifica al nuevo tutor que se le asignó el trámite de titulación, al tutor anterior que dejó de serlo y al estudiante que su trámite tiene un nuevo tutor.
+4. El sistema notifica al nuevo tutor que se le asignó el trámite de titulación y al estudiante que su trámite tiene un nuevo tutor (BR-005).
 5. Use case continues at step 9.
 
 ### A2: El director de carrera desiste
 
-**Trigger:** El director de carrera no confirma la asignación o el cambio (step 6)  
+**Trigger:** El director de carrera no confirma la asignación (step 6), o no confirma el cambio de tutor en A1  
 **Flow:**
 
 1. El director de carrera cancela la operación.
+2. Use case ends.
+
+### A3: No hay trámites en curso
+
+**Trigger:** No hay trámites de titulación en curso que mostrar (step 2)  
+**Flow:**
+
+1. El sistema informa que no hay trámites de titulación en curso.
 2. Use case ends.
 
 ## Postconditions
@@ -55,7 +64,7 @@
 
 - El trámite de titulación tiene como tutor al docente elegido.
 - Un trámite de titulación que estaba sin tutor quedó en la fase evaluación de perfil; uno que cambió de tutor conserva su fase.
-- El tutor asignado tiene una notificación de la asignación y el estudiante una notificación del cambio; tras un cambio, el tutor anterior tiene una notificación de que dejó de ser tutor.
+- El tutor asignado tiene una notificación de la asignación y el estudiante una notificación del cambio; tras un cambio, el tutor anterior no recibe notificación.
 - Las versiones del proyecto y las observaciones del trámite de titulación se conservan con su autor, también las del tutor anterior.
 
 ### Failure Postconditions
@@ -79,3 +88,7 @@ Asignar tutor a un trámite de titulación en la fase requisitos lo pasa a la fa
 ### BR-004: Acceso del tutor anterior
 
 Tras un cambio de tutor, el tutor anterior deja de participar en el trámite de titulación y ya no puede verlo (NFR-004), salvo que participe en él por otro papel.
+
+### BR-005: Notificación del cambio de tutor
+
+Un cambio de tutor se notifica al nuevo tutor (FR-022) y al estudiante (FR-021); el tutor anterior no recibe notificación, a diferencia del miembro del tribunal reemplazado (UC-006 A2).
