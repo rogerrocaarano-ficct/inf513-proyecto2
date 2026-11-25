@@ -2,8 +2,9 @@
 
 | Term                          | Definition                                                                                                                                       | Avoid                 |
 |-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|
-| Trámite de titulación         | El proceso de un estudiante para titularse por Proyecto de Grado, desde su registro hasta el archivo de su documentación.                         | Expediente            |
+| Trámite de titulación         | El proceso de un estudiante para titularse a nivel licenciatura por Proyecto de Grado, desde su registro hasta el archivo de su documentación; un estudiante que reprobó o abandonó uno inicia otro. | Expediente            |
 | Fase                          | Cada etapa del trámite de titulación: requisitos, evaluación de perfil, pre-defensa, defensa formal y archivo.                                   | Etapa                 |
+| Abandono                      | El fin de un trámite de titulación cuyo estudiante no se presentó a su pre-defensa o defensa formal; lo registra un miembro del tribunal ese día. |                       |
 | Estudiante                    | La persona inscrita en la carrera que elabora un proyecto de grado para titularse.                                                                | Alumno, Postulante    |
 | Asistente administrativo      | El funcionario de la dirección de carrera que registra estudiantes, recibe la documentación de requisitos y archiva los trámites.               | Secretaria            |
 | Director de carrera           | La autoridad de la carrera que asigna tutor y tribunal evaluador, designa al docente de taller de grado y programa la pre-defensa y la defensa formal. | Jefe de carrera       |
@@ -20,11 +21,11 @@
 | Observación                   | Un señalamiento que el revisor, el tutor o un miembro del tribunal registra sobre una versión del proyecto o sobre la pre-defensa.              | Corrección            |
 | Pre-defensa                   | La presentación previa del proyecto de grado y su prototipo ante el tribunal evaluador, que puede generar nuevas observaciones.                 |                       |
 | Defensa formal                | La presentación final del proyecto de grado ante el tribunal evaluador, en la que se asigna la calificación.                                     | Defensa final         |
-| Calificación                  | El puntaje de 0 a 100 que el tribunal evaluador asigna de manera conjunta al proyecto de grado en la defensa formal.                             | Nota                  |
+| Calificación                  | El puntaje de 0 a 100 de la defensa formal: el promedio de las calificaciones de los tres miembros del tribunal, redondeado al entero; con 51 o más el trámite de titulación concluye aprobado, con menos, reprobado. | Nota                  |
 | Notificación                  | Un mensaje que el sistema muestra a un usuario cuando un trámite de titulación en el que participa cambia.                                       | Aviso                 |
 | Usuario                       | Toda persona con una cuenta en el sistema, sea cual sea su rol.                                                                                  |                       |
-| Administrador del sistema     | El usuario que registra a los docentes y al director de carrera, gestiona roles, permisos y menú, y consulta la bitácora.                        | Superusuario          |
-| Rol                           | Un conjunto de permisos que se asigna a un usuario, como estudiante, docente o director de carrera.                                             | Perfil de usuario     |
+| Administrador del sistema     | El usuario que registra a los docentes, al director de carrera y a los asistentes administrativos, les asigna su rol y consulta la bitácora.    | Superusuario          |
+| Rol                           | Un conjunto fijo de permisos, definido por el sistema, que se asigna a un usuario, como estudiante, docente o director de carrera.               | Perfil de usuario     |
 | Permiso                       | La autorización para ejecutar una acción o ver una página del sistema; habilita también las opciones de menú correspondientes.                 |                       |
 | Bitácora                      | El registro en base de datos de los inicios de sesión exitosos y fallidos y de las visitas a páginas, con fecha, hora, usuario y dirección IP.   |                       |
 | Tema                          | La combinación de colores, tipografía e ilustraciones orientada a un segmento de usuarios: Niños, Jóvenes o Adultos.                           |                       |
