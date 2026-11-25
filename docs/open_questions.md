@@ -128,7 +128,7 @@ nivel A; (b) WCAG 2.1 nivel AA, el nivel que suelen exigir las normas de accesib
 **Assumed:** Cantidad de trámites de titulación por fase, defensas programadas y calificación promedio.  
 
 Los lineamientos técnicos (3.8) piden "métricas clave relacionadas con la actividad del negocio" sin nombrarlas.
-Otras posibles: tiempo promedio por fase, perfiles de proyecto rechazados, observaciones por entrega.
+Otras posibles: tiempo promedio por fase, perfiles de proyecto rechazados, observaciones por versión del proyecto.
 
 ## OQ-010: ¿Cuál es el número de grupo en la dirección de despliegue?
 
@@ -144,3 +144,58 @@ el esquema asignado al grupo en db.tecnoweb.org.bo (C-008).
 **Answer:** 03  
 **Answered by:** Roger Roca Arano, 2026-11-25  
 **Resolved in:** C-012, C-008  
+
+## OQ-011: ¿Con qué datos se identifica a un estudiante?
+
+**Element:** Entity: STUDENT.registration_number  
+**Raised by:** /entity-model, 2026-11-25  
+**Blocking:** No  
+**Status:** Resolved  
+**Assumed:** Número de registro universitario y número de carnet de identidad, ambos obligatorios y únicos; teléfono opcional.  
+
+Ni la visión ni el catálogo dicen qué datos personales del estudiante registra el asistente administrativo (FR-001).
+La carta de solicitud trae "sus datos personales", sin enumerarlos.
+
+**Answer:** los estudiantes cuentan con un número de registro y adicionalmente su cédula de Identidad, la cédula de identidad, esta compuesta por un número y un complemento opcional. El número de complemento, se asigna en Bolivia cuando por algún error el SEGIP (Servicio General de Identificación Personal) asigna el mismo número a 2 ciudadanos, entonces el complemento es para diferenciarlos.  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** Entity: STUDENT.registration_number, Entity: STUDENT.id_card_number, Entity: STUDENT.id_card_complement  
+
+## OQ-012: ¿El perfil de proyecto se presenta como archivo PDF o como formulario?
+
+**Element:** Entity: PROJECT_VERSION.file_path  
+**Raised by:** /entity-model, 2026-11-25  
+**Blocking:** No  
+**Status:** Withdrawn  
+**Assumed:** El estudiante escribe el título y sube el perfil de proyecto como un PDF de hasta 20 MB (C-004).  
+
+Lecturas: (a) título y PDF; (b) un formulario con campos (objetivos, alcance, justificación) sin archivo.
+
+**Withdrawn:** El perfil de proyecto pasó a ser la versión del proyecto de grado de la fase Evaluación de perfil, que siempre es un archivo PDF (PROJECT_VERSION); la lectura (b) ya no aplica.  
+
+## OQ-013: ¿Entre qué valores se puede ajustar el tamaño de la fuente?
+
+**Element:** Entity: USER_PREFERENCE.font_size_percent  
+**Raised by:** /entity-model, 2026-11-25  
+**Blocking:** No  
+**Status:** Resolved  
+**Assumed:** Del 75 % al 200 % del tamaño normal; el 200 % es el máximo que exige NFR-015.  
+
+FR-033 permite aumentar o reducir la fuente sin fijar los límites.
+
+**Answer:** Del 75 % al 200 %.  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** Entity: USER_PREFERENCE.font_size_percent  
+
+## OQ-014: ¿Qué longitud máxima tiene una observación?
+
+**Element:** Entity: OBSERVATION.body  
+**Raised by:** /entity-model, 2026-11-25  
+**Blocking:** No  
+**Status:** Resolved  
+**Assumed:** 2000 caracteres.  
+
+Las observaciones del revisor, del tutor y del tribunal evaluador son texto libre; ningún requisito fija su largo.
+
+**Answer:** 2000 caracteres.  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** Entity: OBSERVATION.body  
