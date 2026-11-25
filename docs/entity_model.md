@@ -3,7 +3,7 @@
 Modelo de entidades del sistema de seguimiento de trámites de titulación, derivado de
 [requirements.md](requirements.md). Los nombres siguen el [glosario](glossary.md).
 
-USERS (id, name, email, password, email_verified_at, two_factor_secret) ships with the Laravel starter project and is an external boundary.
+USERS (id, name, email, password, email_verified_at, two_factor_secret) ships with the Laravel starter project and is an external boundary. It gains one attribute, `must_change_password` (Boolean, Not Null): true while the user still has the initial password that UC-001 BR-005 sets, false once the user changes it.
 
 ## Entity Relationship Diagram
 
@@ -17,12 +17,15 @@ erDiagram
     STUDENT ||--o{ GRADUATION_PROCESS : "inicia"
     TEACHER |o--o{ GRADUATION_PROCESS : "es tutor de"
     GRADUATION_PROCESS ||--o{ REQUIREMENT_DOCUMENT : "contiene"
+    GRADUATION_PROCESS ||--|{ PHASE_CHANGE : "pasa por"
     GRADUATION_PROCESS ||--o{ PROJECT_VERSION : "recibe"
     TEACHER |o--o{ PROJECT_VERSION : "revisa"
     GRADUATION_PROCESS ||--o{ COMMITTEE_MEMBER : "es evaluado por"
     TEACHER ||--o{ COMMITTEE_MEMBER : "integra"
     PROJECT_VERSION ||--o{ VERSION_APPROVAL : "recibe"
     COMMITTEE_MEMBER ||--o{ VERSION_APPROVAL : "registra"
+    DEFENSE ||--o{ DEFENSE_REVIEW : "recibe"
+    COMMITTEE_MEMBER ||--o{ DEFENSE_REVIEW : "registra"
     PROJECT_VERSION |o--o{ OBSERVATION : "recibe"
     DEFENSE |o--o{ OBSERVATION : "recibe"
     GRADUATION_PROCESS ||--o{ DEFENSE : "programa"
@@ -156,14 +159,36 @@ Proceso de un estudiante para titularse por Proyecto de Grado, desde su registro
 | phase             | Fase actual del trámite                                  | String    | 30               | Not Null, Values: Requisitos, Evaluación de perfil, Pre-defensa, Defensa formal, Archivo |
 | started_at        | Fecha y hora del registro del trámite                    | DateTime  | -                | Not Null                                                                             |
 | concluded_at      | Fecha y hora en que se registró la calificación          | DateTime  | -                | Optional                                                                             |
+| abandoned_at      | Fecha y hora en que un miembro del tribunal registró la inasistencia del estudiante | DateTime  | -                | Optional                                                                             |
 | archived_at       | Fecha y hora en que el asistente administrativo lo archivó | DateTime  | -                | Optional                                                                             |
 
 #### Constraints
 
-- Un estudiante tiene a lo sumo un trámite de titulación sin `concluded_at`.
-- `concluded_at` es posterior a `started_at`, y `archived_at` es posterior a `concluded_at`.
+- Un estudiante tiene a lo sumo un trámite de titulación sin `concluded_at` ni `abandoned_at`, y a lo sumo un trámite aprobado.
+- Un trámite no tiene a la vez `concluded_at` y `abandoned_at`; `abandoned_at` es posterior a `started_at`.
+- Un trámite tiene `abandoned_at` si y solo si una de sus pre-defensas o defensas formales tiene `is_student_absent` verdadero.
+- `concluded_at` es posterior a `started_at`. Solo un trámite concluido o abandonado tiene `archived_at`, posterior a su `concluded_at` o `abandoned_at`.
 - Un trámite en fase `Archivo` tiene `archived_at`; un trámite con `archived_at` está en fase `Archivo`.
 - Desde la fase `Evaluación de perfil` en adelante, el trámite tiene `tutor_id`.
+
+### PHASE_CHANGE
+
+Entrada de un trámite de titulación en una fase, con la fecha y hora en que entró.
+
+| Attribute             | Description                                      | Data Type | Length/Precision | Validation Rules                                                                     |
+|-----------------------|--------------------------------------------------|-----------|------------------|--------------------------------------------------------------------------------------|
+| id                    | Identificador único                              | Long      | 19               | Primary Key, Sequence                                                                |
+| graduation_process_id | Trámite que cambió de fase                       | Long      | 19               | Not Null, Foreign Key (GRADUATION_PROCESS.id)                                        |
+| phase                 | Fase en la que entró el trámite                  | String    | 30               | Not Null, Values: Requisitos, Evaluación de perfil, Pre-defensa, Defensa formal, Archivo |
+| entered_at            | Fecha y hora en que el trámite entró en la fase  | DateTime  | -                | Not Null                                                                             |
+| changed_by            | Usuario cuya acción hizo entrar al trámite en la fase | Long      | 19               | Not Null, Foreign Key (USERS.id)                                                     |
+
+#### Constraints
+
+- Un trámite entra en cada fase a lo sumo una vez (graduation_process_id, phase son únicos juntos).
+- La primera entrada de un trámite tiene `entered_at` igual a su `started_at`, y es la fase `Requisitos` o `Evaluación de perfil`.
+- Las fases de un trámite se suceden en el orden Requisitos, Evaluación de perfil, Pre-defensa, Defensa formal, Archivo, sin volver atrás; un trámite abandonado puede pasar a `Archivo` desde la fase en que quedó.
+- La entrada más reciente de un trámite tiene la misma fase que `GRADUATION_PROCESS.phase`.
 
 ### REQUIREMENT_DOCUMENT
 
@@ -203,12 +228,15 @@ Evaluación de perfil.
 #### Constraints
 
 - El número de versión es único dentro de un trámite (graduation_process_id, number son únicos juntos) y crece de uno en uno, sin reiniciarse al cambiar de fase.
-- Una versión de la fase `Evaluación de perfil` tiene `reviewer_id`; una de otra fase no lo tiene.
+- Una versión de la fase `Evaluación de perfil` tiene `reviewer_id`, salvo que esté `En revisión` mientras no hay un docente de taller de grado designado; una de otra fase no lo tiene.
+- Una versión `Aprobada` o `Rechazada` de la fase `Evaluación de perfil` tiene `reviewer_id`.
 - `Rechazada` solo se da en la fase `Evaluación de perfil`; `Presentada` solo en la fase `Defensa formal`, cuyas versiones no se revisan antes de la defensa formal.
-- Una versión de la fase `Pre-defensa` está `Aprobada` solo cuando los tres miembros del tribunal la aprobaron.
+- Una versión de la fase `Pre-defensa` está `Aprobada` solo cuando los tres miembros vigentes del tribunal la aprobaron; la aprobación de un miembro reemplazado no cuenta.
 - Una versión `Aprobada`, `Rechazada` o `Con observaciones` tiene `evaluated_at`, posterior a `submitted_at`.
 - Un trámite tiene a lo sumo una versión `En revisión` y a lo sumo una versión `Aprobada` por fase.
-- Una versión `Rechazada` o `Con observaciones` tiene al menos una observación.
+- Una versión `Rechazada` tiene al menos una observación de su revisor; una versión `Con observaciones` tiene al menos una observación de un miembro del tribunal vigente que no la aprobó. Las observaciones del tutor, y las de un miembro que aprobó la versión, no cambian su estado.
+- Una versión de la fase `Pre-defensa` deja de estar `En revisión` solo cuando cada uno de los tres miembros vigentes del tribunal se pronunció: la aprobó (VERSION_APPROVAL) o registró observaciones sin aprobarla.
+- Una versión de la fase `Pre-defensa` o `Defensa formal` tiene como `title` el `project_title` de su trámite, que no cambia una vez fijado.
 
 ### COMMITTEE_MEMBER
 
@@ -220,11 +248,13 @@ Docente asignado al tribunal evaluador de un trámite de titulación.
 | graduation_process_id | Trámite que evalúa                   | Long      | 19               | Not Null, Foreign Key (GRADUATION_PROCESS.id)    |
 | teacher_id  | Docente miembro del tribunal         | Long      | 19               | Not Null, Foreign Key (TEACHER.id)               |
 | assigned_at | Fecha y hora de la asignación        | DateTime  | -                | Not Null                                         |
+| replaced_at | Fecha y hora en que el director de carrera lo reemplazó | DateTime  | -                | Optional                                         |
 
 #### Constraints
 
-- Un trámite tiene exactamente tres miembros del tribunal una vez asignado el tribunal evaluador (C-006).
-- Un docente es miembro del tribunal de un trámite a lo sumo una vez (graduation_process_id, teacher_id son únicos juntos).
+- Un trámite tiene exactamente tres miembros del tribunal vigentes, sin `replaced_at`, una vez asignado el tribunal evaluador (C-006).
+- Un docente es miembro del tribunal de un trámite a lo sumo una vez (graduation_process_id, teacher_id son únicos juntos); un miembro reemplazado no vuelve al mismo tribunal.
+- `replaced_at` es posterior a `assigned_at`.
 - El tutor del trámite no es miembro de su tribunal evaluador.
 
 ### VERSION_APPROVAL
@@ -255,12 +285,36 @@ Pre-defensa o defensa formal programada de un proyecto de grado.
 | location     | Ambiente donde se realiza                         | String    | 100              | Optional                                         |
 | grade        | Calificación conjunta del tribunal evaluador      | Integer   | 10               | Optional, Min: 0, Max: 100                       |
 | is_held      | Verdadero cuando la pre-defensa o defensa formal ya se realizó | Boolean   | 1                | Not Null                                         |
+| is_student_absent | Verdadero cuando el tribunal registró que el estudiante no se presentó | Boolean   | 1                | Not Null                                         |
 
 #### Constraints
 
-- Solo una `Defensa formal` realizada tiene `grade`, y toda `Defensa formal` realizada la tiene (C-007).
+- Solo una `Defensa formal` realizada con el estudiante presente tiene `grade`, y toda la tiene (C-007).
+- Solo una pre-defensa o defensa formal realizada tiene `is_student_absent` verdadero.
 - Un trámite tiene a lo sumo una `Pre-defensa` y una `Defensa formal` sin realizar.
 - La `Defensa formal` de un trámite es posterior a una `Pre-defensa` realizada del mismo trámite.
+
+### DEFENSE_REVIEW
+
+Registro que un miembro del tribunal hace de una pre-defensa o defensa formal: sus observaciones de la pre-defensa, o
+su calificación de la defensa formal.
+
+| Attribute           | Description                                    | Data Type | Length/Precision | Validation Rules                                |
+|---------------------|------------------------------------------------|-----------|------------------|-------------------------------------------------|
+| defense_id          | Pre-defensa o defensa formal registrada        | Long      | 19               | Primary Key, Foreign Key (DEFENSE.id)           |
+| committee_member_id | Miembro del tribunal que la registra           | Long      | 19               | Primary Key, Foreign Key (COMMITTEE_MEMBER.id)  |
+| has_observations    | Verdadero cuando el miembro registró observaciones de la pre-defensa | Boolean   | 1                | Not Null                                        |
+| grade               | Calificación que el miembro da a la defensa formal | Integer   | 10               | Optional, Min: 0, Max: 100                      |
+| recorded_at         | Fecha y hora del registro                      | DateTime  | -                | Not Null                                        |
+
+#### Constraints
+
+- `recorded_at` es posterior al `scheduled_at` de la defensa.
+- El miembro del tribunal pertenece al tribunal del trámite de la defensa y está vigente al registrar.
+- En una `Pre-defensa`, el registro no tiene `grade`; con `has_observations` verdadero tiene al menos una observación del miembro sobre esa pre-defensa, y con falso ninguna.
+- En una `Defensa formal`, el registro tiene `grade` y `has_observations` es falso.
+- Una pre-defensa o defensa formal con el estudiante presente está realizada (`is_held`) cuando sus tres miembros vigentes del tribunal la registraron.
+- El `grade` de una `Defensa formal` realizada es el promedio de las calificaciones de sus tres registros, redondeado al entero, con las mitades hacia arriba.
 
 ### OBSERVATION
 
