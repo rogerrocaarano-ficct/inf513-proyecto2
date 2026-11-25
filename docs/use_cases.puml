@@ -69,7 +69,10 @@ admin --> UC018
 admin --> UC019
 admin --> UC020
 
-usuario --> UC015
+estudiante --> UC015
+docente --> UC015
+asistente --> UC015
+director --> UC015
 usuario --> UC021
 
 @enduml
