@@ -13,7 +13,7 @@ Implemented, Verified, Deferred, Rejected), tal como los lee `/spec-review`.
 |--------|-----------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|----------|
 | FR-001 | Registrar estudiante                    | Como asistente administrativo, quiero registrar al estudiante que inicia su trámite de titulación para que pueda dar seguimiento a su trámite en el sistema.                                 | High     | Open     |
 | FR-002 | Registrar documentación de requisitos   | Como asistente administrativo, quiero adjuntar al trámite de titulación la boleta de inscripción, la hoja de vida y la carta de solicitud del estudiante para que la documentación de requisitos no dependa de una carpeta física. | High     | Open     |
-| FR-003 | Registrar docente                       | Como administrador del sistema, quiero registrar a los docentes y al director de carrera para que puedan participar en los trámites de titulación con su propia cuenta.                      | High     | Open     |
+| FR-003 | Registrar personal de la carrera        | Como administrador del sistema, quiero registrar a los docentes, al director de carrera y a los asistentes administrativos para que puedan participar en los trámites de titulación con su propia cuenta. | High     | Open     |
 | FR-004 | Asignar tutor                           | Como director de carrera, quiero asignar un tutor al estudiante que no propuso uno para que cada trámite de titulación tenga un docente que guíe el proyecto de grado.                        | High     | Open     |
 | FR-005 | Presentar perfil de proyecto            | Como estudiante, quiero subir una versión de mi proyecto de grado en la fase evaluación de perfil, también después de un rechazo, para que el revisor la evalúe sin que yo vaya a la dirección de carrera. | High     | Open     |
 | FR-006 | Designar docente de taller de grado     | Como director de carrera, quiero designar al docente de taller de grado para que todo perfil de proyecto presentado le llegue como revisor sin asignarlo uno por uno.                        | High     | Open     |
@@ -37,8 +37,8 @@ Implemented, Verified, Deferred, Rejected), tal como los lee `/spec-review`.
 | FR-024 | Consultar trámites en curso             | Como asistente administrativo, quiero ver la fase actual de todos los trámites de titulación para que pueda informar el estado de cualquiera cuando se me consulte.                         | High     | Open     |
 | FR-025 | Elaborar actas oficiales                | Como asistente administrativo, quiero generar las actas oficiales de la defensa formal para que no las redacte a mano.                                                                     | Low      | Rejected |
 | FR-026 | Almacenar prototipos                    | Como estudiante, quiero subir el prototipo de mi proyecto de grado para que el tribunal evaluador lo revise fuera de la pre-defensa.                                                       | Low      | Rejected |
-| FR-027 | Gestionar roles y permisos              | Como administrador del sistema, quiero crear roles y concederles permisos sobre las acciones del sistema para que cada usuario acceda solo a lo que su rol permite.                         | High     | Open     |
-| FR-028 | Configurar menú                         | Como administrador del sistema, quiero definir qué opciones de menú habilita cada permiso para que el menú de cada rol se arme desde la base de datos sin cambiar el código.                | Medium   | Open     |
+| FR-027 | Asignar rol                             | Como administrador del sistema, quiero asignar a cada usuario que registro uno de los roles que el sistema define para que acceda solo a lo que su rol permite.                              | High     | Open     |
+| FR-028 | Configurar menú                         | Como administrador del sistema, quiero definir qué opciones de menú habilita cada permiso para que el menú de cada rol se arme desde la base de datos sin cambiar el código.                | Medium   | Rejected |
 | FR-029 | Ver menú según rol                      | Como usuario, quiero ver en la barra de navegación solo las opciones que los permisos de mi rol habilitan para que no encuentre opciones que no puedo usar.                                | High     | Open     |
 | FR-030 | Consultar bitácora                      | Como administrador del sistema, quiero consultar la bitácora de inicios de sesión exitosos, intentos fallidos y direcciones IP, filtrada por fecha y usuario, para que pueda detectar accesos indebidos. | High     | Open     |
 | FR-031 | Elegir tema                             | Como usuario, quiero elegir entre los temas Niños, Jóvenes y Adultos para que la interfaz se adapte a mi preferencia.                                                                       | High     | Open     |
@@ -55,6 +55,11 @@ Implemented, Verified, Deferred, Rejected), tal como los lee `/spec-review`.
 
 FR-025 y FR-026 están fuera del alcance de la visión, y FR-039 (el módulo de pagos que menciona el diagrama de los
 lineamientos técnicos) fuera del alcance del proyecto; quedan registrados como `Rejected`.
+
+Los roles, sus permisos y las opciones de menú que habilita cada permiso son fijos: el sistema los define y los
+carga en la base de datos, y el administrador del sistema no los modifica. Por eso FR-028 queda como `Rejected`, y
+FR-027 se limita a asignar uno de esos roles a cada usuario. El menú de FR-029 se sigue armando desde la base de
+datos según los permisos del rol activo.
 
 ## Requisitos no funcionales
 
