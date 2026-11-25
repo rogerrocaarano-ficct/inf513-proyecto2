@@ -7,7 +7,7 @@
 **Primary Actor:** Estudiante, Docente, Asistente administrativo, Director de carrera  
 **Goal:** Encontrar un trámite de titulación por el nombre del estudiante o el título del proyecto de grado, para llegar a él sin recorrer listas  
 **Trigger:** El usuario escribe un nombre o un título en la búsqueda del encabezado  
-**Status:** Draft  
+**Status:** Reviewed  
 
 **Requirements:** [FR-038, NFR-001, NFR-004, NFR-005, NFR-009](../requirements.md)  
 **Layers:** UI
@@ -23,7 +23,7 @@
 3. El sistema busca, entre los trámites de titulación que el usuario puede ver (BR-001), los que coinciden por nombre del estudiante o por título del proyecto de grado (BR-002).
 4. El sistema muestra los resultados con el estudiante, el título del proyecto de grado cuando ya lo tiene, la fase y si el trámite está en curso, concluido, abandonado o archivado.
 5. El usuario elige un resultado.
-6. El sistema muestra el trámite de titulación en la consulta que corresponde a su rol (BR-003).
+6. El sistema abre el trámite de titulación en la consulta de trámite de titulación (UC-013).
 
 ## Alternative Flows
 
@@ -58,7 +58,7 @@ _None — the use case changes no data._
 
 ### BR-001: Trámites que encuentra cada rol
 
-El asistente administrativo y el director de carrera encuentran todos los trámites de titulación. Un docente encuentra solo aquellos en los que es tutor, revisor o miembro del tribunal, vigente o anterior. Un estudiante encuentra solo los suyos (NFR-004). El administrador del sistema no busca trámites de titulación.
+El asistente administrativo y el director de carrera encuentran todos los trámites de titulación. Un docente encuentra solo aquellos en los que hoy es tutor, revisor o miembro vigente del tribunal; un tutor o miembro del tribunal reemplazado deja de encontrarlos (UC-002 BR-004, UC-006 BR-005). Un estudiante encuentra solo los suyos (NFR-004). El administrador del sistema no busca trámites de titulación.
 
 ### BR-002: Coincidencia
 
@@ -66,4 +66,4 @@ Un trámite de titulación coincide cuando el nombre completo del estudiante o e
 
 ### BR-003: Consulta del resultado
 
-Un resultado abre el trámite de titulación en la consulta que el rol del usuario ya tiene: el estudiante, la de su trámite (UC-013); el asistente administrativo, el detalle de UC-014; el director de carrera y el docente, el detalle del trámite con lo que su papel les permite ver.
+Un resultado abre el trámite de titulación en la consulta de trámite de titulación, la misma para todos los roles (UC-013), con las acciones del rol activo del usuario (UC-013 BR-004). El alcance de la búsqueda depende también del rol activo (UC-013 BR-005).
