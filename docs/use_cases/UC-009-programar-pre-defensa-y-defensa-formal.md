@@ -7,9 +7,9 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Fijar la fecha, la hora y el ambiente de la pre-defensa o la defensa formal de un proyecto de grado sin superponer al tribunal evaluador, para que el estudiante, su tutor y su tribunal la conozcan  
 **Trigger:** El director de carrera solicita programar o reprogramar una pre-defensa o defensa formal  
-**Status:** Draft  
+**Status:** Reviewed  
 
-**Requirements:** [FR-015, FR-017, FR-018, FR-021, NFR-005, NFR-009, NFR-013](../requirements.md)  
+**Requirements:** [FR-015, FR-017, FR-018, FR-021, NFR-005, NFR-009, NFR-013, C-005](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
@@ -24,9 +24,9 @@
 4. El sistema muestra si corresponde programar su pre-defensa o su defensa formal, con su tutor y los miembros vigentes de su tribunal evaluador.
 5. El director de carrera ingresa la fecha, la hora y, si ya lo conoce, el ambiente.
 6. El director de carrera confirma la programación.
-7. El sistema verifica que la fecha y hora son futuras y que en esas dos horas ningún miembro del tribunal, ni el tutor, ni el ambiente tienen otra pre-defensa o defensa formal programada (BR-003).
+7. El sistema comprueba que el trámite sigue en curso y que el acto todavía admite la programación o reprogramación solicitada (BR-001, BR-002, BR-005). Valida la fecha y hora futuras y comprueba los choques de horario con el tutor y los miembros vigentes del tribunal, y con el ambiente si se indicó (BR-003).
 8. El sistema registra la pre-defensa o defensa formal programada, o actualiza la que se reprograma.
-9. El sistema notifica al estudiante, a su tutor y a los miembros de su tribunal evaluador la fecha, la hora y el ambiente programados, o su cambio.
+9. El sistema notifica dentro del sistema al estudiante, a su tutor y a los miembros vigentes de su tribunal evaluador la fecha, la hora y el ambiente, si se indicó, o su cambio.
 10. El sistema muestra el calendario actualizado.
 
 ## Alternative Flows
@@ -74,6 +74,14 @@
 1. El director de carrera cancela la operación.
 2. Use case ends.
 
+### A6: La programación ya no está disponible
+
+**Trigger:** Al confirmar, el trámite dejó de estar en curso, dejó de cumplir las condiciones de programación, el acto ya fue programado por otra operación o el acto elegido para reprogramar cambió o ya se realizó (step 7)  
+**Flow:**
+
+1. El sistema informa en español por qué no puede guardar la programación y muestra el calendario actualizado.
+2. Use case ends.
+
 ## Postconditions
 
 ### Success Postconditions
@@ -84,7 +92,7 @@
 
 ### Failure Postconditions
 
-- Las pre-defensas y defensas formales programadas no cambian.
+- Este intento no crea ni modifica una programación ni genera notificaciones.
 
 ## Business Rules
 
@@ -98,7 +106,7 @@ La defensa formal se programa para un trámite de titulación en curso en la fas
 
 ### BR-003: Duración y choques
 
-Cada pre-defensa o defensa formal ocupa dos horas desde su hora de inicio. Dos pre-defensas o defensas formales cuyos horarios se cruzan no pueden tener un mismo miembro del tribunal vigente, un mismo tutor ni un mismo ambiente.
+Cada pre-defensa o defensa formal ocupa dos horas desde su hora de inicio. Dos horarios se cruzan si el inicio de cada acto es anterior al fin del otro. Un docente no puede participar en actos que se cruzan, incluso si es tutor en uno y miembro vigente del tribunal en el otro. Tampoco se permite el cruce en el mismo ambiente cuando ambos actos tienen ambiente indicado. Al reprogramar se excluye de la comparación el propio acto.
 
 ### BR-004: Fecha futura
 
@@ -111,3 +119,7 @@ Solo una pre-defensa o defensa formal que aún no se realizó se reprograma; al 
 ### BR-006: Calendario de defensas
 
 El calendario muestra todas las pre-defensas y defensas formales programadas sin realizar, de todos los trámites de titulación, para que el director de carrera asigne fechas sin superponer al tribunal evaluador (FR-018).
+
+### BR-007: Reemplazo de participantes con un acto programado
+
+Si se reemplaza al tutor o a un miembro del tribunal (UC-002, UC-006), se conserva la programación del acto pendiente cuando el horario es compatible con el reemplazo. Si el reemplazo tiene un choque, el director de carrera debe reprogramar el acto para un horario compatible con los participantes vigentes y con el reemplazo antes de confirmar el cambio. La programación vigente se conserva mientras el acto no se reprograme.
