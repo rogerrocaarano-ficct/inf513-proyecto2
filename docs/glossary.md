@@ -6,10 +6,11 @@
 | Fase                          | Cada etapa del trámite de titulación: requisitos, perfil de proyecto, elaboración del proyecto de grado, pre-defensa, defensa y archivo.          | Etapa                 |
 | Estudiante                    | La persona inscrita en la carrera que elabora un proyecto de grado para titularse.                                                                | Alumno, Postulante    |
 | Asistente administrativo      | El funcionario de la dirección de carrera que registra estudiantes y docentes, recibe la documentación de requisitos y archiva los trámites.     | Secretaria            |
-| Director de carrera           | La autoridad de la carrera que asigna tutor, revisor y tribunal evaluador y programa la pre-defensa y la defensa.                                | Jefe de carrera       |
+| Director de carrera           | La autoridad de la carrera que asigna tutor y tribunal evaluador, designa al docente de taller de grado y programa la pre-defensa y la defensa.                                | Jefe de carrera       |
 | Docente                       | Un profesional que enseña en la carrera y puede ser tutor, revisor o miembro del tribunal en distintos trámites de titulación.                   | Profesor, Catedrático |
 | Tutor                         | El docente que guía a un estudiante durante la elaboración de su proyecto de grado.                                                               | Asesor                |
-| Revisor                       | El docente que evalúa si un perfil de proyecto es viable y apto para la modalidad de graduación.                                                  |                       |
+| Revisor                       | El papel del docente de taller de grado al evaluar si un perfil de proyecto es viable y apto para la modalidad de graduación.                     |                       |
+| Docente de taller de grado    | El docente que el director de carrera designa para dictar el taller de grado; actúa como revisor de todos los perfiles de proyecto.             |                       |
 | Tribunal evaluador            | El grupo de tres docentes que revisa las entregas del proyecto de grado, participa en la pre-defensa y la defensa y asigna la calificación.      | Jurado                |
 | Miembro del tribunal          | Cada uno de los tres docentes que integran un tribunal evaluador.                                                                                 |                       |
 | Documentación de requisitos   | La boleta de inscripción, la hoja de vida y la carta de solicitud que el estudiante presenta para iniciar el trámite de titulación.              |                       |
