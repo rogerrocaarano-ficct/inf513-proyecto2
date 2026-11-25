@@ -27,8 +27,12 @@ class diagram: classes, attributes without types, and named associations with mu
 - The class description is the entity's description paragraph, verbatim.
 - A pure junction entity, whose only attributes are the two keys it joins (e.g. `ROLE_PERMISSION`), is **not** a class:
   it becomes one many-to-many association (`0..*` on both ends) named with its ER relationship label.
-- A junction entity with attributes of its own (e.g. `USER_ROLE`, `VERSION_APPROVAL`) stays a class with one
-  association to each side.
+- A junction entity with attributes of its own (e.g. `USER_ROLE`, `VERSION_APPROVAL`) becomes an **association
+  class**: draw one association directly between the two entities it joins, and keep the junction as a class with its
+  own attributes, attached to that association by the dashed association-class line. It has no associations of its own
+  to either side. Name the direct association with a Spanish verb phrase for the relationship (e.g. `Role` "se asigna
+  a" `User`, `ProjectVersion` "es aprobada por" `CommitteeMember`); its multiplicities are `0..*` on both ends unless
+  an entity constraint fixes an upper bound (three committee members → `0..3`).
 
 ### Attributes
 
@@ -52,7 +56,8 @@ class diagram: classes, attributes without types, and named associations with mu
   `author_id` → `registra`, a notification's `user_id` → `recibe`). Multiplicity on the `User` end: `1` for a
   `Not Null` key, `0..1` for an `Optional` key. On the other end: `0..1` when the key is `Unique` (one-to-one, e.g.
   `Student`), else `0..*`.
-- No role names on association ends, no direction, no navigability, no stereotypes, no association classes.
+- No role names on association ends, no direction, no navigability, no stereotypes. Association classes appear
+  only for junction entities with attributes of their own.
 - Do not add enumerations or notes for the entity constraints.
 
 ## Procedure
@@ -77,10 +82,15 @@ class diagram: classes, attributes without types, and named associations with mu
    - Associations: `create_or_update_connectors` (`type: "Association"`). Updating an end requires its
      `relatedElementID`; to clear an end name, send `"name": ""`.
    - Removals: `delete_from_model`.
+   - Association classes: the MCP tools cannot attach a class to an association (extra connector properties are
+     silently ignored). Create the class and the direct association, then ask the user to link them in EA:
+     right-click the association and look for the association-class option (usually under **Advanced**), or create
+     it from the *Association Class* item of the Class toolbox and move the attributes into it. Check with
+     `get_elements_information` that the class has no other associations left.
 6. **Place new classes** with `place_elements_on_diagram` in free space next to the classes they relate to:
    width `210`, height about `55 + 16 × attributes`. Leave existing positions untouched; the user arranges the layout.
 7. **Reload and verify.** Call `reload_diagrams` for the diagram (needed after connector changes), then re-read the
    changed classes with `get_elements_information` and check them against the target model. Take a diagram image
    only when the user asks to see it.
-8. **Report** what was added, renamed, updated, and removed, plus anything you could not map, and whether new classes
-   may need manual layout.
+8. **Report** what was added, renamed, updated, and removed, plus anything you could not map, whether new classes
+   may need manual layout, and which association classes the user still has to link by hand.
