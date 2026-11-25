@@ -62,9 +62,10 @@ convenciones de Laravel con el apoyo de [Laravel Boost](#laravel-boost).
 
 ### Flujo de ramas
 
-Cada fase o caso de uso se trabaja en su propia rama creada desde `develop` (por ejemplo `requisitos`,
-`modelo-de-entidades` o `UC-001-gestion-de-usuarios`) y se integra de vuelta en `develop`; `main` solo recibe lo
-entregado. Los commits siguen Conventional Commits con el caso de uso o el área como *scope*, por ejemplo
+Cada fase o caso de uso se trabaja en su propia rama creada desde `develop`, con el nombre del desarrollador como
+prefijo para saber quién hizo cada trabajo (por ejemplo `roger/UC-001-gestion-de-usuarios`, `javier/glosario` o
+`alejandro/build`), y se integra de vuelta en `develop` mediante un pull request; `main` solo recibe lo entregado.
+Los commits siguen Conventional Commits con el caso de uso o el área como *scope*, por ejemplo
 `feat(UC-001): agrega registro de estudiante` o `docs(entity-model): agrega modelo de entidades`. Las reglas completas
 están en [`.ai/guidelines/git.md`](.ai/guidelines/git.md).
 
