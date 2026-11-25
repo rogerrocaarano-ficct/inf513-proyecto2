@@ -1,0 +1,75 @@
+@startuml Use Cases Overview
+left to right direction
+
+actor "Usuario" as usuario
+actor "Estudiante" as estudiante
+actor "Asistente administrativo" as asistente
+actor "Director de carrera" as director
+actor "Docente" as docente
+actor "Tutor" as tutor
+actor "Revisor" as revisor
+actor "Miembro del tribunal" as miembro
+actor "Administrador del sistema" as admin
+
+estudiante -up-|> usuario
+asistente -up-|> usuario
+director -up-|> usuario
+docente -up-|> usuario
+admin -up-|> usuario
+tutor -up-|> docente
+revisor -up-|> docente
+miembro -up-|> docente
+
+rectangle "Seguimiento de Trámites de Titulación" {
+    usecase "UC-001\nIniciar trámite de titulación" as UC001
+    usecase "UC-002\nAsignar tutor" as UC002
+    usecase "UC-003\nDesignar docente de taller de grado" as UC003
+    usecase "UC-004\nPresentar versión del proyecto" as UC004
+    usecase "UC-005\nEvaluar perfil de proyecto" as UC005
+    usecase "UC-006\nAsignar tribunal evaluador" as UC006
+    usecase "UC-007\nObservar versión del proyecto como tutor" as UC007
+    usecase "UC-008\nRevisar versión del proyecto como tribunal" as UC008
+    usecase "UC-009\nProgramar pre-defensa y defensa formal" as UC009
+    usecase "UC-010\nRegistrar observaciones de pre-defensa" as UC010
+    usecase "UC-011\nRegistrar calificación" as UC011
+    usecase "UC-012\nArchivar trámite de titulación" as UC012
+    usecase "UC-013\nConsultar trámite de titulación" as UC013
+    usecase "UC-014\nConsultar trámites en curso" as UC014
+    usecase "UC-015\nBuscar trámite de titulación" as UC015
+    usecase "UC-016\nConsultar notificaciones" as UC016
+    usecase "UC-017\nConsultar estadísticas de trámites" as UC017
+    usecase "UC-018\nGestionar cuentas de usuario" as UC018
+    usecase "UC-019\nConsultar bitácora" as UC019
+    usecase "UC-020\nConsultar estadísticas de acceso" as UC020
+    usecase "UC-021\nPersonalizar la interfaz" as UC021
+}
+
+asistente --> UC001
+asistente --> UC012
+asistente --> UC014
+
+director --> UC002
+director --> UC003
+director --> UC006
+director --> UC009
+director --> UC017
+
+estudiante --> UC004
+estudiante --> UC013
+estudiante --> UC016
+
+docente --> UC016
+revisor --> UC005
+tutor --> UC007
+miembro --> UC008
+miembro --> UC010
+miembro --> UC011
+
+admin --> UC018
+admin --> UC019
+admin --> UC020
+
+usuario --> UC015
+usuario --> UC021
+
+@enduml
