@@ -93,3 +93,54 @@ teléfono es necesario.
 **Answer:** 360 pixeles.  
 **Answered by:** Roger Roca Arano, 2026-11-25  
 **Resolved in:** NFR-010  
+
+## OQ-007: ¿En qué horario cambia automáticamente el modo día/noche?
+
+**Element:** FR-032  
+**Raised by:** /requirements, 2026-11-25  
+**Blocking:** No  
+**Status:** Resolved  
+**Assumed:** Modo día de 07:00 a 19:00 y modo noche el resto del día, según la hora del dispositivo del usuario.  
+
+Los lineamientos técnicos (3.5) piden conmutación automática o manual según horario, sin fijar el horario.
+
+**Answer:** el tema cambia con el modo del sistema operativo  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** FR-032  
+
+## OQ-008: ¿Qué nivel de WCAG significa "WCAG compliance básico"?
+
+**Element:** NFR-014  
+**Raised by:** /requirements, 2026-11-25  
+**Blocking:** No  
+**Status:** Open  
+**Assumed:** WCAG 2.1 nivel AA: contraste de al menos 4,5:1 en todos los temas y de 7:1 en el modo de alto contraste.  
+
+Los lineamientos técnicos (3.5) piden "WCAG compliance básico" sin nombrar versión ni nivel. Lecturas: (a) WCAG 2.1
+nivel A; (b) WCAG 2.1 nivel AA, el nivel que suelen exigir las normas de accesibilidad.
+
+## OQ-009: ¿Qué métricas muestra el panel de estadísticas de trámites?
+
+**Element:** FR-036  
+**Raised by:** /requirements, 2026-11-25  
+**Blocking:** No  
+**Status:** Open  
+**Assumed:** Cantidad de trámites de titulación por fase, defensas programadas y calificación promedio.  
+
+Los lineamientos técnicos (3.8) piden "métricas clave relacionadas con la actividad del negocio" sin nombrarlas.
+Otras posibles: tiempo promedio por fase, perfiles de proyecto rechazados, observaciones por entrega.
+
+## OQ-010: ¿Cuál es el número de grupo en la dirección de despliegue?
+
+**Element:** C-012  
+**Raised by:** /requirements, 2026-11-25  
+**Blocking:** No  
+**Status:** Resolved  
+**Assumed:** La dirección queda como en los lineamientos técnicos, con `grupoXXsc`, hasta conocer el número de grupo.  
+
+Los lineamientos técnicos (4) dan la dirección con `XX` en lugar del número de grupo. El número también identifica
+el esquema asignado al grupo en db.tecnoweb.org.bo (C-008).
+
+**Answer:** 03  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** C-012, C-008  

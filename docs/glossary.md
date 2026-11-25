@@ -5,7 +5,7 @@
 | Trámite de titulación         | El proceso de un estudiante para titularse por Proyecto de Grado, desde su registro hasta el archivo de su documentación.                         | Expediente            |
 | Fase                          | Cada etapa del trámite de titulación: requisitos, perfil de proyecto, elaboración del proyecto de grado, pre-defensa, defensa y archivo.          | Etapa                 |
 | Estudiante                    | La persona inscrita en la carrera que elabora un proyecto de grado para titularse.                                                                | Alumno, Postulante    |
-| Asistente administrativo      | El funcionario de la dirección de carrera que registra estudiantes y docentes, recibe la documentación de requisitos y archiva los trámites.     | Secretaria            |
+| Asistente administrativo      | El funcionario de la dirección de carrera que registra estudiantes, recibe la documentación de requisitos y archiva los trámites.               | Secretaria            |
 | Director de carrera           | La autoridad de la carrera que asigna tutor y tribunal evaluador, designa al docente de taller de grado y programa la pre-defensa y la defensa.                                | Jefe de carrera       |
 | Docente                       | Un profesional que enseña en la carrera y puede ser tutor, revisor o miembro del tribunal en distintos trámites de titulación.                   | Profesor, Catedrático |
 | Tutor                         | El docente que guía a un estudiante durante la elaboración de su proyecto de grado.                                                               | Asesor                |
@@ -22,3 +22,10 @@
 | Defensa                       | La presentación formal del proyecto de grado ante el tribunal evaluador, en la que se asigna la calificación.                                    |                       |
 | Calificación                  | El puntaje de 0 a 100 que el tribunal evaluador asigna de manera conjunta al proyecto de grado en la defensa.                                    | Nota                  |
 | Notificación                  | Un mensaje que el sistema muestra a un usuario cuando un trámite de titulación en el que participa cambia.                                       | Aviso                 |
+| Usuario                       | Toda persona con una cuenta en el sistema, sea cual sea su rol.                                                                                  |                       |
+| Administrador del sistema     | El usuario que registra a los docentes y al director de carrera, gestiona roles, permisos y menú, y consulta la bitácora.                        | Superusuario          |
+| Rol                           | Un conjunto de permisos que se asigna a un usuario, como estudiante, docente o director de carrera.                                             | Perfil de usuario     |
+| Permiso                       | La autorización para ejecutar una acción o ver una página del sistema; habilita también las opciones de menú correspondientes.                 |                       |
+| Bitácora                      | El registro en base de datos de los inicios de sesión exitosos y fallidos y de las visitas a páginas, con fecha, hora, usuario y dirección IP.   |                       |
+| Tema                          | La combinación de colores, tipografía e ilustraciones orientada a un segmento de usuarios: Niños, Jóvenes o Adultos.                           |                       |
+| Contador de visitas           | El número de veces que se ha abierto una página, mostrado en su pie de página.                                                                   |                       |
