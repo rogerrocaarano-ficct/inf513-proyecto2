@@ -27,14 +27,12 @@ erDiagram
     DEFENSE |o--o{ OBSERVATION : "recibe"
     GRADUATION_PROCESS ||--o{ DEFENSE : "programa"
     GRADUATION_PROCESS |o--o{ NOTIFICATION : "origina"
+    PAGE ||--o{ PAGE_VISIT : "registra"
     USER_PREFERENCE
     LOGIN_LOG
-    PAGE_VISIT
-    PAGE_VISIT_COUNTER
 ```
 
-USER_PREFERENCE, LOGIN_LOG, PAGE_VISIT y PAGE_VISIT_COUNTER solo se relacionan con USERS, o con
-ninguna entidad, por eso aparecen sin líneas.
+USER_PREFERENCE y LOGIN_LOG solo se relacionan con USERS, por eso aparecen sin líneas.
 
 ### ROLE
 
@@ -309,27 +307,28 @@ Entrada de la bitácora por cada intento de inicio de sesión, exitoso o fallido
 | user_agent      | Navegador y sistema operativo del cliente         | String    | 500              | Optional                          |
 | occurred_at     | Fecha y hora del intento                          | DateTime  | -                | Not Null                          |
 
+### PAGE
+
+Página del sistema con su contador de visitas, que se muestra en su pie de página.
+
+| Attribute   | Description                     | Data Type | Length/Precision | Validation Rules                  |
+|-------------|---------------------------------|-----------|------------------|-----------------------------------|
+| id          | Identificador único             | Long      | 19               | Primary Key, Sequence             |
+| route_name  | Nombre de la ruta de la página  | String    | 100              | Not Null, Unique                  |
+| visit_count | Número de visitas registradas   | Integer   | 10               | Not Null, Min: 0, Max: 2147483647 |
+
+#### Constraints
+
+- `visit_count` es igual al número de filas de PAGE_VISIT de la página.
+
 ### PAGE_VISIT
 
 Entrada de la bitácora por cada visita a una página.
 
-| Attribute    | Description                              | Data Type | Length/Precision | Validation Rules                 |
-|--------------|------------------------------------------|-----------|------------------|----------------------------------|
-| id           | Identificador único                      | Long      | 19               | Primary Key, Sequence            |
-| user_id      | Usuario que visitó la página             | Long      | 19               | Optional, Foreign Key (USERS.id) |
-| route_name   | Nombre de la ruta de la página visitada  | String    | 100              | Not Null                         |
-| ip_address   | Dirección IP de origen, IPv4 o IPv6      | String    | 45               | Not Null                         |
-| visited_at   | Fecha y hora de la visita                | DateTime  | -                | Not Null                         |
-
-### PAGE_VISIT_COUNTER
-
-Total de visitas de cada página, que se muestra en su pie de página.
-
-| Attribute | Description                              | Data Type | Length/Precision | Validation Rules                |
-|-----------|------------------------------------------|-----------|------------------|---------------------------------|
-| route_name | Nombre de la ruta de la página           | String    | 100              | Primary Key                     |
-| total     | Número de visitas registradas            | Integer   | 10               | Not Null, Min: 0, Max: 2147483647 |
-
-#### Constraints
-
-- `total` es igual al número de filas de PAGE_VISIT con la misma `route_name`.
+| Attribute  | Description                          | Data Type | Length/Precision | Validation Rules                 |
+|------------|--------------------------------------|-----------|------------------|----------------------------------|
+| id         | Identificador único                  | Long      | 19               | Primary Key, Sequence            |
+| page_id    | Página visitada                      | Long      | 19               | Not Null, Foreign Key (PAGE.id)  |
+| user_id    | Usuario que visitó la página         | Long      | 19               | Optional, Foreign Key (USERS.id) |
+| ip_address | Dirección IP de origen, IPv4 o IPv6  | String    | 45               | Not Null                         |
+| visited_at | Fecha y hora de la visita            | DateTime  | -                | Not Null                         |
