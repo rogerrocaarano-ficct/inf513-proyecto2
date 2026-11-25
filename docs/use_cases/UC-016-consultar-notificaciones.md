@@ -7,7 +7,7 @@
 **Primary Actor:** Estudiante, Docente  
 **Goal:** Leer en el sistema las notificaciones de los trámites de titulación en los que participa y llegar al trámite que las originó, para enterarse de cada cambio sin depender del asistente administrativo  
 **Trigger:** El usuario ve en el encabezado que tiene notificaciones sin leer, o solicita ver sus notificaciones  
-**Status:** Draft  
+**Status:** Reviewed  
 
 **Requirements:** [FR-021, FR-022, NFR-004, NFR-009, C-005](../requirements.md)  
 **Layers:** UI
@@ -21,7 +21,7 @@
 1. El usuario solicita ver sus notificaciones.
 2. El sistema muestra sus notificaciones, las sin leer primero y de la más reciente a la más antigua, cada una con su mensaje, su fecha y hora y el trámite de titulación que la originó.
 3. El usuario elige una notificación sin leer.
-4. El sistema la marca como leída, con la fecha y hora, y muestra el trámite de titulación que la originó en la consulta que corresponde a su papel.
+4. El sistema la marca como leída, con la fecha y hora, y abre el trámite de titulación que la originó en la consulta de trámite de titulación (UC-013).
 5. El sistema actualiza en el encabezado la cantidad de notificaciones sin leer.
 
 ## Alternative Flows
@@ -57,6 +57,14 @@
 
 1. El sistema informa que no tiene notificaciones.
 2. Use case ends.
+
+### A5: Notificación sin trámite de titulación
+
+**Trigger:** La notificación no se originó en un trámite de titulación, como la designación del docente de taller de grado (UC-003) (step 4)  
+**Flow:**
+
+1. El sistema marca la notificación como leída, con la fecha y hora, y muestra su mensaje completo, sin abrir ningún trámite de titulación.
+2. Use case continues at step 5.
 
 ## Postconditions
 
