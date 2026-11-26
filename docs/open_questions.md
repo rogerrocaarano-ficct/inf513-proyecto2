@@ -461,3 +461,325 @@ rol director de carrera.
 **Answer:** no.  
 **Answered by:** Roger Roca Arano, 2026-11-25  
 **Resolved in:** UC-018 BR-002  
+
+## OQ-032: ¿Con qué textos notifica y confirma el sistema al iniciar un trámite de titulación?
+
+**Element:** UC-001  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 12 notifica al tutor y el paso 13 confirma el inicio, y A1, A3, A7 y A9 informan o señalan un dato, pero la
+especificación no fija los textos. Lectura propuesta: un catálogo de mensajes en español con los términos del
+glosario.
+
+**Answer:** paso 12 (al tutor): "Se le asignó como tutor del trámite de titulación de {estudiante}."; paso 13:
+"Trámite de titulación iniciado." y, para una cuenta nueva, "La contraseña inicial del estudiante es su número de
+cédula de identidad."; A1: "{nombre} ya tiene un trámite de titulación en curso, en la fase {fase}."; A3: "{nombre}
+ya aprobó su trámite de titulación."; A7: "El correo electrónico ya pertenece a otro usuario." y "La cédula de
+identidad ya pertenece a otro estudiante."; A9: "Adjunte la {documento}.", "El archivo debe ser PDF.", "El archivo
+no debe superar los 20 MB."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-033: ¿Con qué textos notifica y confirma el sistema al asignar o cambiar el tutor?
+
+**Element:** UC-002  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Los pasos 8 y 9, A1 step 5, A3 y A4 notifican, confirman o informan, pero la especificación no fija los textos.
+
+**Answer:** paso 8 y A1 step 5 (al tutor): "Se le asignó como tutor del trámite de titulación de {estudiante}.";
+paso 8 (al estudiante): "Su trámite de titulación pasó a la fase evaluación de perfil con {tutor} como tutor.";
+A1 step 5 (al estudiante): "Su trámite de titulación tiene un nuevo tutor: {tutor}."; paso 9: "Tutor asignado:
+{tutor}. Fase: {fase}."; A3: "No hay trámites de titulación en curso."; A4: "{docente} tiene la {acto} de
+{estudiante} el {fecha y hora}, que se cruza con la {acto} de este trámite. Reprograme antes el acto o elija otro
+docente."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-034: ¿Con qué textos notifica y confirma el sistema al designar al docente de taller de grado?
+
+**Element:** UC-003  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Los pasos 7 y 8 y A1 step 3 notifican y confirman, pero la especificación no fija los textos.
+
+**Answer:** paso 7 y A1 step 3 (al nuevo): "Se le designó como docente de taller de grado; recibe {n} perfiles de
+proyecto para revisar."; paso 7 (al anterior): "Dejó de ser docente de taller de grado; sus perfiles de proyecto en
+revisión pasaron a {nuevo}."; paso 8: "{docente} es el docente de taller de grado; {n} perfiles de proyecto pasaron a
+su revisión."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-035: ¿Con qué textos notifica y confirma el sistema al asignar el tribunal evaluador o reemplazar a un miembro?
+
+**Element:** UC-006  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Los pasos 9 y 10, A1, A2 step 5, A3 y A5 notifican, confirman o informan, pero la especificación no fija los textos.
+
+**Answer:** paso 9 y A2 step 5 (a cada miembro asignado): "Se le asignó como miembro del tribunal evaluador del
+trámite de titulación de {estudiante}."; paso 9 (al estudiante): "Su trámite de titulación pasó a la fase
+pre-defensa. Su tribunal evaluador: {m1}, {m2} y {m3}."; A2 step 5 (al miembro reemplazado): "Dejó de ser miembro
+del tribunal evaluador del trámite de titulación de {estudiante}."; A2 step 5 (al estudiante): "Su tribunal
+evaluador tiene un nuevo miembro: {nuevo}, en lugar de {anterior}."; paso 10: "Tribunal evaluador asignado: {m1},
+{m2} y {m3}. Fase: pre-defensa."; A1: "El tribunal evaluador se compone de exactamente tres docentes distintos.";
+A3: "El tribunal evaluador ya no se puede cambiar porque la defensa formal se realizó."; A5: "{docente} tiene la
+{acto} de {estudiante} el {fecha y hora}, que se cruza con la {acto} de este trámite. Reprograme antes el acto o
+elija otro docente."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-036: ¿Con qué textos confirma e informa el sistema al gestionar cuentas de usuario?
+
+**Element:** UC-018  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 8, A3, A5 y A7 confirman o informan, pero la especificación no fija los textos.
+
+**Answer:** paso 8: "Cuenta registrada.", "Cuenta actualizada.", "Cuenta desactivada." o "Cuenta reactivada."; A3:
+"No se puede desactivar la cuenta ni quitarle el rol docente. El director de carrera debe reasignar antes:" seguido
+de la lista de trámites de titulación y papeles; A5: "El correo electrónico ya pertenece a otro usuario."; A7: "Ya
+hay un director de carrera activo: {nombre}."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-037: ¿Qué pasa al reactivar a un exdirector de carrera mientras hay otro director de carrera activo?
+
+**Element:** UC-018 A4  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-002 admite a lo sumo un director de carrera activo, pero A4 no considera una cuenta inactiva que conserva el rol
+director de carrera. Lecturas: (a) no se reactiva y se informa como en A7; (b) se reactiva quitándole el rol
+director de carrera.
+
+**Answer:** (a) no se reactiva y se informa "Ya hay un director de carrera activo: {nombre}."; el administrador del
+sistema quita antes el rol (A1).  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-038: ¿Qué pasa con el registro de docente al quitar el rol docente y al volver a darlo?
+
+**Element:** UC-018 A1  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 7 registra al docente activo al dar el rol docente, pero A1 no dice qué pasa con ese registro al quitar el rol
+(cuando BR-003 lo permite) ni al volver a darlo. Lecturas: (a) queda inactivo y se reutiliza; (b) se borra.
+
+**Answer:** (a) al quitar el rol docente, el docente queda inactivo y no se borra; al volver a darlo, el mismo
+registro vuelve a activo.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-039: ¿Qué formato tiene un teléfono válido?
+
+**Element:** Entity: STUDENT.phone  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+UC-001 A8 rechaza un teléfono sin formato válido y el modelo lo marca `Format: Phone` sin fijar el formato. Lecturas:
+(a) 7 u 8 dígitos con prefijo +591 opcional; (b) de 7 a 15 dígitos con + opcional.
+
+**Answer:** (a) 7 dígitos (fijo) u 8 dígitos (celular), con el prefijo +591 opcional; el teléfono sigue siendo
+opcional.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-040: ¿Cómo se crea la primera cuenta del administrador del sistema?
+
+**Element:** UC-018  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+La precondición de UC-018 exige un administrador del sistema con sesión iniciada, pero ningún caso de uso crea esa
+cuenta. Lecturas: (a) un seeder con los datos del archivo de entorno; (b) un comando de consola.
+
+**Answer:** (a) un seeder toma el nombre, el correo electrónico y la contraseña del archivo de entorno; la cuenta
+debe cambiar su contraseña inicial en el primer inicio de sesión.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-041: ¿Un miembro reemplazado del tribunal puede quedar como tutor del mismo trámite de titulación?
+
+**Element:** UC-002 BR-001  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-001 excluye al docente que "es miembro del tribunal de ese trámite", en presente, mientras UC-006 BR-001 habla de
+"no es ni fue miembro". Lecturas: (a) solo se excluye a los miembros vigentes; (b) también a los reemplazados.
+
+**Answer:** (a) solo se excluye a los miembros vigentes del tribunal.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-042: ¿Qué reglas cumple la nueva contraseña que reemplaza a la contraseña inicial?
+
+**Element:** UC-018 BR-005  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+UC-018 BR-005 y UC-001 BR-005 obligan a cambiar la contraseña inicial en el primer inicio de sesión, pero no fijan
+reglas para la nueva. Lecturas: (a) al menos 8 caracteres, confirmada y distinta de la inicial; (b) solo al menos 8
+caracteres y confirmada.
+
+**Answer:** (a) al menos 8 caracteres, confirmada y distinta de la contraseña inicial; vale también para el
+estudiante (UC-001 BR-005).  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-043: ¿Con qué textos rechaza el sistema un tutor no elegible y pide confirmar al estudiante registrado?
+
+**Element:** UC-001  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-006 limita el tutor a los docentes elegibles y A2 pide que el asistente administrativo confirme que es el
+estudiante que se presenta, pero la especificación no da los textos cuando falla una de esas verificaciones.
+
+**Answer:** tutor no elegible: "El tutor elegido no es un docente elegible."; A2 sin confirmar: "Confirme que es el
+estudiante que se presenta."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-044: ¿Con qué textos rechaza el sistema un docente no elegible como tutor o un trámite que no está en curso?
+
+**Element:** UC-002  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-001 y BR-002 limitan a quién y en qué trámite se asigna el tutor, pero la especificación no da los textos del
+rechazo ni el de un trámite sin docentes elegibles.
+
+**Answer:** "El docente elegido no es elegible como tutor de este trámite de titulación."; "Solo se asigna tutor en
+un trámite de titulación en curso."; lista vacía: "No hay docentes elegibles como tutor de este trámite de
+titulación."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-045: ¿Con qué textos rechaza el sistema la designación de un docente que no es elegible?
+
+**Element:** UC-003 BR-002  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-002 limita quién puede ser designado docente de taller de grado, pero la especificación no da los textos del
+rechazo.
+
+**Answer:** sin docente elegido: "Elija al docente de taller de grado."; docente no elegible: "El docente elegido no
+puede ser designado como docente de taller de grado."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-046: ¿Con qué textos rechaza el sistema un miembro no elegible o un trámite que no recibe tribunal?
+
+**Element:** UC-006  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-001, BR-003 y BR-004 limitan a quién, en qué trámite y a qué miembro se asigna o reemplaza, pero la
+especificación no da los textos del rechazo.
+
+**Answer:** "Alguno de los docentes elegidos no es elegible como miembro del tribunal evaluador."; "El docente
+elegido no es elegible como miembro del tribunal evaluador."; "El tribunal evaluador solo se asigna a un trámite de
+titulación en curso, en la fase evaluación de perfil y con su perfil de proyecto aprobado."; "El tribunal evaluador
+solo se reemplaza en un trámite de titulación en curso que ya lo tiene."; "El miembro que se reemplaza no es un
+miembro vigente del tribunal evaluador."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-047: ¿Se informan todos los choques de horario del nuevo docente o solo el primero?
+
+**Element:** UC-006 A5  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El nuevo miembro del tribunal (UC-006 A5), como el nuevo tutor (UC-002 A4), puede cruzarse con varios actos.
+Lecturas: (a) un mensaje por cada acto que se cruza; (b) solo el primero.
+
+**Answer:** (a) se informa cada acto que se cruza; vale igual para UC-002 A4.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-048: ¿Qué formato tienen el número de cédula de identidad y su complemento?
+
+**Element:** Entity: STUDENT.id_card_number  
+**Raised by:** /use-case-coverage, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El modelo fija solo las longitudes (20 y 5). Lecturas: (a) solo dígitos; (b) sin formato; (c) letras, dígitos y
+guiones.
+
+**Answer:** el número tiene solo dígitos; el complemento admite letras y dígitos.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-049: ¿Se guardan los demás cambios de una cuenta cuando se rechaza el retiro del rol docente?
+
+**Element:** UC-018 A3  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Al cambiar una cuenta (A1) quitándole el rol docente con papeles vigentes, A3 rechaza el retiro, pero no dice qué
+pasa con el nombre o el correo cambiados en la misma confirmación.
+
+**Answer:** se rechaza todo el cambio; el administrador del sistema lo repite sin quitar el rol docente.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-050: ¿El sistema muestra cuántos perfiles de proyecto recibirá el docente antes de confirmar la designación?
+
+**Element:** UC-003 step 2  
+**Raised by:** /use-case-coverage, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 8 da la cantidad de perfiles que pasaron al nuevo revisor; la implementación la muestra también al elegir y
+confirmar, cosa que los pasos 2 a 4 no piden.
+
+**Answer:** sí, se muestra la cantidad de perfiles de proyecto en revisión que pasarán al docente elegido antes de
+confirmar.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-051: ¿Se guarda el nombre del tutor propuesto cuando el trámite de titulación queda con tutor?
+
+**Element:** UC-001 A5  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+La postcondición guarda el nombre del tutor propuesto en un trámite sin tutor, pero no dice qué pasa con ese nombre
+cuando el asistente administrativo elige un tutor elegible.
+
+**Answer:** se descarta; solo se guarda en un trámite que queda sin tutor.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-052: ¿El teléfono se guarda tal como se escribe o normalizado?
+
+**Element:** Entity: STUDENT.phone  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+OQ-039 acepta el prefijo +591 opcional, pero no dice si se guarda.
+
+**Answer:** se guarda normalizado, solo con los 7 u 8 dígitos, sin el prefijo +591.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-053: ¿La cuenta del administrador del sistema se lista y gestiona junto con las demás?
+
+**Element:** UC-018 step 2  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 2 lista las cuentas de docentes, del director de carrera y de asistentes administrativos, pero no dice qué
+pasa con una cuenta de administrador del sistema que tenga además uno de esos roles.
+
+**Answer:** no; una cuenta con el rol administrador del sistema no se lista ni se gestiona en UC-018.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
