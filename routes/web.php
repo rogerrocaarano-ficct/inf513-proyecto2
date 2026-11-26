@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
+use App\Http\Controllers\Committees\CommitteeController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
 use App\Http\Controllers\TutorAssignments\TutorAssignmentController;
 use App\Http\Controllers\WorkshopTeacher\WorkshopTeacherController;
@@ -38,6 +39,14 @@ Route::middleware(['auth', 'can:tutores.asignar'])->prefix('tutores')->name('tut
 Route::middleware(['auth', 'can:taller.designar'])->group(function () {
     Route::get('taller-de-grado', [WorkshopTeacherController::class, 'edit'])->name('workshop-teacher.edit');
     Route::put('taller-de-grado', [WorkshopTeacherController::class, 'update'])->name('workshop-teacher.update');
+});
+
+// UC-006: Asignar tribunal evaluador
+Route::middleware(['auth', 'can:tribunales.asignar'])->prefix('tribunales')->name('committees.')->group(function () {
+    Route::get('/', [CommitteeController::class, 'index'])->name('index');
+    Route::get('{graduationProcess}', [CommitteeController::class, 'edit'])->name('edit');
+    Route::post('{graduationProcess}', [CommitteeController::class, 'store'])->name('store');
+    Route::put('{graduationProcess}/reemplazo', [CommitteeController::class, 'replace'])->name('replace');
 });
 
 require __DIR__.'/settings.php';
