@@ -7,9 +7,9 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Ver un panel con las cifras de los trámites de titulación de la carrera, para evaluar su avance  
 **Trigger:** El director de carrera solicita ver el panel de estadísticas de trámites  
-**Status:** Draft  
+**Status:** Reviewed  
 
-**Requirements:** [FR-036, NFR-001, NFR-005, NFR-009](../requirements.md)  
+**Requirements:** [FR-036, NFR-001, NFR-005, NFR-009, NFR-010](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
@@ -61,7 +61,7 @@ El panel muestra solo estas métricas (FR-036): los trámites de titulación en 
 
 ### BR-002: Calificación promedio
 
-La calificación promedio es el promedio de las calificaciones conjuntas de todas las defensas formales realizadas con el estudiante presente (UC-011 BR-003), con un decimal. Las defensas formales con inasistencia no cuentan.
+La calificación promedio es el promedio de las calificaciones conjuntas de todas las defensas formales realizadas con el estudiante presente (UC-011 BR-003), redondeado a un decimal con las mitades hacia arriba. Las defensas formales con inasistencia no cuentan.
 
 ### BR-003: Datos al momento
 
