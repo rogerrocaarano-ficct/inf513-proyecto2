@@ -3,7 +3,7 @@
 Modelo de entidades del sistema de seguimiento de trámites de titulación, derivado de
 [requirements.md](requirements.md). Los nombres siguen el [glosario](glossary.md).
 
-USERS (id, name, email, password, email_verified_at, two_factor_secret) ships with the Laravel starter project and is an external boundary. It gains one attribute, `must_change_password` (Boolean, Not Null): true while the user still has the initial password that UC-001 BR-005 sets, false once the user changes it.
+USERS (id, name, email, password, email_verified_at, two_factor_secret) ships with the Laravel starter project and is an external boundary. It gains the attributes `is_active` (Boolean, Not Null): false when the account is deactivated and true while it can log in, and `must_change_password` (Boolean, Not Null): true while the user still has the initial password that UC-001 BR-005 sets, false once the user changes it.
 
 ## Entity Relationship Diagram
 
