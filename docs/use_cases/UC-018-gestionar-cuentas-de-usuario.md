@@ -7,9 +7,9 @@
 **Primary Actor:** Administrador del sistema  
 **Goal:** Registrar, cambiar, desactivar y reactivar las cuentas de los docentes, el director de carrera y los asistentes administrativos, con su rol, para que cada uno participe en los trámites de titulación con su propia cuenta y acceda solo a lo que su rol permite  
 **Trigger:** El administrador del sistema solicita gestionar las cuentas de usuario, por ejemplo cuando llega un docente nuevo o uno deja la carrera  
-**Status:** Draft  
+**Status:** Reviewed  
 
-**Requirements:** [FR-003, FR-027, FR-029, NFR-005, NFR-006, NFR-009, NFR-013](../requirements.md)  
+**Requirements:** [FR-003, FR-027, FR-029, NFR-005, NFR-006, NFR-009, NFR-010, NFR-013, NFR-015](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
@@ -36,7 +36,7 @@
 
 1. El sistema muestra el nombre completo, el correo electrónico y el rol de la cuenta.
 2. El administrador del sistema cambia el nombre, el correo electrónico o el rol, y confirma.
-3. El sistema verifica los datos como en el paso 6 y, si el cambio quita el rol docente, también como al desactivar (BR-003).
+3. El sistema verifica los datos como en el paso 6 y, si el cambio quita el rol docente, también como al desactivar (BR-003); si la verificación lo impide, el use case continúa en A3.
 4. El sistema guarda los cambios; el usuario trabaja con su nuevo rol desde su siguiente acción.
 5. Use case continues at step 8.
 
@@ -47,12 +47,12 @@
 
 1. El sistema verifica que el usuario no sea tutor ni miembro vigente del tribunal de un trámite de titulación en curso, ni el docente de taller de grado (BR-003).
 2. El administrador del sistema confirma la desactivación.
-3. El sistema desactiva la cuenta, que ya no puede iniciar sesión, y, si es docente, lo registra como docente inactivo.
+3. El sistema establece `USER.is_active` en falso, por lo que la cuenta ya no puede iniciar sesión, y, si es docente, lo registra como docente inactivo.
 4. Use case continues at step 8.
 
-### A3: Desactivación bloqueada
+### A3: Desactivación o retiro del rol docente bloqueado
 
-**Trigger:** El usuario es tutor o miembro vigente del tribunal de un trámite de titulación en curso, o el docente de taller de grado (step 3)  
+**Trigger:** La verificación de A2.1, o la de A1.3 cuando el cambio quita el rol docente, determina que el usuario es tutor o miembro vigente del tribunal de un trámite de titulación en curso, o el docente de taller de grado  
 **Flow:**
 
 1. El sistema informa que la cuenta no se puede desactivar ni perder el rol docente, y lista los trámites de titulación y los papeles que el director de carrera debe reasignar antes (UC-002, UC-003, UC-006).
@@ -64,7 +64,7 @@
 **Flow:**
 
 1. El administrador del sistema confirma la reactivación.
-2. El sistema reactiva la cuenta y, si es docente, lo registra como docente activo.
+2. El sistema establece `USER.is_active` en verdadero y, si es docente, lo registra como docente activo.
 3. Use case continues at step 8.
 
 ### A5: Correo electrónico de otro usuario
@@ -117,11 +117,11 @@ El administrador del sistema asigna a cada cuenta uno de los roles que el sistem
 
 ### BR-002: El director de carrera es docente
 
-El director de carrera trabaja también como docente: puede ser tutor, pero no miembro de un tribunal evaluador (UC-006 BR-001). Hay a lo sumo un director de carrera activo.
+El director de carrera trabaja también como docente: puede ser tutor, pero no miembro de un tribunal evaluador (UC-006 BR-001). Al cambiar al director de carrera, el usuario no deja de ser docente y conserva los trámites de titulación a los que está asignado como tutor. Hay a lo sumo un director de carrera activo.
 
 ### BR-003: Desactivación y retiro del rol docente
 
-Una cuenta no se desactiva ni pierde el rol docente mientras su usuario sea tutor o miembro vigente del tribunal de un trámite de titulación en curso, o el docente de taller de grado (UC-003 BR-001). El director de carrera reasigna esos papeles antes.
+Una cuenta no se desactiva ni pierde el rol docente mientras su usuario sea tutor o miembro vigente del tribunal de un trámite de titulación en curso, o el docente de taller de grado (UC-003 BR-001). El director de carrera reasigna esos papeles antes. Si se intenta, el sistema lo impide (A3).
 
 ### BR-004: Cuentas permanentes
 
