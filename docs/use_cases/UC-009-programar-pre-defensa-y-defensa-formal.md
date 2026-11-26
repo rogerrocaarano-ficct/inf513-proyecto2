@@ -7,7 +7,7 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Fijar la fecha, la hora y el ambiente de la pre-defensa o la defensa formal de un proyecto de grado sin superponer al tribunal evaluador, para que el estudiante, su tutor y su tribunal la conozcan  
 **Trigger:** El director de carrera solicita programar o reprogramar una pre-defensa o defensa formal  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-015, FR-017, FR-018, FR-021, NFR-005, NFR-009, NFR-013, C-005](../requirements.md)  
 **Layers:** UI
@@ -19,7 +19,7 @@
 ## Main Success Scenario
 
 1. El director de carrera solicita programar una pre-defensa o defensa formal.
-2. El sistema muestra el calendario de las pre-defensas y defensas formales programadas sin realizar, con su fecha, hora, ambiente, estudiante y tribunal evaluador, y la lista de los trámites de titulación que esperan programación (BR-001, BR-002).
+2. El sistema muestra el calendario de las pre-defensas y defensas formales programadas sin realizar, con su fecha, hora, ambiente, estudiante, tutor y tribunal evaluador, y la lista de los trámites de titulación que esperan programación (BR-001, BR-002).
 3. El director de carrera elige un trámite de titulación de la lista.
 4. El sistema muestra si corresponde programar su pre-defensa o su defensa formal, con su tutor y los miembros vigentes de su tribunal evaluador.
 5. El director de carrera ingresa la fecha, la hora y, si ya lo conoce, el ambiente.
@@ -118,8 +118,8 @@ Solo una pre-defensa o defensa formal que aún no se realizó se reprograma; al 
 
 ### BR-006: Calendario de defensas
 
-El calendario muestra todas las pre-defensas y defensas formales programadas sin realizar, de todos los trámites de titulación, para que el director de carrera asigne fechas sin superponer al tribunal evaluador (FR-018).
+El calendario muestra todas las pre-defensas y defensas formales programadas sin realizar, de todos los trámites de titulación, con su tutor y su tribunal evaluador, para que el director de carrera asigne fechas, y elija reemplazos (UC-002, UC-006), sin superponer al tutor ni al tribunal evaluador (FR-018).
 
 ### BR-007: Reemplazo de participantes con un acto programado
 
-Si se reemplaza al tutor o a un miembro del tribunal (UC-002, UC-006), se conserva la programación del acto pendiente cuando el horario es compatible con el reemplazo. Si el reemplazo tiene un choque, el director de carrera debe reprogramar el acto para un horario compatible con los participantes vigentes y con el reemplazo antes de confirmar el cambio. La programación vigente se conserva mientras el acto no se reprograme.
+Un reemplazo del tutor o de un miembro del tribunal conserva la programación del acto pendiente. Si el nuevo docente tiene un choque de horario con ese acto, el reemplazo no se confirma (UC-002 BR-006, UC-006 BR-006): el director de carrera reprograma antes el acto (A3) para un horario compatible con los participantes vigentes y con el nuevo docente, y luego hace el reemplazo.
