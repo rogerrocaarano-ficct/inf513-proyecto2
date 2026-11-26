@@ -9,7 +9,7 @@
 **Trigger:** El director de carrera solicita asignar el tribunal evaluador de un trámite de titulación  
 **Status:** Draft  
 
-**Requirements:** [FR-008, FR-021, FR-022, NFR-004, NFR-005, NFR-009, C-006](../requirements.md)  
+**Requirements:** [FR-008, FR-018, FR-021, FR-022, NFR-004, NFR-005, NFR-009, C-006](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
@@ -47,9 +47,10 @@
 
 1. El sistema muestra los miembros del tribunal vigentes y los docentes elegibles (BR-001).
 2. El director de carrera elige al miembro que reemplaza y al docente que entra en su lugar, y confirma el reemplazo.
-3. El sistema registra la fecha y hora del reemplazo del miembro anterior y registra al nuevo docente como miembro del tribunal, sin cambiar la fase del trámite de titulación.
-4. El sistema notifica al nuevo miembro que se le asignó el trámite de titulación, al miembro anterior que dejó de serlo y al estudiante que su tribunal evaluador tiene un nuevo miembro.
-5. Use case continues at step 10.
+3. El sistema verifica que el nuevo docente no tiene un choque de horario con una pre-defensa o defensa formal programada del trámite de titulación (BR-006).
+4. El sistema registra la fecha y hora del reemplazo del miembro anterior y registra al nuevo docente como miembro del tribunal, sin cambiar la fase del trámite de titulación ni la programación de sus actos.
+5. El sistema notifica al nuevo miembro que se le asignó el trámite de titulación, al miembro anterior que dejó de serlo y al estudiante que su tribunal evaluador tiene un nuevo miembro.
+6. Use case continues at step 10.
 
 ### A3: El reemplazo ya no es posible
 
@@ -65,6 +66,14 @@
 **Flow:**
 
 1. El director de carrera cancela la operación.
+2. Use case ends.
+
+### A5: El nuevo miembro tiene un choque de horario
+
+**Trigger:** En un reemplazo (A2), el nuevo docente tiene otra pre-defensa o defensa formal que se cruza con un acto programado del trámite de titulación (step 6)  
+**Flow:**
+
+1. El sistema informa con qué pre-defensa o defensa formal se cruza el nuevo docente, no hace el reemplazo e indica que el director de carrera debe reprogramar antes el acto (UC-009 A3) o elegir otro docente.
 2. Use case ends.
 
 ## Postconditions
@@ -101,3 +110,7 @@ El director de carrera reemplaza a un miembro a la vez, en un trámite de titula
 ### BR-005: Acceso del miembro reemplazado
 
 El miembro reemplazado deja de participar en el trámite de titulación y ya no puede verlo (NFR-004), salvo que participe en él por otro papel.
+
+### BR-006: Reemplazo con un acto programado
+
+Un reemplazo no se confirma si el nuevo docente tiene un choque de horario (UC-009 BR-003) con una pre-defensa o defensa formal programada sin realizar del trámite de titulación; el director de carrera la reprograma antes (UC-009 BR-007). Sin choque, la programación se conserva.
