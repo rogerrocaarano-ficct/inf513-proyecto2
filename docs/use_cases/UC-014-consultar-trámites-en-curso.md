@@ -7,14 +7,14 @@
 **Primary Actor:** Asistente administrativo  
 **Goal:** Ver la fase actual de todos los trámites de titulación en curso, para informar el estado de cualquiera cuando se lo consulten  
 **Trigger:** El asistente administrativo solicita consultar los trámites de titulación en curso, por ejemplo cuando un estudiante o un docente pregunta por un trámite  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-024, NFR-005, NFR-009](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El asistente administrativo inició sesión con el rol asistente administrativo.
+- El asistente administrativo inició sesión y tiene el rol asistente administrativo.
 
 ## Main Success Scenario
 

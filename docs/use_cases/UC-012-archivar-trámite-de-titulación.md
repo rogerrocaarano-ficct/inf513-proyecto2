@@ -7,14 +7,14 @@
 **Primary Actor:** Asistente administrativo  
 **Goal:** Archivar un trámite de titulación concluido o abandonado, para que deje de figurar entre los trámites pendientes y su documentación quede disponible para consulta  
 **Trigger:** El asistente administrativo solicita archivar los trámites de titulación que ya terminaron  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-020, FR-021, NFR-005, NFR-008, NFR-009, C-005](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El asistente administrativo inició sesión con el rol asistente administrativo.
+- El asistente administrativo inició sesión y tiene el rol asistente administrativo.
 
 ## Main Success Scenario
 

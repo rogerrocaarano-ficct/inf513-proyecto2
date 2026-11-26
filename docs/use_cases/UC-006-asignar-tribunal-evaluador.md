@@ -7,14 +7,14 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Asignar tres docentes como tribunal evaluador de un trámite de titulación con perfil de proyecto aprobado, o reemplazar a uno de ellos, para que el proyecto de grado tenga quién lo evalúe  
 **Trigger:** El director de carrera solicita asignar el tribunal evaluador de un trámite de titulación  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-008, FR-018, FR-021, FR-022, NFR-004, NFR-005, NFR-009, C-006](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El director de carrera inició sesión con el rol director de carrera.
+- El director de carrera inició sesión y tiene el rol director de carrera.
 
 ## Main Success Scenario
 

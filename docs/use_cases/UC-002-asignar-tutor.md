@@ -7,14 +7,14 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Dejar a un docente activo como tutor de un trámite de titulación en curso, para que el estudiante tenga quién guíe su proyecto de grado  
 **Trigger:** El director de carrera decide asignar o cambiar el tutor de un trámite de titulación  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-004, FR-018, FR-021, FR-022, NFR-004, NFR-005, NFR-009](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El director de carrera inició sesión con el rol director de carrera.
+- El director de carrera inició sesión y tiene el rol director de carrera.
 - El administrador del sistema registró docentes activos además del docente de taller de grado (UC-018).
 
 ## Main Success Scenario

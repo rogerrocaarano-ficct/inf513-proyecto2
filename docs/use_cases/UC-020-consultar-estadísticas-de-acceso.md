@@ -7,14 +7,14 @@
 **Primary Actor:** Administrador del sistema  
 **Goal:** Ver por día los inicios de sesión, los intentos fallidos y las páginas más visitadas, para vigilar el flujo de accesos al sistema  
 **Trigger:** El administrador del sistema solicita ver el panel de estadísticas de acceso  
-**Status:** Reviewed 
+**Status:** Draft  
 
 **Requirements:** [FR-035, FR-037, NFR-001, NFR-005, NFR-009, NFR-010, NFR-011, NFR-012, NFR-013](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El administrador del sistema inició sesión con el rol administrador del sistema.
+- El administrador del sistema inició sesión y tiene el rol administrador del sistema.
 
 ## Main Success Scenario
 

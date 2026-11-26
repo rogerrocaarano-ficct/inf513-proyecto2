@@ -7,14 +7,14 @@
 **Primary Actor:** Estudiante, Docente, Asistente administrativo, Director de carrera  
 **Goal:** Encontrar un trámite de titulación por el nombre del estudiante o el título del proyecto de grado, para llegar a él sin recorrer listas  
 **Trigger:** El usuario escribe un nombre o un título en la búsqueda del encabezado  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-038, NFR-001, NFR-004, NFR-005, NFR-009](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El usuario inició sesión con el rol estudiante, docente, asistente administrativo o director de carrera.
+- El usuario inició sesión y tiene el rol estudiante, docente, asistente administrativo o director de carrera.
 
 ## Main Success Scenario
 

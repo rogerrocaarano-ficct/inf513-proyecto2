@@ -7,14 +7,14 @@
 **Primary Actor:** Tutor  
 **Goal:** Registrar observaciones sobre una versión del proyecto de un estudiante que tutela, para que mejore su proyecto de grado antes de la revisión del tribunal evaluador  
 **Trigger:** El tutor solicita revisar las versiones del proyecto de sus estudiantes  
-**Status:** Reviewed
+**Status:** Draft  
 
 **Requirements:** [FR-012, FR-021, NFR-004, NFR-005, NFR-009, NFR-013, C-005](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El tutor inició sesión con el rol docente.
+- El tutor inició sesión y tiene el rol docente.
 
 ## Main Success Scenario
 

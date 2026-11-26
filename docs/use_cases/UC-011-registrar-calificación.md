@@ -7,14 +7,14 @@
 **Primary Actor:** Miembro del tribunal  
 **Goal:** Registrar su calificación de la defensa formal, o la inasistencia del estudiante, para que con las de los otros dos miembros el trámite de titulación quede concluido con su calificación conjunta  
 **Trigger:** Termina la defensa formal programada, o el estudiante no se presenta a ella  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-019, FR-021, FR-042, NFR-004, NFR-005, NFR-009, NFR-013, C-005, C-006, C-007, C-016](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El miembro del tribunal inició sesión con el rol docente.
+- El miembro del tribunal inició sesión y tiene el rol docente.
 
 ## Main Success Scenario
 

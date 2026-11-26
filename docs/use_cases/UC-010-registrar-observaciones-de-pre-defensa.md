@@ -7,14 +7,14 @@
 **Primary Actor:** Miembro del tribunal  
 **Goal:** Registrar sus observaciones de la pre-defensa sobre el documento y el prototipo, o la inasistencia del estudiante, para que el estudiante sepa qué subsanar antes de la defensa formal  
 **Trigger:** Termina la pre-defensa programada, o el estudiante no se presenta a ella  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-016, FR-021, FR-042, NFR-004, NFR-005, NFR-009, NFR-013, C-005, C-006](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El miembro del tribunal inició sesión con el rol docente.
+- El miembro del tribunal inició sesión y tiene el rol docente.
 
 ## Main Success Scenario
 

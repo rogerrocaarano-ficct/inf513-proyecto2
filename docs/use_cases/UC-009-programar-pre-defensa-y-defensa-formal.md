@@ -7,14 +7,14 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Fijar la fecha, la hora y el ambiente de la pre-defensa o la defensa formal de un proyecto de grado sin superponer al tribunal evaluador, para que el estudiante, su tutor y su tribunal la conozcan  
 **Trigger:** El director de carrera solicita programar o reprogramar una pre-defensa o defensa formal  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-015, FR-017, FR-018, FR-021, NFR-005, NFR-009, NFR-013, C-005](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El director de carrera inició sesión con el rol director de carrera.
+- El director de carrera inició sesión y tiene el rol director de carrera.
 
 ## Main Success Scenario
 

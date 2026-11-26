@@ -7,14 +7,14 @@
 **Primary Actor:** Administrador del sistema  
 **Goal:** Consultar los inicios de sesión exitosos y fallidos con su dirección IP, filtrados por fecha y usuario, para detectar accesos indebidos  
 **Trigger:** El administrador del sistema solicita consultar la bitácora de inicios de sesión, por ejemplo ante una cuenta bloqueada o un acceso sospechoso  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-030, NFR-001, NFR-005, NFR-006, NFR-009, NFR-010, NFR-011, NFR-013](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El administrador del sistema inició sesión con el rol administrador del sistema.
+- El administrador del sistema inició sesión y tiene el rol administrador del sistema.
 
 ## Main Success Scenario
 
