@@ -808,6 +808,40 @@ los 300 caracteres."; subida fallida: "No se pudo subir el archivo. Inténtelo d
 observaciones: "Esta versión no tiene observaciones."  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-055: ¿Con qué textos notifica, confirma e informa el sistema al evaluar un perfil de proyecto?
+
+**Element:** UC-005  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 8, el paso 9, A1 step 4, A2, A3, BR-001 y BR-003 notifican, confirman o informan, pero la especificación no
+fija los textos.
+
+**Answer:** paso 8 (al estudiante): "Su perfil de proyecto (versión {n}) fue aprobado."; A1 step 4 (al estudiante):
+"Su perfil de proyecto (versión {n}) fue rechazado. Puede presentar uno nuevo con las observaciones subsanadas.";
+paso 9: "Perfil de proyecto aprobado." o "Perfil de proyecto rechazado."; A2: "El rechazo necesita al menos una
+observación."; A3: "No hay perfiles de proyecto que esperen su revisión."; BR-001: "Solo el revisor del perfil de
+proyecto puede evaluarlo."; BR-003: "El perfil de proyecto ya fue evaluado."; BR-004: "El trámite de titulación ya
+tiene un perfil de proyecto aprobado."; sin decisión: "Elija si aprueba o rechaza el perfil de proyecto.";
+observación de más de 2000 caracteres: "Cada observación admite como máximo 2000 caracteres."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-056: ¿Quién ve la opción de menú para evaluar perfiles de proyecto?
+
+**Element:** UC-005 BR-001  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Solo el docente de taller de grado evalúa perfiles de proyecto, pero los permisos se asignan por rol (ADR-005) y el
+rol docente lo tienen todos los docentes. Lecturas: (a) todo docente ve la opción y la lista muestra solo los
+perfiles de los que es revisor; (b) solo el docente de taller de grado ve la opción.
+
+**Answer:** (b) solo el docente de taller de grado ve la opción "Perfiles de proyecto"; el permiso sigue en el rol
+docente y la evaluación exige ser el revisor del perfil de proyecto.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-057: ¿Qué observaciones ve el estudiante al presentar una versión en la fase defensa formal?
 
 **Element:** UC-004 step 2  
