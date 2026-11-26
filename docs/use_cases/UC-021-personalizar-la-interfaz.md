@@ -7,7 +7,7 @@
 **Primary Actor:** Usuario  
 **Goal:** Elegir el tema, el modo día o noche, el tamaño de la fuente y el alto contraste de la interfaz, para que el sistema se adapte a su preferencia y sea cómodo de leer  
 **Trigger:** El usuario solicita cambiar la apariencia de la interfaz  
-**Status:** Reviewed 
+**Status:** Draft  
 
 **Requirements:** [FR-031, FR-032, FR-033, FR-034, NFR-009, NFR-010, NFR-014, NFR-015, C-011](../requirements.md)  
 **Layers:** UI
@@ -46,7 +46,6 @@
 
 1. El usuario cambia la preferencia que quiere.
 2. El sistema la aplica de inmediato y guarda las preferencias del usuario.
-   Si el guardado falla, el use case continúa en A4.
 3. Use case ends.
 
 ### A3: Restablecer las preferencias
@@ -55,15 +54,6 @@
 **Flow:**
 
 1. El sistema vuelve a las preferencias predeterminadas (BR-004), las aplica de inmediato y las guarda.
-   Si el guardado falla, el use case continúa en A4.
-2. Use case ends.
-
-### A4: No se pueden guardar las preferencias
-
-**Trigger:** El sistema no puede guardar las preferencias después de aplicarlas (step 10, A2 step 2 o A3 step 1)  
-**Flow:**
-
-1. El sistema conserva las preferencias previamente guardadas, revierte cualquier cambio temporal y muestra un mensaje de error en español.
 2. Use case ends.
 
 ## Postconditions
@@ -75,7 +65,7 @@
 
 ### Failure Postconditions
 
-- Las preferencias guardadas del usuario no cambian cuando el guardado falla, las preferencias de otros usuarios no cambian y un tamaño de fuente fuera del 75 % al 200 % nunca se guarda.
+- Las preferencias de otros usuarios no cambian, y un tamaño de fuente fuera del 75 % al 200 % nunca se guarda.
 
 ## Business Rules
 
