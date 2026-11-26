@@ -7,7 +7,7 @@
 **Primary Actor:** Revisor  
 **Goal:** Aprobar o rechazar un perfil de proyecto con las observaciones que lo justifican, para que el estudiante sepa si su proyecto de grado es viable para la modalidad de graduación  
 **Trigger:** El revisor recibe la notificación de un perfil de proyecto que espera su revisión, o decide revisar sus perfiles de proyecto pendientes  
-**Status:** Reviewed  
+**Status:** Approved  
 
 **Requirements:** [FR-007, FR-021, FR-041, NFR-004, NFR-005, NFR-009, NFR-013](../requirements.md)  
 **Layers:** UI

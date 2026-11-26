@@ -7,14 +7,14 @@
 **Primary Actor:** Asistente administrativo  
 **Goal:** Ver la fase actual de todos los trámites de titulación en curso, para informar el estado de cualquiera cuando se lo consulten  
 **Trigger:** El asistente administrativo solicita consultar los trámites de titulación en curso, por ejemplo cuando un estudiante o un docente pregunta por un trámite  
-**Status:** Draft  
+**Status:** Approved  
 
 **Requirements:** [FR-024, NFR-005, NFR-009](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El asistente administrativo inició sesión con el rol asistente administrativo.
+- El asistente administrativo inició sesión y tiene el rol asistente administrativo.
 
 ## Main Success Scenario
 
@@ -23,7 +23,7 @@
 3. El asistente administrativo filtra la lista por fase.
 4. El sistema muestra solo los trámites de titulación en curso de esa fase, con la cantidad.
 5. El asistente administrativo elige un trámite de titulación.
-6. El sistema muestra su detalle: las fases recorridas con su fecha, el tutor, los miembros vigentes del tribunal evaluador, las pre-defensas y defensas formales programadas o realizadas, la documentación de requisitos y las versiones del proyecto con su fase y su estado.
+6. El sistema abre el trámite de titulación en la consulta de trámite de titulación (UC-013).
 
 ## Alternative Flows
 
@@ -37,25 +37,26 @@
 
 ### A2: No hay trámites en curso
 
-**Trigger:** No hay trámites de titulación en curso, o ninguno en la fase elegida (step 2)  
+**Trigger:** No hay trámites de titulación en curso (step 2)  
 **Flow:**
 
 1. El sistema informa que no hay trámites de titulación en curso que mostrar.
 2. Use case ends.
 
-### A3: Descarga de un documento
+### A3: Ningún trámite en la fase elegida
 
-**Trigger:** El asistente administrativo quiere un documento del trámite de titulación (step 6)  
+**Trigger:** No hay trámites de titulación en curso en la fase elegida (step 4)  
 **Flow:**
 
-1. El asistente administrativo descarga un documento de requisitos o una versión del proyecto.
-2. Use case ends.
+1. El sistema informa que no hay trámites de titulación en curso en esa fase.
+2. El asistente administrativo elige otra fase o quita el filtro.
+3. Use case continues at step 3.
 
 ## Postconditions
 
 ### Success Postconditions
 
-- El asistente administrativo vio la fase actual de los trámites de titulación en curso y, si eligió uno, su detalle.
+- El asistente administrativo vio la fase actual de los trámites de titulación en curso y, si eligió uno, lo abrió en la consulta de trámite de titulación (UC-013).
 
 ### Failure Postconditions
 
@@ -73,4 +74,4 @@ El asistente administrativo ve todos los trámites de titulación en curso, de c
 
 ### BR-003: Solo consulta
 
-El asistente administrativo consulta el detalle y descarga los documentos, pero no cambia nada del trámite de titulación desde esta consulta.
+La lista de trámites en curso no cambia nada; las acciones sobre un trámite de titulación se ofrecen al abrirlo, en su consulta (UC-013 BR-004).

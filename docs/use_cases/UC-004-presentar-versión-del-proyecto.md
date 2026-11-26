@@ -7,14 +7,14 @@
 **Primary Actor:** Estudiante  
 **Goal:** Subir una nueva versión del proyecto de grado en la fase actual de su trámite de titulación, para que quienes la revisan la reciban sin que el estudiante vaya a la dirección de carrera  
 **Trigger:** El estudiante decide presentar una nueva versión de su proyecto de grado: el perfil de proyecto, la versión que subsana un rechazo u observaciones, o la versión final para la defensa formal  
-**Status:** Reviewed  
+**Status:** Approved  
 
 **Requirements:** [FR-005, FR-009, FR-022, NFR-004, NFR-008, NFR-009, NFR-013, C-004, C-014](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El estudiante inició sesión con el rol estudiante.
+- El estudiante inició sesión y tiene el rol estudiante.
 
 ## Main Success Scenario
 

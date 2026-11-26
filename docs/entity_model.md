@@ -3,7 +3,7 @@
 Modelo de entidades del sistema de seguimiento de trámites de titulación, derivado de
 [requirements.md](requirements.md). Los nombres siguen el [glosario](glossary.md).
 
-USERS (id, name, email, password, email_verified_at, two_factor_secret) ships with the Laravel starter project and is an external boundary. It gains one attribute, `must_change_password` (Boolean, Not Null): true while the user still has the initial password that UC-001 BR-005 sets, false once the user changes it.
+USERS (id, name, email, password, email_verified_at, two_factor_secret) ships with the Laravel starter project and is an external boundary. It gains the attributes `is_active` (Boolean, Not Null): false when the account is deactivated and true while it can log in, and `must_change_password` (Boolean, Not Null): true while the user still has the initial password that UC-001 BR-005 sets, false once the user changes it.
 
 ## Entity Relationship Diagram
 
@@ -26,6 +26,7 @@ erDiagram
     COMMITTEE_MEMBER ||--o{ VERSION_APPROVAL : "registra"
     DEFENSE ||--o{ DEFENSE_REVIEW : "recibe"
     COMMITTEE_MEMBER ||--o{ DEFENSE_REVIEW : "registra"
+    COMMITTEE_MEMBER |o--o{ DEFENSE : "registra la inasistencia en"
     PROJECT_VERSION |o--o{ OBSERVATION : "recibe"
     DEFENSE |o--o{ OBSERVATION : "recibe"
     GRADUATION_PROCESS ||--o{ DEFENSE : "programa"
@@ -70,17 +71,16 @@ Permiso concedido a un rol.
 
 ### USER_ROLE
 
-Rol asignado a un usuario; un usuario puede tener varios y trabaja con uno activo a la vez.
+Rol asignado a un usuario; un usuario puede tener varios y tiene la suma de sus permisos (ADR-005).
 
 | Attribute | Description                                  | Data Type | Length/Precision | Validation Rules                    |
 |-----------|----------------------------------------------|-----------|------------------|-------------------------------------|
 | user_id   | Usuario que recibe el rol                    | Long      | 19               | Primary Key, Foreign Key (USERS.id) |
 | role_id   | Rol asignado                                 | Long      | 19               | Primary Key, Foreign Key (ROLE.id)   |
-| is_active | Verdadero para el rol con el que trabaja el usuario | Boolean   | 1                | Not Null                            |
 
 #### Constraints
 
-- Cada usuario con al menos un rol tiene exactamente un rol con `is_active` verdadero.
+- Un usuario con el rol `Director de carrera` tiene también el rol `Docente`.
 
 ### MENU_ITEM
 
@@ -286,11 +286,14 @@ Pre-defensa o defensa formal programada de un proyecto de grado.
 | grade        | Calificación conjunta del tribunal evaluador      | Integer   | 10               | Optional, Min: 0, Max: 100                       |
 | is_held      | Verdadero cuando la pre-defensa o defensa formal ya se realizó | Boolean   | 1                | Not Null                                         |
 | is_student_absent | Verdadero cuando el tribunal registró que el estudiante no se presentó | Boolean   | 1                | Not Null                                         |
+| absence_recorded_by_id | Miembro del tribunal que registró la inasistencia del estudiante | Long      | 19               | Optional, Foreign Key (COMMITTEE_MEMBER.id)      |
 
 #### Constraints
 
 - Solo una `Defensa formal` realizada con el estudiante presente tiene `grade`, y toda la tiene (C-007).
 - Solo una pre-defensa o defensa formal realizada tiene `is_student_absent` verdadero.
+- `absence_recorded_by_id` tiene valor si y solo si `is_student_absent` es verdadero; es un miembro vigente del tribunal del trámite al registrarla.
+- Una pre-defensa o defensa formal con `is_student_absent` verdadero no tiene registros en `DEFENSE_REVIEW`: la inasistencia se registra solo mientras ningún miembro la registró.
 - Un trámite tiene a lo sumo una `Pre-defensa` y una `Defensa formal` sin realizar.
 - La `Defensa formal` de un trámite es posterior a una `Pre-defensa` realizada del mismo trámite.
 

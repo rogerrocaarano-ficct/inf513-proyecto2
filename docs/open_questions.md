@@ -113,11 +113,15 @@ Los lineamientos técnicos (3.5) piden conmutación automática o manual según 
 **Element:** NFR-014  
 **Raised by:** /requirements, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** WCAG 2.1 nivel AA: contraste de al menos 4,5:1 en todos los temas y de 7:1 en el modo de alto contraste.  
 
 Los lineamientos técnicos (3.5) piden "WCAG compliance básico" sin nombrar versión ni nivel. Lecturas: (a) WCAG 2.1
 nivel A; (b) WCAG 2.1 nivel AA, el nivel que suelen exigir las normas de accesibilidad.
+
+**Answer:** está bien  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** NFR-014  
 
 ## OQ-009: ¿Qué métricas muestra el panel de estadísticas de trámites?
 
@@ -239,11 +243,15 @@ requisitos, pero el sistema no registra semestres.
 **Element:** UC-002 A1  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** Al nuevo tutor, al tutor anterior y al estudiante.  
 
 FR-021 notifica al estudiante los cambios de fase, observaciones y fechas, y FR-022 al docente que recibe un trámite;
 ningún requisito dice quién se entera de que un tutor deja de serlo.
+
+**Answer:** al estudiante; al aclarar frente a FR-022: al estudiante y al nuevo tutor, el tutor anterior no recibe notificación.  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-002 A1  
 
 ## OQ-018: ¿El docente de taller de grado puede revisar el perfil de proyecto de un estudiante del que es tutor?
 
@@ -310,106 +318,146 @@ lleva.
 **Element:** UC-006 BR-004  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** No: solo cuentan las aprobaciones de los tres miembros vigentes, y el nuevo miembro revisa la versión del proyecto en revisión.  
 
 Un miembro puede ser reemplazado después de aprobar una versión de la fase pre-defensa que los otros dos aún no
 aprobaron; ningún requisito dice si su aprobación sigue valiendo.
+
+**Answer:** ok  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-006 BR-004, UC-008 BR-004  
 
 ## OQ-023: ¿Un miembro del tribunal puede cambiar su pronunciamiento antes de que los otros dos se pronuncien?
 
 **Element:** UC-008 BR-002  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** No: el pronunciamiento registrado queda fijo, como la evaluación del perfil de proyecto (UC-005 BR-003).  
 
 Una versión de la fase pre-defensa sigue en revisión hasta que los tres miembros se pronuncian; ningún requisito dice
 si mientras tanto un miembro puede pasar de observar a aprobar, o al revés.
+
+**Answer:** No; el pronunciamiento queda fijo  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-008 BR-002  
 
 ## OQ-024: ¿A quién se notifica que el tribunal aprobó una versión de la fase pre-defensa?
 
 **Element:** UC-008 step 10  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** Solo al estudiante, como la aprobación del perfil de proyecto (OQ-020); el director de carrera ve el trámite pendiente al programar la pre-defensa.  
 
 FR-015 pide al director de carrera programar la pre-defensa cuando los tres miembros aprobaron, pero ningún requisito
 dice cómo se entera.
+
+**Answer:** Solo al estudiante  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-008 step 10  
 
 ## OQ-025: ¿A quién se notifica la fecha de una pre-defensa o defensa formal?
 
 **Element:** UC-009 step 9  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** Al estudiante, a su tutor y a los miembros vigentes de su tribunal evaluador, también cuando se reprograma.  
 
 FR-021 notifica al estudiante cuando su trámite tiene una fecha asignada; FR-022 solo cubre a los docentes cuando se
 les asigna un trámite o una versión espera su revisión, no las fechas.
+
+**Answer:** Al estudiante, a su tutor y al tribunal vigente, también al reprogramar  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-009 step 9  
 
 ## OQ-026: ¿El choque de horario considera también al tutor y al ambiente?
 
 **Element:** UC-009 BR-003  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** Sí: además de los miembros del tribunal, no se cruzan el tutor ni el ambiente, cuando el ambiente está indicado.  
 
 FR-018 busca no superponer al tribunal evaluador; el tutor y el ambiente también suelen estar presentes en la
 pre-defensa y la defensa formal.
+
+**Answer:** ok  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-009 BR-003  
 
 ## OQ-027: ¿Basta con un miembro del tribunal para registrar la inasistencia del estudiante?
 
 **Element:** UC-010 BR-004  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** Sí: la inasistencia es un hecho que cualquier miembro vigente del tribunal registra, y con ella el trámite de titulación queda abandonado.  
 
 Cada miembro registra sus propias observaciones de la pre-defensa, pero la inasistencia afecta a todo el tribunal y
 abandona el trámite de titulación.
+
+**Answer:** si  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-010 BR-004, UC-011 BR-005  
 
 ## OQ-028: ¿El tutor recibe las observaciones de la pre-defensa?
 
 **Element:** UC-010 step 10  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** Sí: el estudiante y su tutor reciben la notificación con las observaciones de la pre-defensa.  
 
 FR-021 notifica al estudiante cuando recibe observaciones; ningún requisito dice si el tutor, que lo guía para la
 defensa formal, también se entera.
+
+**Answer:** si  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-010 step 10  
 
 ## OQ-029: ¿Cómo se redondea el promedio de las calificaciones de los tres miembros del tribunal?
 
 **Element:** UC-011 BR-003  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** Al entero más cercano, con las mitades hacia arriba: un promedio de 50,5 da 51 y aprueba.  
 
 La calificación conjunta es el promedio de tres enteros, que puede tener decimales; el redondeo decide la aprobación
 cerca del umbral de 51 (C-016).
+
+**Answer:** entero mas cercano, mitades hacia arriba.  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-011 BR-003  
 
 ## OQ-030: ¿Un miembro ve las calificaciones de los demás antes de registrar la suya?
 
 **Element:** UC-011 BR-003  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** No: ve qué miembros ya calificaron, pero no sus calificaciones, hasta que se calcula la calificación conjunta.  
 
 Ver las calificaciones de los demás puede influir en la propia; ningún requisito lo dice.
+
+**Answer:** ok  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-011 BR-003  
 
 ## OQ-031: ¿Puede haber más de un director de carrera activo?
 
 **Element:** UC-018 BR-002  
 **Raised by:** /use-case-spec, 2026-11-25  
 **Blocking:** No  
-**Status:** Open  
+**Status:** Resolved  
 **Assumed:** No: hay a lo sumo un director de carrera activo; para cambiarlo, primero se le quita el rol al actual.  
 
 El glosario habla de "la autoridad de la carrera" en singular, pero ningún requisito limita cuántas cuentas tienen el
 rol director de carrera.
+
+**Answer:** no.  
+**Answered by:** Roger Roca Arano, 2026-11-25  
+**Resolved in:** UC-018 BR-002  

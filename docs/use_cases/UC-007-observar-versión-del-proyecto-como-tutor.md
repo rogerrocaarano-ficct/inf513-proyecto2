@@ -7,25 +7,25 @@
 **Primary Actor:** Tutor  
 **Goal:** Registrar observaciones sobre una versión del proyecto de un estudiante que tutela, para que mejore su proyecto de grado antes de la revisión del tribunal evaluador  
 **Trigger:** El tutor solicita revisar las versiones del proyecto de sus estudiantes  
-**Status:** Draft  
+**Status:** Approved  
 
-**Requirements:** [FR-012, FR-021, NFR-004, NFR-005, NFR-009, NFR-013](../requirements.md)  
+**Requirements:** [FR-012, FR-021, NFR-004, NFR-005, NFR-009, NFR-013, C-005](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El tutor inició sesión con el rol docente.
+- El tutor inició sesión y tiene el rol docente.
 
 ## Main Success Scenario
 
 1. El tutor solicita ver los trámites de titulación de los que es tutor.
 2. El sistema muestra sus trámites de titulación en curso con el estudiante, la fase y la última versión del proyecto, primero los que tienen una versión que el tutor aún no observó.
-3. El tutor elige una versión del proyecto de uno de esos trámites.
+3. El tutor elige uno de esos trámites. El sistema muestra su historial de versiones del proyecto y el tutor elige la versión que quiere observar.
 4. El sistema muestra la versión del proyecto para descargarla, con su fase, su estado y las observaciones que ya tiene, cada una con su autor.
 5. El tutor escribe una o más observaciones.
 6. El tutor confirma las observaciones.
 7. El sistema registra cada observación sobre la versión del proyecto, con el tutor como autor y la fecha y hora, sin cambiar el estado de la versión.
-8. El sistema notifica al estudiante que su versión del proyecto recibió observaciones de su tutor.
+8. El sistema genera una notificación interna para informar al estudiante que su versión del proyecto recibió observaciones de su tutor.
 9. El sistema muestra la versión del proyecto con las observaciones registradas.
 
 ## Alternative Flows
@@ -55,6 +55,14 @@
 1. El tutor sale después de consultar la versión del proyecto.
 2. Use case ends.
 
+### A4: El tutor dejó de estar habilitado para observar
+
+**Trigger:** Al confirmar, el docente ya no es el tutor vigente o el trámite dejó de estar en curso (step 6)  
+**Flow:**
+
+1. El sistema informa en español el motivo del rechazo y no registra observaciones ni genera una notificación.
+2. Use case ends.
+
 ## Postconditions
 
 ### Success Postconditions
@@ -65,7 +73,7 @@
 
 ### Failure Postconditions
 
-- No se registra ninguna observación incompleta, y la versión del proyecto conserva su estado y sus observaciones.
+- Este intento no registra observaciones, no cambia el estado de la versión ni genera una notificación.
 
 ## Business Rules
 
@@ -75,7 +83,7 @@ Solo el tutor vigente de un trámite de titulación en curso registra observacio
 
 ### BR-002: Versiones que se observan
 
-El tutor observa cualquier versión del proyecto de su trámite de titulación, de las fases evaluación de perfil, pre-defensa o defensa formal, mientras el trámite está en curso.
+El tutor observa cualquier versión del proyecto de su trámite de titulación, de las fases evaluación de perfil, pre-defensa o defensa formal, mientras el trámite está en curso. En defensa formal puede registrar comentarios orientativos sin iniciar una revisión de la versión (UC-004 BR-004).
 
 ### BR-003: Observaciones orientativas
 

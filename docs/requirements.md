@@ -37,9 +37,9 @@ Implemented, Verified, Deferred, Rejected), tal como los lee `/spec-review`.
 | FR-024 | Consultar trámites en curso             | Como asistente administrativo, quiero ver la fase actual de todos los trámites de titulación para que pueda informar el estado de cualquiera cuando se me consulte.                         | High     | Open     |
 | FR-025 | Elaborar actas oficiales                | Como asistente administrativo, quiero generar las actas oficiales de la defensa formal para que no las redacte a mano.                                                                     | Low      | Rejected |
 | FR-026 | Almacenar prototipos                    | Como estudiante, quiero subir el prototipo de mi proyecto de grado para que el tribunal evaluador lo revise fuera de la pre-defensa.                                                       | Low      | Rejected |
-| FR-027 | Asignar rol                             | Como administrador del sistema, quiero asignar a cada usuario que registro uno de los roles que el sistema define para que acceda solo a lo que su rol permite.                              | High     | Open     |
+| FR-027 | Asignar rol                             | Como administrador del sistema, quiero asignar a cada usuario que registro uno o más de los roles que el sistema define para que acceda solo a lo que sus roles permiten.                              | High     | Open     |
 | FR-028 | Configurar menú                         | Como administrador del sistema, quiero definir qué opciones de menú habilita cada permiso para que el menú de cada rol se arme desde la base de datos sin cambiar el código.                | Medium   | Rejected |
-| FR-029 | Ver menú según rol                      | Como usuario, quiero ver en la barra de navegación solo las opciones que los permisos de mi rol habilitan para que no encuentre opciones que no puedo usar.                                | High     | Open     |
+| FR-029 | Ver menú según rol                      | Como usuario, quiero ver en la barra de navegación solo las opciones que los permisos de mis roles habilitan para que no encuentre opciones que no puedo usar.                                | High     | Open     |
 | FR-030 | Consultar bitácora                      | Como administrador del sistema, quiero consultar la bitácora de inicios de sesión exitosos, intentos fallidos y direcciones IP, filtrada por fecha y usuario, para que pueda detectar accesos indebidos. | High     | Open     |
 | FR-031 | Elegir tema                             | Como usuario, quiero elegir entre los temas Niños, Jóvenes y Adultos para que la interfaz se adapte a mi preferencia.                                                                       | High     | Open     |
 | FR-032 | Cambiar modo día/noche                  | Como usuario, quiero que el modo día o noche siga automáticamente el modo claro u oscuro de mi sistema operativo, y poder alternarlo a mano, para que la pantalla sea cómoda de leer a cualquier hora. | High     | Open     |
@@ -59,8 +59,8 @@ lineamientos técnicos) fuera del alcance del proyecto; quedan registrados como 
 
 Los roles, sus permisos y las opciones de menú que habilita cada permiso son fijos: el sistema los define y los
 carga en la base de datos, y el administrador del sistema no los modifica. Por eso FR-028 queda como `Rejected`, y
-FR-027 se limita a asignar uno de esos roles a cada usuario. El menú de FR-029 se sigue armando desde la base de
-datos según los permisos del rol activo.
+FR-027 se limita a asignar uno o más de esos roles a cada usuario. El menú de FR-029 se sigue armando desde la base
+de datos, con la suma de los permisos de los roles del usuario; no hay un rol activo que elegir (ADR-005).
 
 ## Requisitos no funcionales
 
@@ -100,5 +100,5 @@ datos según los permisos del rol activo.
 | C-012 | Despliegue               | El sistema se publica en el servidor web institucional, en https://www.tecnoweb.org.bo/inf513/grupo03sc/proyecto2. | Regulatory | Lineamientos técnicos, 4        | High     | Open   |
 | C-013 | Control de versiones     | El código fuente se mantiene en un repositorio de GitHub.                                                        | Regulatory | Lineamientos técnicos, 4        | High     | Open   |
 | C-014 | Almacenamiento de archivos | Los archivos subidos se guardan en el almacenamiento de archivos del servidor, nunca en la base de datos; la base de datos guarda solo su ruta. | Technical  |                                 | High     | Open   |
-| C-016 | Aprobación de la defensa | La defensa formal se aprueba con una calificación de 51 o más; con menos, el trámite de titulación concluye como reprobado. | Business   |                                 | High     | Open   |
 | C-015 | Fecha límite             | Un equipo de tres desarrolladores publica el sistema a más tardar el 30 de noviembre de 2026.                    | Schedule   |                                 | High     | Open   |
+| C-016 | Aprobación de la defensa | La defensa formal se aprueba con una calificación de 51 o más; con menos, el trámite de titulación concluye como reprobado. | Business   |                                 | High     | Open   |

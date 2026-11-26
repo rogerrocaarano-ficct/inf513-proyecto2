@@ -56,6 +56,9 @@ director --> UC017
 
 estudiante --> UC004
 estudiante --> UC013
+docente --> UC013
+asistente --> UC013
+director --> UC013
 estudiante --> UC016
 
 docente --> UC016

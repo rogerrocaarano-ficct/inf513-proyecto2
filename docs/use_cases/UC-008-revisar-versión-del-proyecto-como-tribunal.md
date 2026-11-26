@@ -7,14 +7,14 @@
 **Primary Actor:** Miembro del tribunal  
 **Goal:** Aprobar u observar una versión del proyecto de la fase pre-defensa, para que el estudiante sepa qué subsanar o, con la aprobación de los tres miembros, su proyecto de grado pueda ir a pre-defensa  
 **Trigger:** El miembro del tribunal solicita revisar las versiones del proyecto que esperan su pronunciamiento  
-**Status:** Draft  
+**Status:** Approved  
 
-**Requirements:** [FR-010, FR-011, FR-014, FR-021, NFR-004, NFR-005, NFR-009, NFR-013](../requirements.md)  
+**Requirements:** [FR-010, FR-011, FR-014, FR-021, NFR-004, NFR-005, NFR-009, NFR-013, C-005, C-006](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
 
-- El miembro del tribunal inició sesión con el rol docente.
+- El miembro del tribunal inició sesión y tiene el rol docente.
 
 ## Main Success Scenario
 
@@ -24,10 +24,10 @@
 4. El sistema muestra la versión del proyecto para descargarla, qué miembros del tribunal ya se pronunciaron, y las versiones anteriores del proyecto con su fase y sus observaciones, cada una con su autor (BR-005).
 5. El miembro del tribunal aprueba la versión y, si lo desea, registra observaciones como sugerencias.
 6. El miembro del tribunal confirma su pronunciamiento.
-7. El sistema registra la aprobación del miembro con la fecha y hora, y sus observaciones con el miembro como autor.
+7. El sistema registra el pronunciamiento confirmado con la fecha y hora: la aprobación con las sugerencias que se hayan ingresado, o las observaciones sin aprobación. Cada observación queda con el miembro como autor.
 8. El sistema verifica que los tres miembros vigentes del tribunal se pronunciaron y que los tres aprobaron la versión.
 9. El sistema registra la versión del proyecto como aprobada, con la fecha y hora de la evaluación.
-10. El sistema notifica al estudiante que el tribunal evaluador aprobó su versión del proyecto y que espera la programación de su pre-defensa.
+10. El sistema informa al estudiante mediante una notificación interna que el tribunal evaluador aprobó su versión del proyecto y que espera la programación de su pre-defensa.
 11. El sistema muestra la confirmación con el estado de la versión del proyecto.
 
 ## Alternative Flows
@@ -38,9 +38,7 @@
 **Flow:**
 
 1. El miembro del tribunal registra al menos una observación sobre lo que el estudiante debe subsanar.
-2. El miembro del tribunal confirma su pronunciamiento.
-3. El sistema registra sus observaciones con el miembro como autor y la fecha y hora, sin aprobación.
-4. Use case continues at step 8.
+2. Use case continues at step 6.
 
 ### A2: Faltan pronunciamientos
 
@@ -56,15 +54,15 @@
 **Flow:**
 
 1. El sistema registra la versión del proyecto con observaciones, con la fecha y hora de la evaluación.
-2. El sistema notifica al estudiante que su versión del proyecto recibió observaciones del tribunal evaluador y que puede presentar una nueva versión con ellas subsanadas.
+2. El sistema informa al estudiante mediante una notificación interna que su versión del proyecto recibió observaciones del tribunal evaluador y que puede presentar una nueva versión con ellas subsanadas.
 3. Use case continues at step 11.
 
 ### A4: Observación vacía o demasiado larga
 
-**Trigger:** El miembro confirma sin ninguna observación tras no aprobar, o una observación supera los 2000 caracteres (step 6)  
+**Trigger:** El miembro confirma sin ninguna observación tras no aprobar, o confirma con una observación vacía o de más de 2000 caracteres (step 6)  
 **Flow:**
 
-1. El sistema señala, con un mensaje en español, que falta la observación o cuál es demasiado larga, y conserva lo escrito.
+1. El sistema indica en español si falta una observación obligatoria o cuál está vacía o es demasiado larga, y conserva lo escrito.
 2. El miembro del tribunal corrige las observaciones.
 3. Use case continues at step 6.
 
@@ -74,6 +72,14 @@
 **Flow:**
 
 1. El sistema informa que no hay versiones del proyecto pendientes de su revisión.
+2. Use case ends.
+
+### A6: La versión ya no admite el pronunciamiento del miembro
+
+**Trigger:** Al confirmar, el miembro fue reemplazado, el trámite dejó de estar en curso, la versión dejó de estar en revisión o el miembro ya tiene un pronunciamiento registrado para la versión (step 6)  
+**Flow:**
+
+1. El sistema informa en español que el pronunciamiento ya no puede registrarse.
 2. Use case ends.
 
 ## Postconditions
@@ -86,8 +92,7 @@
 
 ### Failure Postconditions
 
-- El miembro del tribunal no queda con un pronunciamiento incompleto: ni una observación vacía ni una no aprobación sin observaciones.
-- El estado de la versión del proyecto y los pronunciamientos de los demás miembros no cambian.
+- Este intento no registra ni modifica pronunciamientos u observaciones, no cambia el estado de la versión ni genera una notificación.
 
 ## Business Rules
 
