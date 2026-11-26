@@ -1,7 +1,9 @@
 import { usePage } from '@inertiajs/react';
 import {
     BookOpen,
+    ClipboardCheck,
     FilePlus,
+    FileUp,
     Gavel,
     LayoutGrid,
     UserCheck,
@@ -15,7 +17,9 @@ import type { NavItem } from '@/types';
  */
 const menuIcons: Record<string, LucideIcon> = {
     'book-open': BookOpen,
+    'clipboard-check': ClipboardCheck,
     'file-plus': FilePlus,
+    'file-up': FileUp,
     gavel: Gavel,
     'layout-grid': LayoutGrid,
     'user-check': UserCheck,

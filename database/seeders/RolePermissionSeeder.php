@@ -23,6 +23,8 @@ class RolePermissionSeeder extends Seeder
         'tutores.asignar' => ['name' => 'Asignar tutor', 'description' => 'Asignar o cambiar el tutor de un trámite de titulación (UC-002).'],
         'taller.designar' => ['name' => 'Designar docente de taller de grado', 'description' => 'Designar al docente de taller de grado (UC-003).'],
         'tribunales.asignar' => ['name' => 'Asignar tribunal evaluador', 'description' => 'Asignar el tribunal evaluador o reemplazar a un miembro (UC-006).'],
+        'versiones.presentar' => ['name' => 'Presentar versión del proyecto', 'description' => 'Subir una nueva versión del proyecto de grado en la fase actual del trámite (UC-004).'],
+        'perfiles.evaluar' => ['name' => 'Evaluar perfil de proyecto', 'description' => 'Aprobar o rechazar los perfiles de proyecto de los que es revisor (UC-005).'],
     ];
 
     /**
@@ -50,12 +52,12 @@ class RolePermissionSeeder extends Seeder
         'Docente' => [
             'description' => 'Puede ser tutor, revisor o miembro del tribunal.',
             'is_system' => false,
-            'permissions' => [PermissionKey::ViewHome],
+            'permissions' => [PermissionKey::ViewHome, PermissionKey::EvaluateProjectProfile],
         ],
         'Estudiante' => [
             'description' => 'Elabora su proyecto de grado y sigue su trámite de titulación.',
             'is_system' => false,
-            'permissions' => [PermissionKey::ViewHome],
+            'permissions' => [PermissionKey::ViewHome, PermissionKey::SubmitProjectVersion],
         ],
     ];
 
@@ -69,6 +71,8 @@ class RolePermissionSeeder extends Seeder
         ['title' => 'Asignar tutor', 'route_name' => 'tutor-assignments.index', 'icon' => 'user-check', 'sort_order' => 30, 'permission' => PermissionKey::AssignTutor],
         ['title' => 'Docente de taller de grado', 'route_name' => 'workshop-teacher.edit', 'icon' => 'book-open', 'sort_order' => 40, 'permission' => PermissionKey::DesignateWorkshopTeacher],
         ['title' => 'Tribunal evaluador', 'route_name' => 'committees.index', 'icon' => 'gavel', 'sort_order' => 50, 'permission' => PermissionKey::AssignCommittee],
+        ['title' => 'Presentar versión', 'route_name' => 'project-versions.create', 'icon' => 'file-up', 'sort_order' => 60, 'permission' => PermissionKey::SubmitProjectVersion],
+        ['title' => 'Perfiles de proyecto', 'route_name' => 'project-profiles.index', 'icon' => 'clipboard-check', 'sort_order' => 70, 'permission' => PermissionKey::EvaluateProjectProfile],
     ];
 
     /**
