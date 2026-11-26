@@ -71,17 +71,16 @@ Permiso concedido a un rol.
 
 ### USER_ROLE
 
-Rol asignado a un usuario; un usuario puede tener varios y trabaja con uno activo a la vez.
+Rol asignado a un usuario; un usuario puede tener varios y tiene la suma de sus permisos (ADR-005).
 
 | Attribute | Description                                  | Data Type | Length/Precision | Validation Rules                    |
 |-----------|----------------------------------------------|-----------|------------------|-------------------------------------|
 | user_id   | Usuario que recibe el rol                    | Long      | 19               | Primary Key, Foreign Key (USERS.id) |
 | role_id   | Rol asignado                                 | Long      | 19               | Primary Key, Foreign Key (ROLE.id)   |
-| is_active | Verdadero para el rol con el que trabaja el usuario | Boolean   | 1                | Not Null                            |
 
 #### Constraints
 
-- Cada usuario con al menos un rol tiene exactamente un rol con `is_active` verdadero.
+- Un usuario con el rol `Director de carrera` tiene también el rol `Docente`.
 
 ### MENU_ITEM
 

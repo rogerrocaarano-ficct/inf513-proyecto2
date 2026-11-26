@@ -25,7 +25,7 @@
 | Notificación                  | Un mensaje que el sistema muestra a un usuario cuando un trámite de titulación en el que participa cambia.                                       | Aviso                 |
 | Usuario                       | Toda persona con una cuenta en el sistema, sea cual sea su rol.                                                                                  |                       |
 | Administrador del sistema     | El usuario que registra a los docentes, al director de carrera y a los asistentes administrativos, les asigna su rol y consulta la bitácora.    | Superusuario          |
-| Rol                           | Un conjunto fijo de permisos, definido por el sistema, que se asigna a un usuario, como estudiante, docente o director de carrera.               | Perfil de usuario     |
+| Rol                           | Un conjunto fijo de permisos, definido por el sistema, que se asigna a un usuario, como estudiante, docente o director de carrera. Un usuario con varios roles tiene la suma de sus permisos, sin elegir uno activo.               | Perfil de usuario     |
 | Permiso                       | La autorización para ejecutar una acción o ver una página del sistema; habilita también las opciones de menú correspondientes.                 |                       |
 | Bitácora                      | El registro en base de datos de los inicios de sesión exitosos y fallidos y de las visitas a páginas, con fecha, hora, usuario y dirección IP.   |                       |
 | Tema                          | La combinación de colores, tipografía e ilustraciones orientada a un segmento de usuarios: Niños, Jóvenes o Adultos.                           |                       |
