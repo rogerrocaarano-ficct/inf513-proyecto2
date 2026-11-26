@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
+use App\Http\Controllers\Committees\CommitteeController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
 use App\Http\Controllers\ProjectProfiles\ProjectProfileController;
 use App\Http\Controllers\ProjectVersions\ProjectVersionController;
@@ -54,6 +55,14 @@ Route::middleware(['auth', 'can:perfiles.evaluar'])->prefix('perfiles')->name('p
     Route::get('{projectVersion}', [ProjectProfileController::class, 'show'])->name('show');
     Route::put('{projectVersion}', [ProjectProfileController::class, 'update'])->name('update');
     Route::get('{projectVersion}/archivo', [ProjectProfileController::class, 'download'])->name('download');
+});
+
+// UC-006: Asignar tribunal evaluador
+Route::middleware(['auth', 'can:tribunales.asignar'])->prefix('tribunales')->name('committees.')->group(function () {
+    Route::get('/', [CommitteeController::class, 'index'])->name('index');
+    Route::get('{graduationProcess}', [CommitteeController::class, 'edit'])->name('edit');
+    Route::post('{graduationProcess}', [CommitteeController::class, 'store'])->name('store');
+    Route::put('{graduationProcess}/reemplazo', [CommitteeController::class, 'replace'])->name('replace');
 });
 
 require __DIR__.'/settings.php';
