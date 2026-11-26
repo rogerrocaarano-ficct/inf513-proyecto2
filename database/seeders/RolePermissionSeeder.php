@@ -1,0 +1,107 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Enums\PermissionKey;
+use App\Models\MenuItem;
+use App\Models\Permission;
+use App\Models\Role;
+use Illuminate\Database\Seeder;
+
+/**
+ * Fixed roles, their permissions and the menu options the permissions enable (FR-027, FR-029, ADR-005).
+ */
+class RolePermissionSeeder extends Seeder
+{
+    /**
+     * @var array<string, array{name: string, description: string}>
+     */
+    private const array PERMISSIONS = [
+        'inicio.ver' => ['name' => 'Ver inicio', 'description' => 'Abrir la página de inicio.'],
+        'cuentas.gestionar' => ['name' => 'Gestionar cuentas de usuario', 'description' => 'Registrar, cambiar, desactivar y reactivar cuentas (UC-018).'],
+        'tramites.iniciar' => ['name' => 'Iniciar trámite de titulación', 'description' => 'Registrar el trámite de titulación de un estudiante (UC-001).'],
+        'tutores.asignar' => ['name' => 'Asignar tutor', 'description' => 'Asignar o cambiar el tutor de un trámite de titulación (UC-002).'],
+        'taller.designar' => ['name' => 'Designar docente de taller de grado', 'description' => 'Designar al docente de taller de grado (UC-003).'],
+        'tribunales.asignar' => ['name' => 'Asignar tribunal evaluador', 'description' => 'Asignar el tribunal evaluador o reemplazar a un miembro (UC-006).'],
+    ];
+
+    /**
+     * @var array<string, array{description: string, is_system: bool, permissions: list<PermissionKey>}>
+     */
+    private const array ROLES = [
+        'Administrador del sistema' => [
+            'description' => 'Gestiona las cuentas de usuario y consulta la bitácora.',
+            'is_system' => true,
+            'permissions' => [PermissionKey::ViewHome, PermissionKey::ManageAccounts],
+        ],
+        'Asistente administrativo' => [
+            'description' => 'Registra estudiantes, recibe la documentación de requisitos y archiva los trámites.',
+            'is_system' => false,
+            'permissions' => [PermissionKey::ViewHome, PermissionKey::StartGraduationProcess],
+        ],
+        'Director de carrera' => [
+            'description' => 'Asigna tutor y tribunal evaluador, y designa al docente de taller de grado.',
+            'is_system' => false,
+            'permissions' => [
+                PermissionKey::ViewHome, PermissionKey::AssignTutor,
+                PermissionKey::DesignateWorkshopTeacher, PermissionKey::AssignCommittee,
+            ],
+        ],
+        'Docente' => [
+            'description' => 'Puede ser tutor, revisor o miembro del tribunal.',
+            'is_system' => false,
+            'permissions' => [PermissionKey::ViewHome],
+        ],
+        'Estudiante' => [
+            'description' => 'Elabora su proyecto de grado y sigue su trámite de titulación.',
+            'is_system' => false,
+            'permissions' => [PermissionKey::ViewHome],
+        ],
+    ];
+
+    /**
+     * @var list<array{title: string, route_name: string, icon: string, sort_order: int, permission: PermissionKey}>
+     */
+    private const array MENU = [
+        ['title' => 'Inicio', 'route_name' => 'dashboard', 'icon' => 'layout-grid', 'sort_order' => 1, 'permission' => PermissionKey::ViewHome],
+        ['title' => 'Cuentas de usuario', 'route_name' => 'accounts.index', 'icon' => 'users', 'sort_order' => 10, 'permission' => PermissionKey::ManageAccounts],
+        ['title' => 'Iniciar trámite', 'route_name' => 'graduation-processes.create', 'icon' => 'file-plus', 'sort_order' => 20, 'permission' => PermissionKey::StartGraduationProcess],
+        ['title' => 'Asignar tutor', 'route_name' => 'tutor-assignments.index', 'icon' => 'user-check', 'sort_order' => 30, 'permission' => PermissionKey::AssignTutor],
+        ['title' => 'Docente de taller de grado', 'route_name' => 'workshop-teacher.edit', 'icon' => 'book-open', 'sort_order' => 40, 'permission' => PermissionKey::DesignateWorkshopTeacher],
+        ['title' => 'Tribunal evaluador', 'route_name' => 'committees.index', 'icon' => 'gavel', 'sort_order' => 50, 'permission' => PermissionKey::AssignCommittee],
+    ];
+
+    /**
+     * Seed the fixed roles, permissions and menu options; running it again keeps them in step.
+     */
+    public function run(): void
+    {
+        foreach (self::PERMISSIONS as $key => $attributes) {
+            Permission::query()->updateOrCreate(['key' => $key], $attributes);
+        }
+
+        $permissionIds = Permission::query()->pluck('id', 'key');
+
+        foreach (self::ROLES as $name => $definition) {
+            $role = Role::query()->updateOrCreate(['name' => $name], [
+                'description' => $definition['description'],
+                'is_system' => $definition['is_system'],
+            ]);
+
+            $role->permissions()->sync(array_map(
+                fn (PermissionKey $key): int => $permissionIds[$key->value],
+                $definition['permissions'],
+            ));
+        }
+
+        foreach (self::MENU as $item) {
+            MenuItem::query()->updateOrCreate(['route_name' => $item['route_name']], [
+                'title' => $item['title'],
+                'icon' => $item['icon'],
+                'sort_order' => $item['sort_order'],
+                'parent_id' => null,
+                'permission_id' => $permissionIds[$item['permission']->value],
+            ]);
+        }
+    }
+}

@@ -123,4 +123,20 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | First System Administrator
+    |--------------------------------------------------------------------------
+    |
+    | AdminUserSeeder creates the first system administrator account with these
+    | values (OQ-040). The account must change its password on first login.
+    |
+    */
+
+    'system_administrator' => [
+        'name' => env('ADMIN_NAME', 'Administrador del sistema'),
+        'email' => env('ADMIN_EMAIL'),
+        'password' => env('ADMIN_PASSWORD'),
+    ],
+
 ];
