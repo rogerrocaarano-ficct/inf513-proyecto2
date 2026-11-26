@@ -7,7 +7,7 @@
 **Primary Actor:** Miembro del tribunal  
 **Goal:** Registrar sus observaciones de la pre-defensa sobre el documento y el prototipo, o la inasistencia del estudiante, para que el estudiante sepa qué subsanar antes de la defensa formal  
 **Trigger:** Termina la pre-defensa programada, o el estudiante no se presenta a ella  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-016, FR-021, FR-042, NFR-004, NFR-005, NFR-009, NFR-013, C-005, C-006](../requirements.md)  
 **Layers:** UI
@@ -22,8 +22,8 @@
 2. El sistema muestra las pre-defensas de los trámites de titulación de cuyo tribunal es miembro vigente, cuya hora de inicio ya pasó y que esperan su registro.
 3. El miembro del tribunal elige una pre-defensa.
 4. El sistema muestra la versión del proyecto aprobada de la fase pre-defensa para descargarla, y qué miembros del tribunal ya registraron la pre-defensa.
-5. El miembro del tribunal ingresa sus observaciones sobre el documento y el prototipo, indica que no tiene observaciones o indica que el estudiante no se presentó.
-6. El miembro del tribunal confirma su decisión. El sistema verifica que el trámite sigue en curso en la fase pre-defensa, que el acto sigue pendiente, conserva la programación consultada y ya pasó su hora de inicio, y que el miembro sigue vigente y aún no tiene un registro.
+5. El miembro del tribunal ingresa sus observaciones sobre el documento y el prototipo, indica que no tiene observaciones o, mientras ningún miembro haya registrado la pre-defensa, indica que el estudiante no se presentó (BR-004).
+6. El miembro del tribunal confirma su decisión. El sistema verifica que el trámite sigue en curso en la fase pre-defensa, que el acto sigue pendiente, conserva la programación consultada y ya pasó su hora de inicio, que el miembro sigue vigente y aún no tiene un registro y, si indicó la inasistencia, que ningún miembro registró aún la pre-defensa.
 7. El sistema registra la pre-defensa por ese miembro, con la fecha y hora, y sus observaciones con el miembro como autor.
 8. El sistema verifica que los tres miembros vigentes del tribunal registraron la pre-defensa.
 9. El sistema marca la pre-defensa como realizada y pasa el trámite de titulación de la fase pre-defensa a la fase defensa formal.
@@ -45,7 +45,7 @@
 **Trigger:** El miembro del tribunal confirmó la inasistencia del estudiante y la validación del paso 6 pasó (step 7)  
 **Flow:**
 
-1. El sistema marca la pre-defensa como realizada con la inasistencia del estudiante, y registra el trámite de titulación como abandonado, con la fecha y hora.
+1. El sistema marca la pre-defensa como realizada con la inasistencia del estudiante y el miembro que la registró, y registra el trámite de titulación como abandonado, con la fecha y hora.
 2. El sistema notifica dentro del sistema al estudiante, a su tutor y a los demás miembros vigentes del tribunal que el trámite de titulación quedó abandonado por inasistencia a la pre-defensa.
 3. Use case continues at step 11.
 
@@ -68,7 +68,7 @@
 
 ### A5: El registro ya no está disponible
 
-**Trigger:** Al confirmar, el trámite ya no está en curso en la fase pre-defensa, el acto ya se marcó como realizado o se reprogramó, el miembro dejó de estar vigente o ya tiene un registro (step 6)  
+**Trigger:** Al confirmar, el trámite ya no está en curso en la fase pre-defensa, el acto ya se marcó como realizado o se reprogramó, el miembro dejó de estar vigente o ya tiene un registro, o indicó la inasistencia y otro miembro ya registró la pre-defensa (step 6)  
 **Flow:**
 
 1. El sistema informa en español que el registro ya no está disponible y actualiza la lista de pre-defensas pendientes.
@@ -103,7 +103,7 @@ Cada miembro vigente registra sus propias observaciones sobre el documento y el 
 
 ### BR-004: Inasistencia a la pre-defensa
 
-Basta con que un miembro vigente del tribunal registre que el estudiante no se presentó: la pre-defensa queda realizada con la inasistencia del estudiante y el trámite de titulación queda abandonado (UC-001 BR-008). Un trámite abandonado no continúa y no recibe defensa formal.
+Basta con que un miembro vigente del tribunal registre que el estudiante no se presentó: la pre-defensa queda realizada con la inasistencia del estudiante, con el miembro que la registró, y el trámite de titulación queda abandonado (UC-001 BR-008). La inasistencia se registra solo mientras ningún miembro haya registrado la pre-defensa; un registro con observaciones o sin ellas confirma que el estudiante se presentó. Un trámite abandonado no continúa y no recibe defensa formal.
 
 ### BR-005: Observaciones de la pre-defensa
 
