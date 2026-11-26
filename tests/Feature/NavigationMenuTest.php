@@ -2,6 +2,8 @@
 
 use App\Enums\PermissionKey;
 use App\Enums\RoleName;
+use App\Models\MenuItem;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Teacher;
 use App\Models\User;
@@ -44,13 +46,18 @@ test('the menu of a user with several roles is the union of their options (UC-01
 });
 
 test('a menu option whose page is not built yet is left out', function () {
-    $assistant = User::factory()->administrativeAssistant()->create();
+    MenuItem::query()->create([
+        'title' => 'Página futura',
+        'route_name' => 'future-page.index',
+        'sort_order' => 999,
+        'permission_id' => Permission::query()->where('key', PermissionKey::ViewHome)->value('id'),
+    ]);
+    $teacher = User::factory()->withRoles(RoleName::Teacher)->create();
 
-    $this->actingAs($assistant)
+    $this->actingAs($teacher)
         ->get(route('dashboard'))
         ->assertInertia(fn ($page) => $page
-            ->where('menu.0.title', 'Inicio')
-            ->count('menu', 1));
+            ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === ['Inicio']));
 });
 
 test('a change of roles changes the menu from the next page (UC-018 BR-006)', function () {
