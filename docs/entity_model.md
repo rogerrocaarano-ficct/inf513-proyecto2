@@ -26,6 +26,7 @@ erDiagram
     COMMITTEE_MEMBER ||--o{ VERSION_APPROVAL : "registra"
     DEFENSE ||--o{ DEFENSE_REVIEW : "recibe"
     COMMITTEE_MEMBER ||--o{ DEFENSE_REVIEW : "registra"
+    COMMITTEE_MEMBER |o--o{ DEFENSE : "registra la inasistencia en"
     PROJECT_VERSION |o--o{ OBSERVATION : "recibe"
     DEFENSE |o--o{ OBSERVATION : "recibe"
     GRADUATION_PROCESS ||--o{ DEFENSE : "programa"
@@ -286,11 +287,14 @@ Pre-defensa o defensa formal programada de un proyecto de grado.
 | grade        | Calificación conjunta del tribunal evaluador      | Integer   | 10               | Optional, Min: 0, Max: 100                       |
 | is_held      | Verdadero cuando la pre-defensa o defensa formal ya se realizó | Boolean   | 1                | Not Null                                         |
 | is_student_absent | Verdadero cuando el tribunal registró que el estudiante no se presentó | Boolean   | 1                | Not Null                                         |
+| absence_recorded_by_id | Miembro del tribunal que registró la inasistencia del estudiante | Long      | 19               | Optional, Foreign Key (COMMITTEE_MEMBER.id)      |
 
 #### Constraints
 
 - Solo una `Defensa formal` realizada con el estudiante presente tiene `grade`, y toda la tiene (C-007).
 - Solo una pre-defensa o defensa formal realizada tiene `is_student_absent` verdadero.
+- `absence_recorded_by_id` tiene valor si y solo si `is_student_absent` es verdadero; es un miembro vigente del tribunal del trámite al registrarla.
+- Una pre-defensa o defensa formal con `is_student_absent` verdadero no tiene registros en `DEFENSE_REVIEW`: la inasistencia se registra solo mientras ningún miembro la registró.
 - Un trámite tiene a lo sumo una `Pre-defensa` y una `Defensa formal` sin realizar.
 - La `Defensa formal` de un trámite es posterior a una `Pre-defensa` realizada del mismo trámite.
 
