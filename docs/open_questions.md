@@ -498,6 +498,21 @@ A1 step 5 (al estudiante): "Su trámite de titulación tiene un nuevo tutor: {tu
 docente."  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-034: ¿Con qué textos notifica y confirma el sistema al designar al docente de taller de grado?
+
+**Element:** UC-003  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Los pasos 7 y 8 y A1 step 3 notifican y confirman, pero la especificación no fija los textos.
+
+**Answer:** paso 7 y A1 step 3 (al nuevo): "Se le designó como docente de taller de grado; recibe {n} perfiles de
+proyecto para revisar."; paso 7 (al anterior): "Dejó de ser docente de taller de grado; sus perfiles de proyecto en
+revisión pasaron a {nuevo}."; paso 8: "{docente} es el docente de taller de grado; {n} perfiles de proyecto pasaron a
+su revisión."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-041: ¿Un miembro reemplazado del tribunal puede quedar como tutor del mismo trámite de titulación?
 
 **Element:** UC-002 BR-001  
@@ -538,6 +553,34 @@ rechazo ni el de un trámite sin docentes elegibles.
 **Answer:** "El docente elegido no es elegible como tutor de este trámite de titulación."; "Solo se asigna tutor en
 un trámite de titulación en curso."; lista vacía: "No hay docentes elegibles como tutor de este trámite de
 titulación."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-045: ¿Con qué textos rechaza el sistema la designación de un docente que no es elegible?
+
+**Element:** UC-003 BR-002  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-002 limita quién puede ser designado docente de taller de grado, pero la especificación no da los textos del
+rechazo.
+
+**Answer:** sin docente elegido: "Elija al docente de taller de grado."; docente no elegible: "El docente elegido no
+puede ser designado como docente de taller de grado."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-050: ¿El sistema muestra cuántos perfiles de proyecto recibirá el docente antes de confirmar la designación?
+
+**Element:** UC-003 step 2  
+**Raised by:** /use-case-coverage, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 8 da la cantidad de perfiles que pasaron al nuevo revisor; la implementación la muestra también al elegir y
+confirmar, cosa que los pasos 2 a 4 no piden.
+
+**Answer:** sí, se muestra la cantidad de perfiles de proyecto en revisión que pasarán al docente elegido antes de
+confirmar.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
 ## OQ-051: ¿Se guarda el nombre del tutor propuesto cuando el trámite de titulación queda con tutor?
