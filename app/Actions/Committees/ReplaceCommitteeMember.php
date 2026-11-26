@@ -29,6 +29,7 @@ class ReplaceCommitteeMember
     public function handle(GraduationProcess $process, int $replacedMemberId, int $newTeacherId): CommitteeMember
     {
         return DB::transaction(function () use ($process, $replacedMemberId, $newTeacherId): CommitteeMember {
+            $this->findScheduleConflicts->lockCalendar();
             $process = GraduationProcess::query()->whereKey($process->getKey())->lockForUpdate()->firstOrFail();
 
             $this->ensureReplaceable($process);
@@ -98,7 +99,7 @@ class ReplaceCommitteeMember
             $otherAct = mb_strtolower($other->type->value);
             $thisAct = mb_strtolower($conflict['defense']->type->value);
             $student = $other->graduationProcess->student->user->name;
-            $when = $other->scheduled_at->format('d/m/Y H:i');
+            $when = $other->scheduled_at->setTimezone(FindScheduleConflicts::TIMEZONE)->format('d/m/Y H:i');
 
             return "{$newTeacher->user->name} tiene la {$otherAct} de {$student} el {$when}, que se cruza con la {$thisAct} de este trámite. Reprograme antes el acto o elija otro docente.";
         });

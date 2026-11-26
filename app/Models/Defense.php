@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\DefenseType;
+use Carbon\CarbonInterface;
 use Database\Factories\DefenseFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -11,7 +12,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Carbon;
 
 /**
  * Pre-defensa o defensa formal programada de un proyecto de grado.
@@ -19,8 +19,9 @@ use Illuminate\Support\Carbon;
  * @property int $id
  * @property int $graduation_process_id
  * @property DefenseType $type
- * @property Carbon $scheduled_at
+ * @property CarbonInterface $scheduled_at
  * @property string|null $location
+ * @property int $schedule_revision
  * @property int|null $grade
  * @property bool $is_held
  * @property bool $is_student_absent

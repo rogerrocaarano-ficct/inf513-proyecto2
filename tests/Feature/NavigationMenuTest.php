@@ -42,6 +42,7 @@ test('the menu of a user with several roles is the union of their options (UC-01
         ->assertInertia(fn ($page) => $page
             ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
                 'Inicio', 'Asignar tutor', 'Docente de taller de grado', 'Tribunal evaluador', 'Mis estudiantes',
+                'Calendario de defensas',
             ]));
 });
 

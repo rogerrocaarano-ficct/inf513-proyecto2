@@ -30,6 +30,7 @@ class AssignTutor
     public function handle(GraduationProcess $process, Teacher $teacher, User $assignedBy): GraduationProcess
     {
         return DB::transaction(function () use ($process, $teacher, $assignedBy): GraduationProcess {
+            $this->findScheduleConflicts->lockCalendar();
             $process = GraduationProcess::query()->lockForUpdate()->findOrFail($process->id);
 
             // UC-002 BR-002: The tutor is assigned or changed only in a process in progress.
@@ -107,7 +108,7 @@ class AssignTutor
                     $teacher->user->name,
                     mb_strtolower($conflict['conflictsWith']->type->value),
                     $conflict['conflictsWith']->graduationProcess->student->user->name,
-                    $conflict['conflictsWith']->scheduled_at->format('d/m/Y H:i'),
+                    $conflict['conflictsWith']->scheduled_at->setTimezone(FindScheduleConflicts::TIMEZONE)->format('d/m/Y H:i'),
                     mb_strtolower($conflict['defense']->type->value),
                 ))->unique()->implode(' '),
             ]);

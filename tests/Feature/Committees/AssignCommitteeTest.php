@@ -310,8 +310,8 @@ describe('replacement of a member', function () {
                 'committee_member_id' => $this->members[0]->id,
                 'teacher_id' => $this->newTeacher->id,
             ])
-            ->assertSessionHasErrors(['teacher_id' => "{$name} tiene la defensa formal de {$secondOther->student->user->name} el 10/12/2026 09:00, que se cruza con la pre-defensa de este trámite. Reprograme antes el acto o elija otro docente. "
-                ."{$name} tiene la pre-defensa de {$firstOther->student->user->name} el 10/12/2026 11:00, que se cruza con la pre-defensa de este trámite. Reprograme antes el acto o elija otro docente."]);
+            ->assertSessionHasErrors(['teacher_id' => "{$name} tiene la defensa formal de {$secondOther->student->user->name} el 10/12/2026 05:00, que se cruza con la pre-defensa de este trámite. Reprograme antes el acto o elija otro docente. "
+                ."{$name} tiene la pre-defensa de {$firstOther->student->user->name} el 10/12/2026 07:00, que se cruza con la pre-defensa de este trámite. Reprograme antes el acto o elija otro docente."]);
 
         expect($this->replacedProcess->currentCommitteeMembers()->pluck('teacher_id'))->not->toContain($this->newTeacher->id);
     });
@@ -328,7 +328,7 @@ describe('replacement of a member', function () {
                 'committee_member_id' => $old->id,
                 'teacher_id' => $this->newTeacher->id,
             ])
-            ->assertSessionHasErrors(['teacher_id' => "{$this->newTeacher->user->name} tiene la defensa formal de {$other->student->user->name} el 10/12/2026 11:30, que se cruza con la pre-defensa de este trámite. Reprograme antes el acto o elija otro docente."]);
+            ->assertSessionHasErrors(['teacher_id' => "{$this->newTeacher->user->name} tiene la defensa formal de {$other->student->user->name} el 10/12/2026 07:30, que se cruza con la pre-defensa de este trámite. Reprograme antes el acto o elija otro docente."]);
 
         expect($old->refresh()->replaced_at)->toBeNull()
             ->and($this->replacedProcess->currentCommitteeMembers()->count())->toBe(3)

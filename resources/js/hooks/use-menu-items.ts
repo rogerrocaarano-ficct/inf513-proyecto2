@@ -1,6 +1,7 @@
 import { usePage } from '@inertiajs/react';
 import {
     BookOpen,
+    CalendarDays,
     ClipboardCheck,
     FilePlus,
     FileUp,
@@ -18,6 +19,7 @@ import type { NavItem } from '@/types';
  */
 const menuIcons: Record<string, LucideIcon> = {
     'book-open': BookOpen,
+    'calendar-days': CalendarDays,
     'clipboard-check': ClipboardCheck,
     'file-plus': FilePlus,
     'file-up': FileUp,

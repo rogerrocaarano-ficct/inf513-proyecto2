@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
 use App\Http\Controllers\Committees\CommitteeController;
+use App\Http\Controllers\Defenses\DefenseController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
 use App\Http\Controllers\ProjectProfiles\ProjectProfileController;
 use App\Http\Controllers\ProjectVersions\ProjectVersionController;
@@ -73,6 +74,12 @@ Route::middleware(['auth', 'can:versiones.observar'])->prefix('tutelados')->name
     Route::get('versiones/{projectVersion}', [TutorObservationController::class, 'version'])->name('version');
     Route::post('versiones/{projectVersion}/observaciones', [TutorObservationController::class, 'store'])->name('store');
     Route::get('versiones/{projectVersion}/archivo', [TutorObservationController::class, 'download'])->name('download');
+});
+
+// UC-009: Programar pre-defensa y defensa formal
+Route::middleware(['auth', 'can:defensas.programar'])->prefix('defensas')->name('defenses.')->group(function () {
+    Route::get('/', [DefenseController::class, 'index'])->name('index');
+    Route::post('/', [DefenseController::class, 'store'])->name('store');
 });
 
 require __DIR__.'/settings.php';

@@ -294,7 +294,7 @@ test('UC-002 A4 BR-006: a new tutor with an overlapping act is refused and nothi
     $this->actingAs($this->directorUser)
         ->put(route('tutor-assignments.update', $process), ['teacher_id' => $newTutor->id])
         ->assertSessionHasErrors([
-            'teacher_id' => "{$newTutor->user->name} tiene la defensa formal de {$other->student->user->name} el 10/12/2026 11:00, "
+            'teacher_id' => "{$newTutor->user->name} tiene la defensa formal de {$other->student->user->name} el 10/12/2026 07:00, "
                 .'que se cruza con la pre-defensa de este trámite. Reprograme antes el acto o elija otro docente.',
         ]);
 
