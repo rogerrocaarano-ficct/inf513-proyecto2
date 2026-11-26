@@ -7,9 +7,9 @@
 **Primary Actor:** Asistente administrativo  
 **Goal:** Archivar un trámite de titulación concluido o abandonado, para que deje de figurar entre los trámites pendientes y su documentación quede disponible para consulta  
 **Trigger:** El asistente administrativo solicita archivar los trámites de titulación que ya terminaron  
-**Status:** Draft  
+**Status:** Reviewed  
 
-**Requirements:** [FR-020, FR-021, NFR-005, NFR-008, NFR-009](../requirements.md)  
+**Requirements:** [FR-020, FR-021, NFR-005, NFR-008, NFR-009, C-005](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
@@ -19,12 +19,12 @@
 ## Main Success Scenario
 
 1. El asistente administrativo solicita archivar trámites de titulación.
-2. El sistema muestra los trámites de titulación concluidos o abandonados que no están archivados, con el estudiante, el título del proyecto de grado, el resultado (aprobado, reprobado o abandonado) y su fecha, los más antiguos primero.
+2. El sistema muestra los trámites de titulación que cumplen BR-001, con el estudiante, el título del proyecto de grado, el resultado (aprobado, reprobado o abandonado) y la fecha de conclusión o abandono, con los más antiguos primero.
 3. El asistente administrativo elige un trámite de titulación.
-4. El sistema muestra el resumen del trámite de titulación: estudiante, título del proyecto de grado, tutor, tribunal evaluador, documentación de requisitos, versiones del proyecto y calificación o abandono.
+4. El sistema muestra el estudiante, el título del proyecto de grado, el tutor, el tribunal evaluador, la documentación de requisitos y las versiones presentadas. Si el trámite concluyó, muestra la calificación conjunta y el resultado. Si fue abandonado, muestra la inasistencia y el acto en que se registró.
 5. El asistente administrativo confirma el archivo.
-6. El sistema registra el trámite de titulación como archivado, con la fecha y hora, y lo pasa a la fase archivo.
-7. El sistema notifica al estudiante que su trámite de titulación fue archivado.
+6. El sistema vuelve a comprobar que el trámite cumple BR-001. Registra la fecha y hora de archivo, pasa el trámite a la fase archivo y registra su entrada a esa fase en el historial con la misma fecha y hora.
+7. El sistema genera una notificación interna para informar al estudiante que su trámite de titulación fue archivado (FR-021, C-005).
 8. El sistema muestra la confirmación y la lista de trámites de titulación por archivar, sin el archivado.
 
 ## Alternative Flows
@@ -45,31 +45,39 @@
 1. El asistente administrativo vuelve a la lista sin archivar.
 2. Use case ends.
 
+### A3: El trámite ya no está pendiente de archivo
+
+**Trigger:** Al confirmar, el trámite seleccionado ya no cumple BR-001 (step 6)  
+**Flow:**
+
+1. El sistema informa en español por qué el trámite no puede archivarse, e indica si ya fue archivado.
+2. Use case continues at step 2.
+
 ## Postconditions
 
 ### Success Postconditions
 
-- El trámite de titulación está archivado, en la fase archivo, con la fecha y hora del archivo.
+- El trámite de titulación está archivado y el historial registra su entrada a la fase archivo con la fecha y hora del archivo.
 - El trámite de titulación conserva su documentación de requisitos, sus versiones del proyecto, sus observaciones y su calificación o su abandono, disponibles para consulta.
-- El estudiante tiene una notificación del archivo.
+- El estudiante tiene una notificación interna del archivo.
 
 ### Failure Postconditions
 
-- El trámite de titulación no cambia de fase ni de estado.
+- El intento de archivo no modifica el trámite ni su historial y no genera una notificación de archivo.
 
 ## Business Rules
 
 ### BR-001: Trámites que se archivan
 
-Solo se archiva un trámite de titulación concluido, aprobado o reprobado (UC-011 BR-004), o abandonado por inasistencia (UC-001 BR-008). Un trámite en curso no se archiva.
+Solo se archiva un trámite de titulación pendiente de archivo que haya concluido, aprobado o reprobado (UC-011 BR-004), o que haya sido abandonado por inasistencia (UC-001 BR-008). La fecha y hora de archivo es posterior a la de conclusión o abandono.
 
 ### BR-002: El archivo conserva todo
 
-Archivar no borra ni cambia nada del trámite de titulación: su documentación de requisitos, sus versiones del proyecto y sus observaciones se conservan y se pueden descargar (NFR-008).
+El archivo conserva los datos del trámite, incluido su resultado. La documentación de requisitos y los archivos de todas las versiones del proyecto siguen disponibles para descarga (NFR-008). Las observaciones se conservan para consulta (UC-013).
 
 ### BR-003: Archivo definitivo
 
-Un trámite de titulación archivado no vuelve a otra fase ni recibe cambios.
+Un trámite de titulación archivado permanece en la fase archivo y queda disponible solo para consulta. Cada trámite se archiva una sola vez, con un único registro de entrada a esa fase y una única notificación de archivo.
 
 ### BR-004: Trámites archivados en las consultas
 
