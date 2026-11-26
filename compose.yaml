@@ -1,0 +1,20 @@
+services:
+    pgsql:
+        image: 'postgres:17'
+        ports:
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        environment:
+            POSTGRES_DB: '${DB_DATABASE}'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD}'
+        volumes:
+            - 'pgsql-data:/var/lib/postgresql/data'
+            - './docker/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
+        healthcheck:
+            test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
+            retries: 3
+            timeout: 5s
+
+volumes:
+    pgsql-data:
+        driver: local
