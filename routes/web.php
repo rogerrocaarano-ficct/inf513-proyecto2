@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
+use App\Http\Controllers\TutorAssignments\TutorAssignmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'welcome')->name('home');
@@ -25,6 +26,12 @@ Route::middleware(['auth', 'can:cuentas.gestionar'])->prefix('cuentas')->name('a
 Route::middleware(['auth', 'can:tramites.iniciar'])->group(function () {
     Route::get('tramites/nuevo', [GraduationProcessController::class, 'create'])->name('graduation-processes.create');
     Route::post('tramites', [GraduationProcessController::class, 'store'])->name('graduation-processes.store');
+});
+
+Route::middleware(['auth', 'can:tutores.asignar'])->prefix('tutores')->name('tutor-assignments.')->group(function () {
+    Route::get('/', [TutorAssignmentController::class, 'index'])->name('index');
+    Route::get('{graduationProcess}/asignar', [TutorAssignmentController::class, 'edit'])->name('edit');
+    Route::put('{graduationProcess}', [TutorAssignmentController::class, 'update'])->name('update');
 });
 
 require __DIR__.'/settings.php';
