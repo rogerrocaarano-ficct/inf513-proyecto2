@@ -783,3 +783,42 @@ pasa con una cuenta de administrador del sistema que tenga además uno de esos r
 
 **Answer:** no; una cuenta con el rol administrador del sistema no se lista ni se gestiona en UC-018.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-054: ¿Con qué textos notifica, confirma e informa el sistema al presentar una versión del proyecto?
+
+**Element:** UC-004  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 7, el paso 8, A1, A2, A3 y A4 notifican, confirman o informan, pero la especificación no fija los textos.
+
+**Answer:** paso 7 (al docente de taller de grado): "{estudiante} presentó el perfil de proyecto (versión {n}), que
+espera su revisión."; paso 7 (al tutor y a los miembros del tribunal, pre-defensa): "{estudiante} presentó la versión
+{n} del proyecto de grado, que espera su revisión."; A2 (al tutor y a los miembros del tribunal): "{estudiante}
+presentó la versión {n} del proyecto de grado para la defensa formal."; paso 8: "Versión {n} presentada. Estado:
+{estado}."; A1: "Su perfil de proyecto queda pendiente de revisión hasta que el director de carrera designe al
+docente de taller de grado."; A3: "No tiene un trámite de titulación en curso.", "Su trámite de titulación espera la
+asignación de su tutor.", "Su versión {n} del proyecto sigue en revisión.", "Su perfil de proyecto ya fue aprobado y
+espera la asignación del tribunal evaluador.", "Su versión de la fase pre-defensa ya fue aprobada y espera el
+siguiente paso.", "Su defensa formal ya se realizó.", "Su pre-defensa no dejó observaciones que subsanar."; A4:
+"Ingrese el título del proyecto de grado.", "Adjunte el archivo de la versión.", "El archivo debe ser PDF.", "El
+archivo no debe superar los 20 MB."; título de más de 300 caracteres: "El título del proyecto de grado no debe superar
+los 300 caracteres."; subida fallida: "No se pudo subir el archivo. Inténtelo de nuevo."; paso 2, última versión sin
+observaciones: "Esta versión no tiene observaciones."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-057: ¿Qué observaciones ve el estudiante al presentar una versión en la fase defensa formal?
+
+**Element:** UC-004 step 2  
+**Raised by:** /use-case-coverage, 2026-11-26  
+**Blocking:** No  
+**Status:** Open  
+**Assumed:** Solo las observaciones de su última versión del proyecto, como dice el paso 2.  
+
+En la fase defensa formal el estudiante presenta versiones porque la pre-defensa dejó observaciones (BR-006), pero
+esas observaciones son de la pre-defensa (OBSERVATION con `defense_id`), no de una versión del proyecto. El paso 2
+muestra solo las observaciones de la última versión, que suele ser la versión aprobada de la fase pre-defensa, sin
+observaciones: el estudiante ve "Esta versión no tiene observaciones." justo cuando tiene observaciones que subsanar.
+Lecturas: (a) el paso 2 muestra además, en la fase defensa formal, las observaciones de la pre-defensa; (b) se deja
+como está y el estudiante las consulta en otro caso de uso (UC-013).
