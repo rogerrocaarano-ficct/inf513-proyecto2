@@ -513,6 +513,26 @@ revisión pasaron a {nuevo}."; paso 8: "{docente} es el docente de taller de gra
 su revisión."  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-035: ¿Con qué textos notifica y confirma el sistema al asignar el tribunal evaluador o reemplazar a un miembro?
+
+**Element:** UC-006  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Los pasos 9 y 10, A1, A2 step 5, A3 y A5 notifican, confirman o informan, pero la especificación no fija los textos.
+
+**Answer:** paso 9 y A2 step 5 (a cada miembro asignado): "Se le asignó como miembro del tribunal evaluador del
+trámite de titulación de {estudiante}."; paso 9 (al estudiante): "Su trámite de titulación pasó a la fase
+pre-defensa. Su tribunal evaluador: {m1}, {m2} y {m3}."; A2 step 5 (al miembro reemplazado): "Dejó de ser miembro
+del tribunal evaluador del trámite de titulación de {estudiante}."; A2 step 5 (al estudiante): "Su tribunal
+evaluador tiene un nuevo miembro: {nuevo}, en lugar de {anterior}."; paso 10: "Tribunal evaluador asignado: {m1},
+{m2} y {m3}. Fase: pre-defensa."; A1: "El tribunal evaluador se compone de exactamente tres docentes distintos.";
+A3: "El tribunal evaluador ya no se puede cambiar porque la defensa formal se realizó."; A5: "{docente} tiene la
+{acto} de {estudiante} el {fecha y hora}, que se cruza con la {acto} de este trámite. Reprograme antes el acto o
+elija otro docente."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-041: ¿Un miembro reemplazado del tribunal puede quedar como tutor del mismo trámite de titulación?
 
 **Element:** UC-002 BR-001  
@@ -567,6 +587,36 @@ rechazo.
 
 **Answer:** sin docente elegido: "Elija al docente de taller de grado."; docente no elegible: "El docente elegido no
 puede ser designado como docente de taller de grado."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-046: ¿Con qué textos rechaza el sistema un miembro no elegible o un trámite que no recibe tribunal?
+
+**Element:** UC-006  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-001, BR-003 y BR-004 limitan a quién, en qué trámite y a qué miembro se asigna o reemplaza, pero la
+especificación no da los textos del rechazo.
+
+**Answer:** "Alguno de los docentes elegidos no es elegible como miembro del tribunal evaluador."; "El docente
+elegido no es elegible como miembro del tribunal evaluador."; "El tribunal evaluador solo se asigna a un trámite de
+titulación en curso, en la fase evaluación de perfil y con su perfil de proyecto aprobado."; "El tribunal evaluador
+solo se reemplaza en un trámite de titulación en curso que ya lo tiene."; "El miembro que se reemplaza no es un
+miembro vigente del tribunal evaluador."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-047: ¿Se informan todos los choques de horario del nuevo docente o solo el primero?
+
+**Element:** UC-006 A5  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El nuevo miembro del tribunal (UC-006 A5), como el nuevo tutor (UC-002 A4), puede cruzarse con varios actos.
+Lecturas: (a) un mensaje por cada acto que se cruza; (b) solo el primero.
+
+**Answer:** (a) se informa cada acto que se cruza; vale igual para UC-002 A4.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
 ## OQ-050: ¿El sistema muestra cuántos perfiles de proyecto recibirá el docente antes de confirmar la designación?
