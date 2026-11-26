@@ -481,6 +481,36 @@ identidad ya pertenece a otro estudiante."; A9: "Adjunte la {documento}.", "El a
 no debe superar los 20 MB."  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-033: ¿Con qué textos notifica y confirma el sistema al asignar o cambiar el tutor?
+
+**Element:** UC-002  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Los pasos 8 y 9, A1 step 5, A3 y A4 notifican, confirman o informan, pero la especificación no fija los textos.
+
+**Answer:** paso 8 y A1 step 5 (al tutor): "Se le asignó como tutor del trámite de titulación de {estudiante}.";
+paso 8 (al estudiante): "Su trámite de titulación pasó a la fase evaluación de perfil con {tutor} como tutor.";
+A1 step 5 (al estudiante): "Su trámite de titulación tiene un nuevo tutor: {tutor}."; paso 9: "Tutor asignado:
+{tutor}. Fase: {fase}."; A3: "No hay trámites de titulación en curso."; A4: "{docente} tiene la {acto} de
+{estudiante} el {fecha y hora}, que se cruza con la {acto} de este trámite. Reprograme antes el acto o elija otro
+docente."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-041: ¿Un miembro reemplazado del tribunal puede quedar como tutor del mismo trámite de titulación?
+
+**Element:** UC-002 BR-001  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-001 excluye al docente que "es miembro del tribunal de ese trámite", en presente, mientras UC-006 BR-001 habla de
+"no es ni fue miembro". Lecturas: (a) solo se excluye a los miembros vigentes; (b) también a los reemplazados.
+
+**Answer:** (a) solo se excluye a los miembros vigentes del tribunal.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-043: ¿Con qué textos rechaza el sistema un tutor no elegible y pide confirmar al estudiante registrado?
 
 **Element:** UC-001  
@@ -493,6 +523,21 @@ estudiante que se presenta, pero la especificación no da los textos cuando fall
 
 **Answer:** tutor no elegible: "El tutor elegido no es un docente elegible."; A2 sin confirmar: "Confirme que es el
 estudiante que se presenta."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-044: ¿Con qué textos rechaza el sistema un docente no elegible como tutor o un trámite que no está en curso?
+
+**Element:** UC-002  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-001 y BR-002 limitan a quién y en qué trámite se asigna el tutor, pero la especificación no da los textos del
+rechazo ni el de un trámite sin docentes elegibles.
+
+**Answer:** "El docente elegido no es elegible como tutor de este trámite de titulación."; "Solo se asigna tutor en
+un trámite de titulación en curso."; lista vacía: "No hay docentes elegibles como tutor de este trámite de
+titulación."  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
 ## OQ-051: ¿Se guarda el nombre del tutor propuesto cuando el trámite de titulación queda con tutor?
