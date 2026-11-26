@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -69,6 +70,14 @@ class ProjectVersion extends Model
     public function reviewer(): BelongsTo
     {
         return $this->belongsTo(Teacher::class, 'reviewer_id');
+    }
+
+    /**
+     * @return HasMany<Observation, $this>
+     */
+    public function observations(): HasMany
+    {
+        return $this->hasMany(Observation::class)->orderBy('recorded_at')->orderBy('id');
     }
 
     /**

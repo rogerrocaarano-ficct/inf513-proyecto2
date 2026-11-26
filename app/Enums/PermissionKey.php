@@ -13,4 +13,6 @@ enum PermissionKey: string
     case AssignTutor = 'tutores.asignar';
     case DesignateWorkshopTeacher = 'taller.designar';
     case AssignCommittee = 'tribunales.asignar';
+    case SubmitProjectVersion = 'versiones.presentar';
+    case EvaluateProjectProfile = 'perfiles.evaluar';
 }

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -68,6 +69,16 @@ class Defense extends Model
     public function absenceRecordedBy(): BelongsTo
     {
         return $this->belongsTo(CommitteeMember::class, 'absence_recorded_by_id');
+    }
+
+    /**
+     * The observations the committee members recorded on this pre-defense.
+     *
+     * @return HasMany<Observation, $this>
+     */
+    public function observations(): HasMany
+    {
+        return $this->hasMany(Observation::class)->orderBy('recorded_at')->orderBy('id');
     }
 
     /**
