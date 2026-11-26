@@ -7,7 +7,7 @@
 **Primary Actor:** Estudiante, Docente, Asistente administrativo, Director de carrera  
 **Goal:** Ver en una sola consulta el estado de un trámite de titulación, sus versiones del proyecto y sus observaciones, con las acciones que su rol le permite sobre él, para saber qué paso corresponde sin depender del asistente administrativo  
 **Trigger:** El usuario abre un trámite de titulación desde su menú, una lista, la búsqueda (UC-015) o una notificación (UC-016)  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-013, FR-023, FR-040, NFR-004, NFR-005, NFR-008, NFR-009](../requirements.md)  
 **Layers:** UI
@@ -19,10 +19,10 @@
 ## Main Success Scenario
 
 1. El usuario abre un trámite de titulación.
-2. El sistema verifica que el usuario puede ver ese trámite de titulación con su rol activo (BR-001).
+2. El sistema verifica que el usuario puede ver ese trámite de titulación con sus roles (BR-001).
 3. El sistema muestra el trámite de titulación: el estudiante, el título del proyecto de grado cuando ya lo tiene, si está en curso, concluido, abandonado o archivado, la fase actual y las fases ya concluidas, cada una con la fecha en que el trámite entró en ella, el tutor, los miembros vigentes del tribunal evaluador y las pre-defensas y defensas formales programadas o realizadas con su fecha, hora y ambiente.
-4. El sistema muestra la documentación de requisitos, cuando el rol activo puede verla (BR-006), y las versiones del proyecto del trámite de titulación, de la más reciente a la primera, cada una con su número, su fase, su estado y su fecha de presentación.
-5. El sistema muestra las acciones que el rol activo del usuario puede ejecutar ahora sobre el trámite de titulación (BR-004).
+4. El sistema muestra la documentación de requisitos, cuando alguno de sus roles puede verla (BR-006), y las versiones del proyecto del trámite de titulación, de la más reciente a la primera, cada una con su número, su fase, su estado y su fecha de presentación.
+5. El sistema muestra las acciones que los roles del usuario le permiten ejecutar ahora sobre el trámite de titulación (BR-004).
 6. El usuario elige una versión del proyecto.
 7. El sistema muestra las observaciones de esa versión, cada una con su autor, su papel (revisor, tutor o miembro del tribunal) y su fecha, y permite descargar el archivo de la versión.
 8. El usuario descarga el archivo de la versión del proyecto.
@@ -39,7 +39,7 @@
 
 ### A2: Trámite de titulación que el usuario no puede ver
 
-**Trigger:** El rol activo del usuario no le permite ver ese trámite de titulación (step 2)  
+**Trigger:** Ninguno de los roles del usuario le permite ver ese trámite de titulación (step 2)  
 **Flow:**
 
 1. El sistema informa que el usuario no tiene acceso a ese trámite de titulación, sin mostrar ninguno de sus datos.
@@ -91,19 +91,19 @@ _None — the use case changes no data._
 
 ### BR-001: Quién ve un trámite de titulación
 
-Con su rol activo, el asistente administrativo y el director de carrera ven todos los trámites de titulación. Un docente ve solo aquellos en los que hoy es tutor, revisor o miembro vigente del tribunal. Un estudiante ve solo los suyos, en curso, concluidos, abandonados o archivados (NFR-004). El administrador del sistema no consulta trámites de titulación.
+El asistente administrativo y el director de carrera ven todos los trámites de titulación. Un docente ve solo aquellos en los que hoy es tutor, revisor o miembro vigente del tribunal. Un estudiante ve solo los suyos, en curso, concluidos, abandonados o archivados (NFR-004). El administrador del sistema no consulta trámites de titulación.
 
 ### BR-002: Una sola consulta para todos los roles
 
-Todos los roles ven el trámite de titulación en esta misma consulta y con el mismo contenido, salvo la documentación de requisitos (BR-006); lo que cambia según el rol activo son las acciones que se ofrecen (BR-004).
+Todos los roles ven el trámite de titulación en esta misma consulta y con el mismo contenido, salvo la documentación de requisitos (BR-006); lo que cambia según los roles del usuario son las acciones que se ofrecen (BR-004).
 
 ### BR-003: Versiones, observaciones y calificaciones
 
 Se muestran todas las versiones del proyecto, desde el perfil de proyecto, con su fase y sus observaciones; ninguna se oculta ni se borra (NFR-008). Cada observación se muestra con su autor y su papel en el trámite de titulación. Nadie ve en esta consulta la calificación de cada miembro del tribunal, solo la calificación conjunta (UC-011 BR-003).
 
-### BR-004: Acciones según el rol activo
+### BR-004: Acciones según los roles
 
-La consulta ofrece solo las acciones que el rol activo del usuario puede ejecutar en ese momento sobre el trámite de titulación, según las reglas de cada caso de uso:
+La consulta ofrece solo las acciones que los roles del usuario le permiten ejecutar en ese momento sobre el trámite de titulación, según las reglas de cada caso de uso:
 
 - estudiante: presentar una versión del proyecto (UC-004);
 - revisor: evaluar el perfil de proyecto (UC-005);
@@ -112,9 +112,9 @@ La consulta ofrece solo las acciones que el rol activo del usuario puede ejecuta
 - director de carrera: asignar o cambiar el tutor (UC-002), asignar o reemplazar el tribunal evaluador (UC-006), programar o reprogramar la pre-defensa o defensa formal (UC-009);
 - asistente administrativo: archivar el trámite de titulación (UC-012).
 
-### BR-005: Rol activo
+### BR-005: Varios roles
 
-Un usuario con varios roles, como el director de carrera, que también es docente, ve y actúa según su rol activo; al cambiar de rol activo cambian los trámites de titulación que ve y las acciones que se le ofrecen.
+Un usuario con varios roles, como el director de carrera, que también es docente, ve y actúa con la suma de los permisos de sus roles, sin elegir uno activo (ADR-005): ve los trámites de titulación que cualquiera de sus roles le deja ver, y en cada uno se le ofrecen las acciones de todos sus papeles en él.
 
 ### BR-006: Documentación de requisitos
 
