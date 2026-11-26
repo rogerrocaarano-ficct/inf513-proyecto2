@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
+use App\Http\Controllers\ProjectVersions\ProjectVersionController;
 use App\Http\Controllers\TutorAssignments\TutorAssignmentController;
 use App\Http\Controllers\WorkshopTeacher\WorkshopTeacherController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,12 @@ Route::middleware(['auth', 'can:tutores.asignar'])->prefix('tutores')->name('tut
 Route::middleware(['auth', 'can:taller.designar'])->group(function () {
     Route::get('taller-de-grado', [WorkshopTeacherController::class, 'edit'])->name('workshop-teacher.edit');
     Route::put('taller-de-grado', [WorkshopTeacherController::class, 'update'])->name('workshop-teacher.update');
+});
+
+// UC-004: Presentar versión del proyecto
+Route::middleware(['auth', 'can:versiones.presentar'])->prefix('versiones')->name('project-versions.')->group(function () {
+    Route::get('presentar', [ProjectVersionController::class, 'create'])->name('create');
+    Route::post('/', [ProjectVersionController::class, 'store'])->name('store');
 });
 
 require __DIR__.'/settings.php';
