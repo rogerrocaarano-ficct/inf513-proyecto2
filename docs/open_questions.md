@@ -577,6 +577,20 @@ El paso 7 registra al docente activo al dar el rol docente, pero A1 no dice qué
 registro vuelve a activo.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-039: ¿Qué formato tiene un teléfono válido?
+
+**Element:** Entity: STUDENT.phone  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+UC-001 A8 rechaza un teléfono sin formato válido y el modelo lo marca `Format: Phone` sin fijar el formato. Lecturas:
+(a) 7 u 8 dígitos con prefijo +591 opcional; (b) de 7 a 15 dígitos con + opcional.
+
+**Answer:** (a) 7 dígitos (fijo) u 8 dígitos (celular), con el prefijo +591 opcional; el teléfono sigue siendo
+opcional.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-040: ¿Cómo se crea la primera cuenta del administrador del sistema?
 
 **Element:** UC-018  
@@ -692,6 +706,19 @@ Lecturas: (a) un mensaje por cada acto que se cruza; (b) solo el primero.
 **Answer:** (a) se informa cada acto que se cruza; vale igual para UC-002 A4.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-048: ¿Qué formato tienen el número de cédula de identidad y su complemento?
+
+**Element:** Entity: STUDENT.id_card_number  
+**Raised by:** /use-case-coverage, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El modelo fija solo las longitudes (20 y 5). Lecturas: (a) solo dígitos; (b) sin formato; (c) letras, dígitos y
+guiones.
+
+**Answer:** el número tiene solo dígitos; el complemento admite letras y dígitos.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-049: ¿Se guardan los demás cambios de una cuenta cuando se rechaza el retiro del rol docente?
 
 **Element:** UC-018 A3  
@@ -730,6 +757,18 @@ La postcondición guarda el nombre del tutor propuesto en un trámite sin tutor,
 cuando el asistente administrativo elige un tutor elegible.
 
 **Answer:** se descarta; solo se guarda en un trámite que queda sin tutor.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-052: ¿El teléfono se guarda tal como se escribe o normalizado?
+
+**Element:** Entity: STUDENT.phone  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+OQ-039 acepta el prefijo +591 opcional, pero no dice si se guarda.
+
+**Answer:** se guarda normalizado, solo con los 7 u 8 dígitos, sin el prefijo +591.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
 ## OQ-053: ¿La cuenta del administrador del sistema se lista y gestiona junto con las demás?
