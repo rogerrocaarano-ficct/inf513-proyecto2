@@ -856,3 +856,50 @@ muestra solo las observaciones de la última versión, que suele ser la versión
 observaciones: el estudiante ve "Esta versión no tiene observaciones." justo cuando tiene observaciones que subsanar.
 Lecturas: (a) el paso 2 muestra además, en la fase defensa formal, las observaciones de la pre-defensa; (b) se deja
 como está y el estudiante las consulta en otro caso de uso (UC-013).
+
+## OQ-058: ¿Con qué textos notifica el sistema al estudiante el resultado de la revisión del tribunal?
+
+**Element:** UC-008 step 10  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 10 y A3 step 2 notifican al estudiante, pero la especificación no fija los textos. Lectura propuesta: un
+mensaje para la aprobación de los tres miembros y otro para la versión con observaciones, con los términos del
+glosario.
+
+**Answer:** paso 10: "El tribunal evaluador aprobó su versión {n} del proyecto de grado y espera la programación de
+su pre-defensa."; A3 step 2: "Su versión {n} del proyecto de grado recibió observaciones del tribunal evaluador.
+Puede presentar una nueva versión con ellas subsanadas."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-059: ¿Con qué textos confirma e informa el sistema la revisión de una versión como tribunal?
+
+**Element:** UC-008  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 11 confirma con el estado de la versión, y A4, A5, A6 y BR-001 informan o señalan un dato, pero la
+especificación no fija los textos.
+
+**Answer:** paso 11: "Pronunciamiento registrado. Estado de la versión: {estado}."; A4: "El pronunciamiento necesita
+al menos una observación.", "Escriba la observación." y "Cada observación admite como máximo 2000 caracteres."; A5:
+"No hay versiones del proyecto pendientes de su revisión."; A6: "El pronunciamiento ya no puede registrarse.";
+BR-001: "Solo un miembro vigente del tribunal evaluador puede revisar la versión del proyecto."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-060: ¿Quién ve la opción de menú para revisar versiones del proyecto como tribunal?
+
+**Element:** UC-008 step 1  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Solo un miembro vigente del tribunal evaluador revisa versiones (BR-001), pero los permisos se asignan por rol
+(ADR-005) y el rol docente lo tienen todos los docentes. Lecturas: (a) todo docente ve la opción y la lista sale vacía;
+(b) solo un docente que sea miembro vigente de algún tribunal ve la opción, como en OQ-056.
+
+**Answer:** (b) solo un miembro vigente de algún tribunal ve la opción "Revisión de versiones"; el permiso sigue en el
+rol docente y la revisión exige ser miembro vigente del tribunal de ese trámite.  
+**Answered by:** Roger Roca Arano, 2026-11-26  

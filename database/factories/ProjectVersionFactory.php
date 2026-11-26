@@ -77,6 +77,45 @@ class ProjectVersionFactory extends Factory
     }
 
     /**
+     * A pre-defense version in review, waiting for the committee pronouncements (UC-008).
+     */
+    public function preDefenseInReview(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'phase' => Phase::PreDefense,
+            'status' => ProjectVersionStatus::InReview,
+            'reviewer_id' => null,
+            'evaluated_at' => null,
+        ]);
+    }
+
+    /**
+     * A pre-defense version the committee approved.
+     */
+    public function preDefenseApproved(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'phase' => Phase::PreDefense,
+            'status' => ProjectVersionStatus::Approved,
+            'reviewer_id' => null,
+            'evaluated_at' => now()->subDay(),
+        ]);
+    }
+
+    /**
+     * A pre-defense version the committee left with observations.
+     */
+    public function preDefenseWithObservations(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'phase' => Phase::PreDefense,
+            'status' => ProjectVersionStatus::WithObservations,
+            'reviewer_id' => null,
+            'evaluated_at' => now()->subDay(),
+        ]);
+    }
+
+    /**
      * The designated workshop teacher, created when there is none (UC-003 BR-001: at most one).
      */
     private function workshopTeacherId(): int

@@ -81,6 +81,16 @@ class ProjectVersion extends Model
     }
 
     /**
+     * UC-008 BR-002: the approvals the committee members recorded on this version.
+     *
+     * @return HasMany<VersionApproval, $this>
+     */
+    public function versionApprovals(): HasMany
+    {
+        return $this->hasMany(VersionApproval::class);
+    }
+
+    /**
      * Project profiles: the versions of the profile evaluation phase.
      *
      * @param  Builder<ProjectVersion>  $query
