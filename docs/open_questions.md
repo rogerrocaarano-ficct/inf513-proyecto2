@@ -461,3 +461,50 @@ rol director de carrera.
 **Answer:** no.  
 **Answered by:** Roger Roca Arano, 2026-11-25  
 **Resolved in:** UC-018 BR-002  
+
+## OQ-032: ¿Con qué textos notifica y confirma el sistema al iniciar un trámite de titulación?
+
+**Element:** UC-001  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 12 notifica al tutor y el paso 13 confirma el inicio, y A1, A3, A7 y A9 informan o señalan un dato, pero la
+especificación no fija los textos. Lectura propuesta: un catálogo de mensajes en español con los términos del
+glosario.
+
+**Answer:** paso 12 (al tutor): "Se le asignó como tutor del trámite de titulación de {estudiante}."; paso 13:
+"Trámite de titulación iniciado." y, para una cuenta nueva, "La contraseña inicial del estudiante es su número de
+cédula de identidad."; A1: "{nombre} ya tiene un trámite de titulación en curso, en la fase {fase}."; A3: "{nombre}
+ya aprobó su trámite de titulación."; A7: "El correo electrónico ya pertenece a otro usuario." y "La cédula de
+identidad ya pertenece a otro estudiante."; A9: "Adjunte la {documento}.", "El archivo debe ser PDF.", "El archivo
+no debe superar los 20 MB."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-043: ¿Con qué textos rechaza el sistema un tutor no elegible y pide confirmar al estudiante registrado?
+
+**Element:** UC-001  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-006 limita el tutor a los docentes elegibles y A2 pide que el asistente administrativo confirme que es el
+estudiante que se presenta, pero la especificación no da los textos cuando falla una de esas verificaciones.
+
+**Answer:** tutor no elegible: "El tutor elegido no es un docente elegible."; A2 sin confirmar: "Confirme que es el
+estudiante que se presenta."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-051: ¿Se guarda el nombre del tutor propuesto cuando el trámite de titulación queda con tutor?
+
+**Element:** UC-001 A5  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+La postcondición guarda el nombre del tutor propuesto en un trámite sin tutor, pero no dice qué pasa con ese nombre
+cuando el asistente administrativo elige un tutor elegible.
+
+**Answer:** se descarta; solo se guarda en un trámite que queda sin tutor.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
