@@ -7,7 +7,7 @@
 **Primary Actor:** Miembro del tribunal  
 **Goal:** Registrar su calificación de la defensa formal, o la inasistencia del estudiante, para que con las de los otros dos miembros el trámite de titulación quede concluido con su calificación conjunta  
 **Trigger:** Termina la defensa formal programada, o el estudiante no se presenta a ella  
-**Status:** Reviewed  
+**Status:** Draft  
 
 **Requirements:** [FR-019, FR-021, FR-042, NFR-004, NFR-005, NFR-009, NFR-013, C-005, C-006, C-007, C-016](../requirements.md)  
 **Layers:** UI
@@ -22,8 +22,8 @@
 2. El sistema muestra las defensas formales de los trámites de titulación de cuyo tribunal es miembro vigente, cuya hora de inicio ya pasó y que esperan su calificación.
 3. El miembro del tribunal elige una defensa formal.
 4. El sistema muestra la versión del proyecto que se defiende para descargarla (UC-004 BR-006) y qué miembros del tribunal ya registraron su calificación, sin mostrar sus calificaciones.
-5. El miembro del tribunal ingresa su calificación o indica que el estudiante no se presentó.
-6. El miembro del tribunal confirma su decisión. El sistema verifica que el trámite sigue en curso en la fase defensa formal, que el acto sigue pendiente, conserva la programación consultada y ya pasó su hora de inicio, y que el miembro sigue vigente y aún no registró una calificación.
+5. El miembro del tribunal ingresa su calificación o, mientras ningún miembro haya registrado su calificación, indica que el estudiante no se presentó (BR-005).
+6. El miembro del tribunal confirma su decisión. El sistema verifica que el trámite sigue en curso en la fase defensa formal, que el acto sigue pendiente, conserva la programación consultada y ya pasó su hora de inicio, que el miembro sigue vigente y aún no registró una calificación y, si indicó la inasistencia, que ningún miembro registró aún su calificación.
 7. El sistema verifica que la calificación es un número entero entre 0 y 100.
 8. El sistema registra la calificación del miembro con la fecha y hora.
 9. El sistema verifica que los tres miembros vigentes del tribunal registraron su calificación.
@@ -46,7 +46,7 @@
 **Trigger:** El miembro del tribunal confirmó la inasistencia del estudiante y la validación del paso 6 pasó (step 7)  
 **Flow:**
 
-1. El sistema marca la defensa formal como realizada con la inasistencia del estudiante, sin calificación conjunta, y registra el trámite de titulación como abandonado, con la fecha y hora.
+1. El sistema marca la defensa formal como realizada con la inasistencia del estudiante y el miembro que la registró, sin calificación conjunta, y registra el trámite de titulación como abandonado, con la fecha y hora.
 2. El sistema notifica dentro del sistema al estudiante, a su tutor y a los demás miembros vigentes del tribunal que el trámite de titulación quedó abandonado por inasistencia a la defensa formal.
 3. Use case continues at step 12.
 
@@ -69,7 +69,7 @@
 
 ### A5: El registro ya no está disponible
 
-**Trigger:** Al confirmar, el trámite ya no está en curso en la fase defensa formal, el acto ya se marcó como realizado o se reprogramó, el miembro dejó de estar vigente o ya registró una calificación (step 6)  
+**Trigger:** Al confirmar, el trámite ya no está en curso en la fase defensa formal, el acto ya se marcó como realizado o se reprogramó, el miembro dejó de estar vigente o ya registró una calificación, o indicó la inasistencia y otro miembro ya registró su calificación (step 6)  
 **Flow:**
 
 1. El sistema informa en español que el registro ya no está disponible y actualiza la lista de defensas formales pendientes.
@@ -108,4 +108,4 @@ Con la calificación conjunta, la defensa formal queda realizada y el trámite d
 
 ### BR-005: Inasistencia a la defensa formal
 
-Basta con que un miembro vigente del tribunal registre que el estudiante no se presentó: la defensa formal queda realizada con la inasistencia del estudiante, sin calificación conjunta, y el trámite de titulación queda abandonado (UC-001 BR-008, UC-010 BR-004).
+Basta con que un miembro vigente del tribunal registre que el estudiante no se presentó: la defensa formal queda realizada con la inasistencia del estudiante, con el miembro que la registró, sin calificación conjunta, y el trámite de titulación queda abandonado (UC-001 BR-008, UC-010 BR-004). La inasistencia se registra solo mientras ningún miembro haya registrado su calificación; una calificación registrada confirma que el estudiante se presentó.
