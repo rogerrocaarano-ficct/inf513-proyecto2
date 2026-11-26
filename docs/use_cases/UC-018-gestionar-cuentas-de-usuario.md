@@ -7,7 +7,7 @@
 **Primary Actor:** Administrador del sistema  
 **Goal:** Registrar, cambiar, desactivar y reactivar las cuentas de los docentes, el director de carrera y los asistentes administrativos, con sus roles, para que cada uno participe en los trámites de titulación con su propia cuenta y acceda solo a lo que sus roles permiten  
 **Trigger:** El administrador del sistema solicita gestionar las cuentas de usuario, por ejemplo cuando llega un docente nuevo o uno deja la carrera  
-**Status:** Draft  
+**Status:** Reviewed  
 
 **Requirements:** [FR-003, FR-027, FR-029, NFR-005, NFR-006, NFR-009, NFR-010, NFR-013, NFR-015](../requirements.md)  
 **Layers:** UI
