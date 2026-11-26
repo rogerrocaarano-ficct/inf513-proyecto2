@@ -68,6 +68,9 @@ class HandleInertiaRequests extends Middleware
             ->orderBy('sort_order')
             ->get()
             ->filter(fn (MenuItem $item): bool => Route::has($item->route_name))
+            // UC-005 BR-001: Only the workshop teacher, the reviewer, sees the project profiles option (OQ-056).
+            ->filter(fn (MenuItem $item): bool => $item->route_name !== 'project-profiles.index'
+                || $user->teacher?->is_workshop_teacher === true)
             ->map(fn (MenuItem $item): array => [
                 'title' => $item->title,
                 'href' => route($item->route_name, absolute: false),

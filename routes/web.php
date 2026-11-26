@@ -3,6 +3,7 @@
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
+use App\Http\Controllers\ProjectProfiles\ProjectProfileController;
 use App\Http\Controllers\ProjectVersions\ProjectVersionController;
 use App\Http\Controllers\TutorAssignments\TutorAssignmentController;
 use App\Http\Controllers\WorkshopTeacher\WorkshopTeacherController;
@@ -45,6 +46,14 @@ Route::middleware(['auth', 'can:taller.designar'])->group(function () {
 Route::middleware(['auth', 'can:versiones.presentar'])->prefix('versiones')->name('project-versions.')->group(function () {
     Route::get('presentar', [ProjectVersionController::class, 'create'])->name('create');
     Route::post('/', [ProjectVersionController::class, 'store'])->name('store');
+});
+
+// UC-005: Evaluar perfil de proyecto
+Route::middleware(['auth', 'can:perfiles.evaluar'])->prefix('perfiles')->name('project-profiles.')->group(function () {
+    Route::get('/', [ProjectProfileController::class, 'index'])->name('index');
+    Route::get('{projectVersion}', [ProjectProfileController::class, 'show'])->name('show');
+    Route::put('{projectVersion}', [ProjectProfileController::class, 'update'])->name('update');
+    Route::get('{projectVersion}/archivo', [ProjectProfileController::class, 'download'])->name('download');
 });
 
 require __DIR__.'/settings.php';
