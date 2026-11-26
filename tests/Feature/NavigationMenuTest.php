@@ -41,7 +41,7 @@ test('the menu of a user with several roles is the union of their options (UC-01
         ->get(route('dashboard'))
         ->assertInertia(fn ($page) => $page
             ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
-                'Inicio', 'Asignar tutor', 'Docente de taller de grado', 'Tribunal evaluador',
+                'Inicio', 'Asignar tutor', 'Docente de taller de grado', 'Tribunal evaluador', 'Mis estudiantes',
             ]));
 });
 
@@ -57,14 +57,14 @@ test('a menu option whose page is not built yet is left out', function () {
     $this->actingAs($teacher)
         ->get(route('dashboard'))
         ->assertInertia(fn ($page) => $page
-            ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === ['Inicio']));
+            ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === ['Inicio', 'Mis estudiantes']));
 });
 
 test('a change of roles changes the menu from the next page (UC-018 BR-006)', function () {
     registerMenuRoutes('graduation-processes.create');
     $user = User::factory()->withRoles(RoleName::Teacher)->create();
 
-    $this->actingAs($user)->get(route('dashboard'))->assertInertia(fn ($page) => $page->count('menu', 1));
+    $this->actingAs($user)->get(route('dashboard'))->assertInertia(fn ($page) => $page->count('menu', 2));
 
     $user->roles()->attach(Role::query()->where('name', RoleName::AdministrativeAssistant)->value('id'));
 
