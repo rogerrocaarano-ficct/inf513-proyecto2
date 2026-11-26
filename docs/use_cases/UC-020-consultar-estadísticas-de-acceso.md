@@ -7,9 +7,9 @@
 **Primary Actor:** Administrador del sistema  
 **Goal:** Ver por día los inicios de sesión, los intentos fallidos y las páginas más visitadas, para vigilar el flujo de accesos al sistema  
 **Trigger:** El administrador del sistema solicita ver el panel de estadísticas de acceso  
-**Status:** Draft  
+**Status:** Reviewed 
 
-**Requirements:** [FR-035, FR-037, NFR-001, NFR-005, NFR-009, NFR-011, NFR-012](../requirements.md)  
+**Requirements:** [FR-035, FR-037, NFR-001, NFR-005, NFR-009, NFR-010, NFR-011, NFR-012, NFR-013](../requirements.md)  
 **Layers:** UI
 
 ## Preconditions
@@ -22,14 +22,14 @@
 2. El sistema muestra, para cada día de los últimos 30 días, la cantidad de inicios de sesión exitosos y de intentos fallidos.
 3. El sistema muestra las 10 páginas más visitadas en ese periodo, con su cantidad de visitas, y la cantidad de visitas por día.
 4. El administrador del sistema cambia el rango de fechas.
-5. El sistema verifica que la fecha inicial no es posterior a la final y que el rango no supera un año.
+5. El sistema verifica en el servidor que la fecha inicial no es posterior a la final y que el rango no supera los 365 días consecutivos.
 6. El sistema muestra las mismas cifras para el nuevo rango.
 
 ## Alternative Flows
 
 ### A1: Rango de fechas inválido
 
-**Trigger:** La fecha inicial es posterior a la final, o el rango supera un año (step 5)  
+**Trigger:** La fecha inicial es posterior a la final, o el rango supera 365 días consecutivos (step 5)  
 **Flow:**
 
 1. El sistema informa el motivo con un mensaje en español y conserva el rango anterior.
