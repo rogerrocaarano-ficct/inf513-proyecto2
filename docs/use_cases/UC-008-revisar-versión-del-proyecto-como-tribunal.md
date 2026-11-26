@@ -7,7 +7,7 @@
 **Primary Actor:** Miembro del tribunal  
 **Goal:** Aprobar u observar una versión del proyecto de la fase pre-defensa, para que el estudiante sepa qué subsanar o, con la aprobación de los tres miembros, su proyecto de grado pueda ir a pre-defensa  
 **Trigger:** El miembro del tribunal solicita revisar las versiones del proyecto que esperan su pronunciamiento  
-**Status:** Reviewed  
+**Status:** Approved  
 
 **Requirements:** [FR-010, FR-011, FR-014, FR-021, NFR-004, NFR-005, NFR-009, NFR-013, C-005, C-006](../requirements.md)  
 **Layers:** UI

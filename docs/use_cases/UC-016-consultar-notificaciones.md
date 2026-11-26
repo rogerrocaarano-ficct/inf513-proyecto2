@@ -7,7 +7,7 @@
 **Primary Actor:** Estudiante, Docente  
 **Goal:** Leer en el sistema las notificaciones de los trámites de titulación en los que participa y llegar al trámite que las originó, para enterarse de cada cambio sin depender del asistente administrativo  
 **Trigger:** El usuario ve en el encabezado que tiene notificaciones sin leer, o solicita ver sus notificaciones  
-**Status:** Reviewed  
+**Status:** Approved  
 
 **Requirements:** [FR-021, FR-022, NFR-004, NFR-009, C-005](../requirements.md)  
 **Layers:** UI

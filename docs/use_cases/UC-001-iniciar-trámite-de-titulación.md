@@ -7,7 +7,7 @@
 **Primary Actor:** Asistente administrativo  
 **Goal:** Registrar el trámite de titulación de un estudiante, con su cuenta y su documentación de requisitos, para que el trámite se siga en el sistema y no en una carpeta física  
 **Trigger:** Un estudiante se presenta en la dirección de carrera con su documentación de requisitos para iniciar un trámite de titulación  
-**Status:** Reviewed  
+**Status:** Approved  
 
 **Requirements:** [FR-001, FR-002, FR-022, NFR-005, NFR-006, NFR-008, NFR-009, NFR-013, C-004, C-014, C-016](../requirements.md)  
 **Layers:** UI

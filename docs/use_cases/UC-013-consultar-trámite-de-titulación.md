@@ -7,7 +7,7 @@
 **Primary Actor:** Estudiante, Docente, Asistente administrativo, Director de carrera  
 **Goal:** Ver en una sola consulta el estado de un trámite de titulación, sus versiones del proyecto y sus observaciones, con las acciones que su rol le permite sobre él, para saber qué paso corresponde sin depender del asistente administrativo  
 **Trigger:** El usuario abre un trámite de titulación desde su menú, una lista, la búsqueda (UC-015) o una notificación (UC-016)  
-**Status:** Reviewed  
+**Status:** Approved  
 
 **Requirements:** [FR-013, FR-023, FR-040, NFR-004, NFR-005, NFR-008, NFR-009](../requirements.md)  
 **Layers:** UI
