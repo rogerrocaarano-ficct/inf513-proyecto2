@@ -7,7 +7,7 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Designar al docente de taller de grado, para que todo perfil de proyecto le llegue como revisor sin asignarlo uno por uno  
 **Trigger:** El director de carrera solicita designar al docente de taller de grado, al inicio de la gestión o cuando cambia el docente que dicta el taller  
-**Status:** Draft  
+**Status:** Reviewed  
 
 **Requirements:** [FR-006, FR-022, NFR-004, NFR-005, NFR-009](../requirements.md)  
 **Layers:** UI

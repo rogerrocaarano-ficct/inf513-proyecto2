@@ -7,7 +7,7 @@
 **Primary Actor:** Director de carrera  
 **Goal:** Ver un panel con las cifras de los trámites de titulación de la carrera, para evaluar su avance  
 **Trigger:** El director de carrera solicita ver el panel de estadísticas de trámites  
-**Status:** Draft  
+**Status:** Reviewed  
 
 **Requirements:** [FR-036, NFR-001, NFR-005, NFR-009, NFR-010](../requirements.md)  
 **Layers:** UI

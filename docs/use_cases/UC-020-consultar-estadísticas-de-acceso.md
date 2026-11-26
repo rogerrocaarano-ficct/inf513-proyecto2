@@ -7,7 +7,7 @@
 **Primary Actor:** Administrador del sistema  
 **Goal:** Ver por día los inicios de sesión, los intentos fallidos y las páginas más visitadas, para vigilar el flujo de accesos al sistema  
 **Trigger:** El administrador del sistema solicita ver el panel de estadísticas de acceso  
-**Status:** Draft  
+**Status:** Reviewed  
 
 **Requirements:** [FR-035, FR-037, NFR-001, NFR-005, NFR-009, NFR-010, NFR-011, NFR-012, NFR-013](../requirements.md)  
 **Layers:** UI
