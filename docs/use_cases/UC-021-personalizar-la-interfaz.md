@@ -7,7 +7,7 @@
 **Primary Actor:** Usuario  
 **Goal:** Elegir el tema, el modo día o noche, el tamaño de la fuente y el alto contraste de la interfaz, para que el sistema se adapte a su preferencia y sea cómodo de leer  
 **Trigger:** El usuario solicita cambiar la apariencia de la interfaz  
-**Status:** Draft  
+**Status:** Reviewed  
 
 **Requirements:** [FR-031, FR-032, FR-033, FR-034, NFR-009, NFR-010, NFR-014, NFR-015, C-011](../requirements.md)  
 **Layers:** UI
