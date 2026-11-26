@@ -7,6 +7,7 @@ use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
 use App\Http\Controllers\ProjectProfiles\ProjectProfileController;
 use App\Http\Controllers\ProjectVersions\ProjectVersionController;
 use App\Http\Controllers\TutorAssignments\TutorAssignmentController;
+use App\Http\Controllers\TutorObservations\TutorObservationController;
 use App\Http\Controllers\WorkshopTeacher\WorkshopTeacherController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,15 @@ Route::middleware(['auth', 'can:tribunales.asignar'])->prefix('tribunales')->nam
     Route::get('{graduationProcess}', [CommitteeController::class, 'edit'])->name('edit');
     Route::post('{graduationProcess}', [CommitteeController::class, 'store'])->name('store');
     Route::put('{graduationProcess}/reemplazo', [CommitteeController::class, 'replace'])->name('replace');
+});
+
+// UC-007: Observar versión del proyecto como tutor
+Route::middleware(['auth', 'can:versiones.observar'])->prefix('tutelados')->name('tutor-observations.')->group(function () {
+    Route::get('/', [TutorObservationController::class, 'index'])->name('index');
+    Route::get('tramites/{graduationProcess}', [TutorObservationController::class, 'show'])->name('show');
+    Route::get('versiones/{projectVersion}', [TutorObservationController::class, 'version'])->name('version');
+    Route::post('versiones/{projectVersion}/observaciones', [TutorObservationController::class, 'store'])->name('store');
+    Route::get('versiones/{projectVersion}/archivo', [TutorObservationController::class, 'download'])->name('download');
 });
 
 require __DIR__.'/settings.php';

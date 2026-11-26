@@ -6,6 +6,7 @@ import {
     FileUp,
     Gavel,
     LayoutGrid,
+    MessageSquareText,
     UserCheck,
     Users,
 } from 'lucide-react';
@@ -22,6 +23,7 @@ const menuIcons: Record<string, LucideIcon> = {
     'file-up': FileUp,
     gavel: Gavel,
     'layout-grid': LayoutGrid,
+    'message-square-text': MessageSquareText,
     'user-check': UserCheck,
     users: Users,
 };
