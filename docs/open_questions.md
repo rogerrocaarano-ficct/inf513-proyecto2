@@ -533,6 +533,64 @@ A3: "El tribunal evaluador ya no se puede cambiar porque la defensa formal se re
 elija otro docente."  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-036: ¿Con qué textos confirma e informa el sistema al gestionar cuentas de usuario?
+
+**Element:** UC-018  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 8, A3, A5 y A7 confirman o informan, pero la especificación no fija los textos.
+
+**Answer:** paso 8: "Cuenta registrada.", "Cuenta actualizada.", "Cuenta desactivada." o "Cuenta reactivada."; A3:
+"No se puede desactivar la cuenta ni quitarle el rol docente. El director de carrera debe reasignar antes:" seguido
+de la lista de trámites de titulación y papeles; A5: "El correo electrónico ya pertenece a otro usuario."; A7: "Ya
+hay un director de carrera activo: {nombre}."  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-037: ¿Qué pasa al reactivar a un exdirector de carrera mientras hay otro director de carrera activo?
+
+**Element:** UC-018 A4  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+BR-002 admite a lo sumo un director de carrera activo, pero A4 no considera una cuenta inactiva que conserva el rol
+director de carrera. Lecturas: (a) no se reactiva y se informa como en A7; (b) se reactiva quitándole el rol
+director de carrera.
+
+**Answer:** (a) no se reactiva y se informa "Ya hay un director de carrera activo: {nombre}."; el administrador del
+sistema quita antes el rol (A1).  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-038: ¿Qué pasa con el registro de docente al quitar el rol docente y al volver a darlo?
+
+**Element:** UC-018 A1  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 7 registra al docente activo al dar el rol docente, pero A1 no dice qué pasa con ese registro al quitar el rol
+(cuando BR-003 lo permite) ni al volver a darlo. Lecturas: (a) queda inactivo y se reutiliza; (b) se borra.
+
+**Answer:** (a) al quitar el rol docente, el docente queda inactivo y no se borra; al volver a darlo, el mismo
+registro vuelve a activo.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-040: ¿Cómo se crea la primera cuenta del administrador del sistema?
+
+**Element:** UC-018  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+La precondición de UC-018 exige un administrador del sistema con sesión iniciada, pero ningún caso de uso crea esa
+cuenta. Lecturas: (a) un seeder con los datos del archivo de entorno; (b) un comando de consola.
+
+**Answer:** (a) un seeder toma el nombre, el correo electrónico y la contraseña del archivo de entorno; la cuenta
+debe cambiar su contraseña inicial en el primer inicio de sesión.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-041: ¿Un miembro reemplazado del tribunal puede quedar como tutor del mismo trámite de titulación?
 
 **Element:** UC-002 BR-001  
@@ -544,6 +602,21 @@ BR-001 excluye al docente que "es miembro del tribunal de ese trámite", en pres
 "no es ni fue miembro". Lecturas: (a) solo se excluye a los miembros vigentes; (b) también a los reemplazados.
 
 **Answer:** (a) solo se excluye a los miembros vigentes del tribunal.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
+## OQ-042: ¿Qué reglas cumple la nueva contraseña que reemplaza a la contraseña inicial?
+
+**Element:** UC-018 BR-005  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+UC-018 BR-005 y UC-001 BR-005 obligan a cambiar la contraseña inicial en el primer inicio de sesión, pero no fijan
+reglas para la nueva. Lecturas: (a) al menos 8 caracteres, confirmada y distinta de la inicial; (b) solo al menos 8
+caracteres y confirmada.
+
+**Answer:** (a) al menos 8 caracteres, confirmada y distinta de la contraseña inicial; vale también para el
+estudiante (UC-001 BR-005).  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
 ## OQ-043: ¿Con qué textos rechaza el sistema un tutor no elegible y pide confirmar al estudiante registrado?
@@ -619,6 +692,19 @@ Lecturas: (a) un mensaje por cada acto que se cruza; (b) solo el primero.
 **Answer:** (a) se informa cada acto que se cruza; vale igual para UC-002 A4.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-049: ¿Se guardan los demás cambios de una cuenta cuando se rechaza el retiro del rol docente?
+
+**Element:** UC-018 A3  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+Al cambiar una cuenta (A1) quitándole el rol docente con papeles vigentes, A3 rechaza el retiro, pero no dice qué
+pasa con el nombre o el correo cambiados en la misma confirmación.
+
+**Answer:** se rechaza todo el cambio; el administrador del sistema lo repite sin quitar el rol docente.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
+
 ## OQ-050: ¿El sistema muestra cuántos perfiles de proyecto recibirá el docente antes de confirmar la designación?
 
 **Element:** UC-003 step 2  
@@ -646,3 +732,15 @@ cuando el asistente administrativo elige un tutor elegible.
 **Answer:** se descarta; solo se guarda en un trámite que queda sin tutor.  
 **Answered by:** Roger Roca Arano, 2026-11-26  
 
+## OQ-053: ¿La cuenta del administrador del sistema se lista y gestiona junto con las demás?
+
+**Element:** UC-018 step 2  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+El paso 2 lista las cuentas de docentes, del director de carrera y de asistentes administrativos, pero no dice qué
+pasa con una cuenta de administrador del sistema que tenga además uno de esos roles.
+
+**Answer:** no; una cuenta con el rol administrador del sistema no se lista ni se gestiona en UC-018.  
+**Answered by:** Roger Roca Arano, 2026-11-26  
