@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -30,6 +31,7 @@ class FortifyServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureActions();
+        $this->configureAuthentication();
         $this->configureViews();
         $this->configureRateLimiting();
     }
@@ -40,7 +42,25 @@ class FortifyServiceProvider extends ServiceProvider
     private function configureActions(): void
     {
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
-        Fortify::createUsersUsing(CreateNewUser::class);
+    }
+
+    /**
+     * Only an active account can log in.
+     */
+    private function configureAuthentication(): void
+    {
+        Fortify::authenticateUsing(function (Request $request): ?User {
+            $user = User::query()
+                ->where('email', Str::lower($request->string(Fortify::username())->value()))
+                ->first();
+
+            // UC-018 A2: A deactivated account can no longer log in.
+            if ($user === null || ! $user->is_active) {
+                return null;
+            }
+
+            return Hash::check($request->string('password')->value(), $user->password) ? $user : null;
+        });
     }
 
     /**
@@ -63,14 +83,6 @@ class FortifyServiceProvider extends ServiceProvider
             'status' => $request->session()->get('status'),
         ]));
 
-        Fortify::verifyEmailView(fn (Request $request) => Inertia::render('auth/verify-email', [
-            'status' => $request->session()->get('status'),
-        ]));
-
-        Fortify::registerView(fn () => Inertia::render('auth/register', [
-            'passwordRules' => Password::defaults()->toPasswordRulesString(),
-        ]));
-
         Fortify::twoFactorChallengeView(fn () => Inertia::render('auth/two-factor-challenge'));
 
         Fortify::confirmPasswordView(fn () => Inertia::render('auth/confirm-password'));
@@ -88,7 +100,8 @@ class FortifyServiceProvider extends ServiceProvider
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
-            return Limit::perMinute(5)->by($throttleKey);
+            // NFR-006: After 5 failed login attempts, new attempts are blocked for 30 minutes.
+            return Limit::perMinutes(30, 5)->by($throttleKey);
         });
 
         RateLimiter::for('passkeys', function (Request $request) {
