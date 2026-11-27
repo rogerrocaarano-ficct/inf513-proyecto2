@@ -17,4 +17,5 @@ enum PermissionKey: string
     case EvaluateProjectProfile = 'perfiles.evaluar';
     case ObserveProjectVersion = 'versiones.observar';
     case ScheduleDefense = 'defensas.programar';
+    case RegisterPreDefense = 'pre-defensas.registrar';
 }

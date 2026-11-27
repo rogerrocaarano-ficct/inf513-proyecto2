@@ -27,6 +27,7 @@ class RolePermissionSeeder extends Seeder
         'perfiles.evaluar' => ['name' => 'Evaluar perfil de proyecto', 'description' => 'Aprobar o rechazar los perfiles de proyecto de los que es revisor (UC-005).'],
         'versiones.observar' => ['name' => 'Observar versión del proyecto como tutor', 'description' => 'Registrar observaciones sobre las versiones del proyecto de los estudiantes que tutela (UC-007).'],
         'defensas.programar' => ['name' => 'Programar defensas', 'description' => 'Programar o reprogramar pre-defensas y defensas formales (UC-009).'],
+        'pre-defensas.registrar' => ['name' => 'Registrar pre-defensa', 'description' => 'Registrar observaciones de la pre-defensa o la inasistencia del estudiante (UC-010).'],
     ];
 
     /**
@@ -55,7 +56,10 @@ class RolePermissionSeeder extends Seeder
         'Docente' => [
             'description' => 'Puede ser tutor, revisor o miembro del tribunal.',
             'is_system' => false,
-            'permissions' => [PermissionKey::ViewHome, PermissionKey::EvaluateProjectProfile, PermissionKey::ObserveProjectVersion],
+            'permissions' => [
+                PermissionKey::ViewHome, PermissionKey::EvaluateProjectProfile,
+                PermissionKey::ObserveProjectVersion, PermissionKey::RegisterPreDefense,
+            ],
         ],
         'Estudiante' => [
             'description' => 'Elabora su proyecto de grado y sigue su trámite de titulación.',
@@ -78,6 +82,7 @@ class RolePermissionSeeder extends Seeder
         ['title' => 'Perfiles de proyecto', 'route_name' => 'project-profiles.index', 'icon' => 'clipboard-check', 'sort_order' => 70, 'permission' => PermissionKey::EvaluateProjectProfile],
         ['title' => 'Mis estudiantes', 'route_name' => 'tutor-observations.index', 'icon' => 'message-square-text', 'sort_order' => 80, 'permission' => PermissionKey::ObserveProjectVersion],
         ['title' => 'Calendario de defensas', 'route_name' => 'defenses.index', 'icon' => 'calendar-days', 'sort_order' => 90, 'permission' => PermissionKey::ScheduleDefense],
+        ['title' => 'Registrar pre-defensa', 'route_name' => 'defense-reviews.index', 'icon' => 'clipboard-list', 'sort_order' => 100, 'permission' => PermissionKey::RegisterPreDefense],
     ];
 
     /**

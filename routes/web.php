@@ -4,6 +4,7 @@ use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
 use App\Http\Controllers\Committees\CommitteeController;
 use App\Http\Controllers\Defenses\DefenseController;
+use App\Http\Controllers\Defenses\DefenseReviewController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
 use App\Http\Controllers\ProjectProfiles\ProjectProfileController;
 use App\Http\Controllers\ProjectVersions\ProjectVersionController;
@@ -80,6 +81,14 @@ Route::middleware(['auth', 'can:versiones.observar'])->prefix('tutelados')->name
 Route::middleware(['auth', 'can:defensas.programar'])->prefix('defensas')->name('defenses.')->group(function () {
     Route::get('/', [DefenseController::class, 'index'])->name('index');
     Route::post('/', [DefenseController::class, 'store'])->name('store');
+});
+
+// UC-010: Registrar observaciones de pre-defensa
+Route::middleware(['auth', 'can:pre-defensas.registrar'])->prefix('pre-defensas')->name('defense-reviews.')->group(function () {
+    Route::get('/', [DefenseReviewController::class, 'index'])->name('index');
+    Route::get('{defense}', [DefenseReviewController::class, 'show'])->name('show');
+    Route::get('{defense}/versiones/{projectVersion}/archivo', [DefenseReviewController::class, 'download'])->name('download');
+    Route::post('{defense}', [DefenseReviewController::class, 'store'])->name('store');
 });
 
 require __DIR__.'/settings.php';

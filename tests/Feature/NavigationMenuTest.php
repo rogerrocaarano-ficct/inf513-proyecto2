@@ -21,6 +21,10 @@ function registerMenuRoutes(string ...$names): void
     Route::getRoutes()->refreshNameLookups();
 }
 
+beforeEach(function () {
+    $this->withoutVite();
+});
+
 test('the menu shows only the options the permissions of the user role enable (FR-029)', function () {
     registerMenuRoutes('accounts.index', 'graduation-processes.create');
     $administrator = User::factory()->systemAdministrator()->create();
@@ -42,7 +46,7 @@ test('the menu of a user with several roles is the union of their options (UC-01
         ->assertInertia(fn ($page) => $page
             ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
                 'Inicio', 'Asignar tutor', 'Docente de taller de grado', 'Tribunal evaluador', 'Mis estudiantes',
-                'Calendario de defensas',
+                'Calendario de defensas', 'Registrar pre-defensa',
             ]));
 });
 
@@ -58,14 +62,16 @@ test('a menu option whose page is not built yet is left out', function () {
     $this->actingAs($teacher)
         ->get(route('dashboard'))
         ->assertInertia(fn ($page) => $page
-            ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === ['Inicio', 'Mis estudiantes']));
+            ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
+                'Inicio', 'Mis estudiantes', 'Registrar pre-defensa',
+            ]));
 });
 
 test('a change of roles changes the menu from the next page (UC-018 BR-006)', function () {
     registerMenuRoutes('graduation-processes.create');
     $user = User::factory()->withRoles(RoleName::Teacher)->create();
 
-    $this->actingAs($user)->get(route('dashboard'))->assertInertia(fn ($page) => $page->count('menu', 2));
+    $this->actingAs($user)->get(route('dashboard'))->assertInertia(fn ($page) => $page->count('menu', 3));
 
     $user->roles()->attach(Role::query()->where('name', RoleName::AdministrativeAssistant)->value('id'));
 
@@ -82,4 +88,24 @@ test('the permissions of every role of the user authorize its abilities (ADR-005
         ->and($director->can(PermissionKey::ManageAccounts->value))->toBeFalse()
         ->and($assistant->can(PermissionKey::StartGraduationProcess->value))->toBeTrue()
         ->and($assistant->can(PermissionKey::AssignCommittee->value))->toBeFalse();
+});
+
+test('UC-010 NFR-005: only teachers can register a pre-defense', function () {
+    $teacher = Teacher::factory()->create()->user;
+    $director = Teacher::factory()->careerDirector()->create()->user;
+    $student = User::factory()->withRoles(RoleName::Student)->create();
+
+    expect($teacher->can(PermissionKey::RegisterPreDefense->value))->toBeTrue()
+        ->and($director->can(PermissionKey::RegisterPreDefense->value))->toBeTrue()
+        ->and($student->can(PermissionKey::RegisterPreDefense->value))->toBeFalse();
+});
+
+test('UC-010 FR-029: the teacher menu offers the pre-defense registration option', function () {
+    $teacher = Teacher::factory()->create()->user;
+
+    $this->actingAs($teacher)
+        ->get(route('dashboard'))
+        ->assertInertia(fn ($page) => $page->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
+            'Inicio', 'Mis estudiantes', 'Registrar pre-defensa',
+        ]));
 });

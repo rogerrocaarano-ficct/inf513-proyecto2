@@ -25,6 +25,7 @@ class DefenseFactory extends Factory
             'type' => DefenseType::PreDefense,
             'scheduled_at' => now()->addWeek()->setTime(10, 0),
             'location' => null,
+            'schedule_revision' => 1,
             'grade' => null,
             'is_held' => false,
             'is_student_absent' => false,
