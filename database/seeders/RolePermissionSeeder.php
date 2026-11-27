@@ -20,6 +20,7 @@ class RolePermissionSeeder extends Seeder
         'inicio.ver' => ['name' => 'Ver inicio', 'description' => 'Abrir la página de inicio.'],
         'cuentas.gestionar' => ['name' => 'Gestionar cuentas de usuario', 'description' => 'Registrar, cambiar, desactivar y reactivar cuentas (UC-018).'],
         'tramites.iniciar' => ['name' => 'Iniciar trámite de titulación', 'description' => 'Registrar el trámite de titulación de un estudiante (UC-001).'],
+        'tramites.archivar' => ['name' => 'Archivar trámite de titulación', 'description' => 'Archivar trámites de titulación concluidos o abandonados (UC-012).'],
         'tutores.asignar' => ['name' => 'Asignar tutor', 'description' => 'Asignar o cambiar el tutor de un trámite de titulación (UC-002).'],
         'taller.designar' => ['name' => 'Designar docente de taller de grado', 'description' => 'Designar al docente de taller de grado (UC-003).'],
         'tribunales.asignar' => ['name' => 'Asignar tribunal evaluador', 'description' => 'Asignar el tribunal evaluador o reemplazar a un miembro (UC-006).'],
@@ -44,7 +45,7 @@ class RolePermissionSeeder extends Seeder
         'Asistente administrativo' => [
             'description' => 'Registra estudiantes, recibe la documentación de requisitos y archiva los trámites.',
             'is_system' => false,
-            'permissions' => [PermissionKey::ViewHome, PermissionKey::StartGraduationProcess],
+            'permissions' => [PermissionKey::ViewHome, PermissionKey::StartGraduationProcess, PermissionKey::ArchiveGraduationProcess],
         ],
         'Director de carrera' => [
             'description' => 'Asigna tutor y tribunal evaluador, y designa al docente de taller de grado.',
@@ -81,6 +82,7 @@ class RolePermissionSeeder extends Seeder
         ['title' => 'Inicio', 'route_name' => 'dashboard', 'icon' => 'layout-grid', 'sort_order' => 1, 'permission' => PermissionKey::ViewHome],
         ['title' => 'Cuentas de usuario', 'route_name' => 'accounts.index', 'icon' => 'users', 'sort_order' => 10, 'permission' => PermissionKey::ManageAccounts],
         ['title' => 'Iniciar trámite', 'route_name' => 'graduation-processes.create', 'icon' => 'file-plus', 'sort_order' => 20, 'permission' => PermissionKey::StartGraduationProcess],
+        ['title' => 'Archivar trámite', 'route_name' => 'graduation-archives.index', 'icon' => 'archive', 'sort_order' => 120, 'permission' => PermissionKey::ArchiveGraduationProcess],
         ['title' => 'Asignar tutor', 'route_name' => 'tutor-assignments.index', 'icon' => 'user-check', 'sort_order' => 30, 'permission' => PermissionKey::AssignTutor],
         ['title' => 'Docente de taller de grado', 'route_name' => 'workshop-teacher.edit', 'icon' => 'book-open', 'sort_order' => 40, 'permission' => PermissionKey::DesignateWorkshopTeacher],
         ['title' => 'Tribunal evaluador', 'route_name' => 'committees.index', 'icon' => 'gavel', 'sort_order' => 50, 'permission' => PermissionKey::AssignCommittee],

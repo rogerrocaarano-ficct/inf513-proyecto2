@@ -10,6 +10,7 @@ enum PermissionKey: string
     case ViewHome = 'inicio.ver';
     case ManageAccounts = 'cuentas.gestionar';
     case StartGraduationProcess = 'tramites.iniciar';
+    case ArchiveGraduationProcess = 'tramites.archivar';
     case AssignTutor = 'tutores.asignar';
     case DesignateWorkshopTeacher = 'taller.designar';
     case AssignCommittee = 'tribunales.asignar';
