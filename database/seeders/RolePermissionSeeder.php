@@ -28,6 +28,7 @@ class RolePermissionSeeder extends Seeder
         'versiones.observar' => ['name' => 'Observar versión del proyecto como tutor', 'description' => 'Registrar observaciones sobre las versiones del proyecto de los estudiantes que tutela (UC-007).'],
         'versiones.revisar' => ['name' => 'Revisar versión del proyecto como tribunal', 'description' => 'Aprobar u observar las versiones de la pre-defensa de los trámites cuyo tribunal evaluador integra (UC-008).'],
         'defensas.programar' => ['name' => 'Programar defensas', 'description' => 'Programar o reprogramar pre-defensas y defensas formales (UC-009).'],
+        'pre-defensas.registrar' => ['name' => 'Registrar pre-defensa', 'description' => 'Registrar observaciones de la pre-defensa o la inasistencia del estudiante (UC-010).'],
     ];
 
     /**
@@ -57,8 +58,11 @@ class RolePermissionSeeder extends Seeder
             'description' => 'Puede ser tutor, revisor o miembro del tribunal.',
             'is_system' => false,
             'permissions' => [
+                
                 PermissionKey::ViewHome, PermissionKey::EvaluateProjectProfile,
+               
                 PermissionKey::ObserveProjectVersion, PermissionKey::ReviewProjectVersion,
+            , PermissionKey::RegisterPreDefense,
             ],
         ],
         'Estudiante' => [
@@ -83,6 +87,7 @@ class RolePermissionSeeder extends Seeder
         ['title' => 'Mis estudiantes', 'route_name' => 'tutor-observations.index', 'icon' => 'message-square-text', 'sort_order' => 80, 'permission' => PermissionKey::ObserveProjectVersion],
         ['title' => 'Revisión de versiones', 'route_name' => 'committee-reviews.index', 'icon' => 'clipboard-check', 'sort_order' => 90, 'permission' => PermissionKey::ReviewProjectVersion],
         ['title' => 'Calendario de defensas', 'route_name' => 'defenses.index', 'icon' => 'calendar-days', 'sort_order' => 100, 'permission' => PermissionKey::ScheduleDefense],
+        ['title' => 'Registrar pre-defensa', 'route_name' => 'defense-reviews.index', 'icon' => 'clipboard-list', 'sort_order' => 100, 'permission' => PermissionKey::RegisterPreDefense],
     ];
 
     /**

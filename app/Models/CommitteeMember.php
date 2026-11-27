@@ -69,6 +69,16 @@ class CommitteeMember extends Model
     }
 
     /**
+     * The pre-defense or formal defense registrations this member made (UC-010).
+     *
+     * @return HasMany<DefenseReview, $this>
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(DefenseReview::class);
+    }
+
+    /**
      * Members who were not replaced.
      *
      * @param  Builder<CommitteeMember>  $query

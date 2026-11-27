@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property bool $is_student_absent
  * @property int|null $absence_recorded_by_id
  * @property-read GraduationProcess $graduationProcess
+ * @property-read CommitteeMember|null $absenceRecordedBy
  */
 #[Fillable([
     'graduation_process_id', 'type', 'scheduled_at', 'location', 'grade',
@@ -70,6 +72,27 @@ class Defense extends Model
     public function absenceRecordedBy(): BelongsTo
     {
         return $this->belongsTo(CommitteeMember::class, 'absence_recorded_by_id');
+    }
+
+    /**
+     * The individual registrations of the committee members (UC-010).
+     *
+     * @return HasMany<DefenseReview, $this>
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(DefenseReview::class);
+    }
+
+    /**
+     * The committee members who registered this act, through defense_reviews (UC-010, UC-011).
+     *
+     * @return BelongsToMany<CommitteeMember, $this>
+     */
+    public function committeeMembers(): BelongsToMany
+    {
+        return $this->belongsToMany(CommitteeMember::class, 'defense_reviews', 'defense_id', 'committee_member_id')
+            ->withPivot(['has_observations', 'grade', 'recorded_at']);
     }
 
     /**

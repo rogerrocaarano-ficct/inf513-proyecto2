@@ -857,6 +857,26 @@ observaciones: el estudiante ve "Esta versión no tiene observaciones." justo cu
 Lecturas: (a) el paso 2 muestra además, en la fase defensa formal, las observaciones de la pre-defensa; (b) se deja
 como está y el estudiante las consulta en otro caso de uso (UC-013).
 
+## OQ-058: ¿Con qué textos notifica el sistema al registrar la pre-defensa o la inasistencia?
+
+**Element:** UC-010 step 10, A2  
+**Raised by:** /use-case-implement, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+**Assumed:** Se sigue el estilo de UC-009 (`Se {verbo} la {acto} de {estudiante}`) y de UC-004 (frases cortas con el
+nombre del estudiante). Paso 10: "Se registró la pre-defensa de {estudiante}. Observaciones del tribunal:
+{observaciones}. El trámite pasó a la fase defensa formal.", donde {observaciones} es la unión de los cuerpos de las
+observaciones separados por "; ", o "No hubo observaciones". A2: "Se registró la inasistencia de {estudiante} a la
+pre-defensa. El trámite de titulación quedó abandonado.". El mensaje se recorta a 500 caracteres para caber en
+`notifications.message`; las observaciones completas siguen en `observations`. El tutor también recibe la notificación
+del paso 10 (OQ-028).
+
+El paso 10 y A2 exigen notificaciones internas (C-005) pero no fijan los textos; las observaciones se unen en un solo
+mensaje, sin incluir el nombre de quien las escribió.
+
+**Answer:** los textos anteriores, con el nombre del estudiante y las observaciones del tribunal.  
+**Answered by:** OpenCode (supuesto pendiente de confirmación), 2026-11-26
+
 ## OQ-058: ¿Con qué textos notifica el sistema al estudiante el resultado de la revisión del tribunal?
 
 **Element:** UC-008 step 10  

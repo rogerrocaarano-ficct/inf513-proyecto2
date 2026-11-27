@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "spec-review": {
+      "source": "AI-Unified-Process/marketplace",
+      "sourceType": "github",
+      "skillPath": "aiup-core/skills/spec-review/SKILL.md",
+      "computedHash": "13157b863fad773c961d00eb83cf37daebd92c6e474c51e7013dfe221ad3e144"
+    }
+  }
+}
