@@ -46,7 +46,7 @@ test('the menu of a user with several roles is the union of their options (UC-01
         ->assertInertia(fn ($page) => $page
             ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
                 'Inicio', 'Asignar tutor', 'Docente de taller de grado', 'Tribunal evaluador', 'Mis estudiantes',
-                'Calendario de defensas', 'Registrar pre-defensa',
+                'Calendario de defensas', 'Registrar pre-defensa', 'Registrar calificación',
             ]));
 });
 
@@ -63,7 +63,7 @@ test('a menu option whose page is not built yet is left out', function () {
         ->get(route('dashboard'))
         ->assertInertia(fn ($page) => $page
             ->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
-                'Inicio', 'Mis estudiantes', 'Registrar pre-defensa',
+                'Inicio', 'Mis estudiantes', 'Registrar pre-defensa', 'Registrar calificación',
             ]));
 });
 
@@ -71,7 +71,7 @@ test('a change of roles changes the menu from the next page (UC-018 BR-006)', fu
     registerMenuRoutes('graduation-processes.create');
     $user = User::factory()->withRoles(RoleName::Teacher)->create();
 
-    $this->actingAs($user)->get(route('dashboard'))->assertInertia(fn ($page) => $page->count('menu', 3));
+    $this->actingAs($user)->get(route('dashboard'))->assertInertia(fn ($page) => $page->count('menu', 4));
 
     $user->roles()->attach(Role::query()->where('name', RoleName::AdministrativeAssistant)->value('id'));
 
@@ -100,12 +100,12 @@ test('UC-010 NFR-005: only teachers can register a pre-defense', function () {
         ->and($student->can(PermissionKey::RegisterPreDefense->value))->toBeFalse();
 });
 
-test('UC-010 FR-029: the teacher menu offers the pre-defense registration option', function () {
+test('UC-010 and UC-011 FR-029: the teacher menu offers both defense registration options', function () {
     $teacher = Teacher::factory()->create()->user;
 
     $this->actingAs($teacher)
         ->get(route('dashboard'))
         ->assertInertia(fn ($page) => $page->where('menu', fn ($menu) => collect($menu)->pluck('title')->all() === [
-            'Inicio', 'Mis estudiantes', 'Registrar pre-defensa',
+            'Inicio', 'Mis estudiantes', 'Registrar pre-defensa', 'Registrar calificación',
         ]));
 });

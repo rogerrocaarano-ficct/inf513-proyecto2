@@ -28,6 +28,7 @@ class RolePermissionSeeder extends Seeder
         'versiones.observar' => ['name' => 'Observar versión del proyecto como tutor', 'description' => 'Registrar observaciones sobre las versiones del proyecto de los estudiantes que tutela (UC-007).'],
         'defensas.programar' => ['name' => 'Programar defensas', 'description' => 'Programar o reprogramar pre-defensas y defensas formales (UC-009).'],
         'pre-defensas.registrar' => ['name' => 'Registrar pre-defensa', 'description' => 'Registrar observaciones de la pre-defensa o la inasistencia del estudiante (UC-010).'],
+        'defensas.calificar' => ['name' => 'Registrar calificación', 'description' => 'Registrar una calificación o la inasistencia a la defensa formal (UC-011).'],
     ];
 
     /**
@@ -59,6 +60,7 @@ class RolePermissionSeeder extends Seeder
             'permissions' => [
                 PermissionKey::ViewHome, PermissionKey::EvaluateProjectProfile,
                 PermissionKey::ObserveProjectVersion, PermissionKey::RegisterPreDefense,
+                PermissionKey::GradeFormalDefense,
             ],
         ],
         'Estudiante' => [
@@ -83,6 +85,7 @@ class RolePermissionSeeder extends Seeder
         ['title' => 'Mis estudiantes', 'route_name' => 'tutor-observations.index', 'icon' => 'message-square-text', 'sort_order' => 80, 'permission' => PermissionKey::ObserveProjectVersion],
         ['title' => 'Calendario de defensas', 'route_name' => 'defenses.index', 'icon' => 'calendar-days', 'sort_order' => 90, 'permission' => PermissionKey::ScheduleDefense],
         ['title' => 'Registrar pre-defensa', 'route_name' => 'defense-reviews.index', 'icon' => 'clipboard-list', 'sort_order' => 100, 'permission' => PermissionKey::RegisterPreDefense],
+        ['title' => 'Registrar calificación', 'route_name' => 'formal-defense-reviews.index', 'icon' => 'clipboard-check', 'sort_order' => 110, 'permission' => PermissionKey::GradeFormalDefense],
     ];
 
     /**

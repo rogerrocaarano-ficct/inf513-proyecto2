@@ -36,4 +36,11 @@ class DefensePolicy
     {
         return $this->registerPreDefense($user, $defense);
     }
+
+    public function gradeFormalDefense(User $user, Defense $defense): Response
+    {
+        return $defense->type === DefenseType::FormalDefense && $this->findMember->forDefense($user, $defense) !== null
+            ? Response::allow()
+            : Response::deny('No es miembro vigente del tribunal de esta defensa formal.');
+    }
 }
