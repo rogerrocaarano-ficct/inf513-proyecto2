@@ -62,9 +62,8 @@ class RolePermissionSeeder extends Seeder
             'permissions' => [
                 
                 PermissionKey::ViewHome, PermissionKey::EvaluateProjectProfile,
-               
                 PermissionKey::ObserveProjectVersion, PermissionKey::ReviewProjectVersion,
-            , PermissionKey::RegisterPreDefense,
+                PermissionKey::RegisterPreDefense,
                 PermissionKey::GradeFormalDefense,
             ],
         ],
