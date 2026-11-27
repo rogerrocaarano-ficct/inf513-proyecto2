@@ -29,7 +29,9 @@ function uc010HttpProcess(): array
         'original_file_name' => 'pre-defensa.pdf',
         'evaluated_at' => now()->subDay(),
     ]);
-    $version->approvers()->attach($process->currentCommitteeMembers->modelKeys(), ['approved_at' => now()->subDay()]);
+    $version->versionApprovals()->createMany($process->currentCommitteeMembers->map(
+        fn (CommitteeMember $member): array => ['committee_member_id' => $member->id, 'approved_at' => now()->subDay()],
+    )->all());
     $act = Defense::factory()->for($process)->create(['scheduled_at' => now()->subHour()]);
 
     return [$process, $act, $process->currentCommitteeMembers, $version];
