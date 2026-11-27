@@ -24,8 +24,9 @@ class DefenseEligibility
             DefenseType::PreDefense => $query->where('phase', Phase::PreDefense)
                 ->whereHas('projectVersions', fn (Builder $versions) => $versions
                     ->where('phase', Phase::PreDefense)->where('status', ProjectVersionStatus::Approved)
-                    ->whereHas('approvers', fn (Builder $members) => $members->current()
-                        ->whereColumn('committee_members.graduation_process_id', 'project_versions.graduation_process_id'), '=', 3)),
+                    ->whereHas('versionApprovals', fn (Builder $approvals) => $approvals
+                        ->whereHas('committeeMember', fn (Builder $members) => $members->current()
+                            ->whereColumn('committee_members.graduation_process_id', 'project_versions.graduation_process_id')), '=', 3)),
             DefenseType::FormalDefense => $query->where('phase', Phase::FormalDefense)
                 ->whereHas('defenses', fn (Builder $acts) => $acts
                     ->where('type', DefenseType::PreDefense)->where('is_held', true))

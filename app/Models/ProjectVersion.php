@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
@@ -74,19 +73,21 @@ class ProjectVersion extends Model
     }
 
     /**
-     * @return BelongsToMany<CommitteeMember, $this>
-     */
-    public function approvers(): BelongsToMany
-    {
-        return $this->belongsToMany(CommitteeMember::class, 'version_approvals')->withPivot('approved_at');
-    }
-
-    /**
      * @return HasMany<Observation, $this>
      */
     public function observations(): HasMany
     {
         return $this->hasMany(Observation::class)->orderBy('recorded_at')->orderBy('id');
+    }
+
+    /**
+     * UC-008 BR-002: the approvals the committee members recorded on this version.
+     *
+     * @return HasMany<VersionApproval, $this>
+     */
+    public function versionApprovals(): HasMany
+    {
+        return $this->hasMany(VersionApproval::class);
     }
 
     /**

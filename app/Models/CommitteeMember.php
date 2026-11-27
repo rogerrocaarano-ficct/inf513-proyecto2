@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -55,6 +56,16 @@ class CommitteeMember extends Model
     public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
+    }
+
+    /**
+     * UC-008 BR-002: the approvals this member recorded on pre-defense versions.
+     *
+     * @return HasMany<VersionApproval, $this>
+     */
+    public function versionApprovals(): HasMany
+    {
+        return $this->hasMany(VersionApproval::class);
     }
 
     /**

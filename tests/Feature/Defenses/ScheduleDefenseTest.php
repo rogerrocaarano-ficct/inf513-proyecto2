@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\CommitteeReviews\RegisterCommitteePronouncement;
 use App\Enums\DefenseType;
 use App\Enums\Phase;
 use App\Enums\ProjectVersionStatus;
@@ -19,7 +20,9 @@ function approvedPreDefenseProcess(): GraduationProcess
         'status' => ProjectVersionStatus::Approved,
         'evaluated_at' => now()->subDay(),
     ]);
-    $version->approvers()->attach($process->currentCommitteeMembers->modelKeys(), ['approved_at' => now()->subDay()]);
+    $version->versionApprovals()->createMany($process->currentCommitteeMembers->map(
+        fn (CommitteeMember $member): array => ['committee_member_id' => $member->id, 'approved_at' => now()->subDay()],
+    )->all());
 
     return $process;
 }
@@ -83,6 +86,28 @@ test('UC-009 A4: an empty calendar remains available without changing any record
 
     $this->assertDatabaseCount('defenses', 0);
     $this->assertDatabaseCount('notifications', 0);
+});
+
+test('UC-009 BR-001: the third approval registered by UC-008 enables scheduling', function () {
+    $process = GraduationProcess::factory()->withCommittee()->create();
+    $version = ProjectVersion::factory()->for($process)->preDefenseInReview()->create();
+    $members = $process->currentCommitteeMembers()->with('teacher.user')->get();
+    $register = app(RegisterCommitteePronouncement::class);
+
+    foreach ($members->take(2) as $member) {
+        $register->handle($version, true, [], $member->teacher->user);
+    }
+
+    $this->actingAs($this->director)->get(route('defenses.index'))
+        ->assertInertia(fn ($page) => $page->has('waiting', 0));
+
+    $register->handle($version, true, [], $members->last()->teacher->user);
+
+    $this->get(route('defenses.index'))
+        ->assertInertia(fn ($page) => $page->has('waiting', 1)->where('waiting.0.process_id', $process->id));
+    $this->post(route('defenses.store'), defenseSchedule($process))
+        ->assertRedirect(route('defenses.index'))->assertSessionHasNoErrors();
+    $this->assertDatabaseHas('defenses', ['graduation_process_id' => $process->id, 'type' => DefenseType::PreDefense->value]);
 });
 
 test('UC-009 BR-001: schedules a pre-defense and notifies exactly the student, tutor and current committee', function () {

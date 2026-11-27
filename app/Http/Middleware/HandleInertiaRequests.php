@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\CommitteeMember;
 use App\Models\MenuItem;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -71,11 +72,31 @@ class HandleInertiaRequests extends Middleware
             // UC-005 BR-001: Only the workshop teacher, the reviewer, sees the project profiles option (OQ-056).
             ->filter(fn (MenuItem $item): bool => $item->route_name !== 'project-profiles.index'
                 || $user->teacher?->is_workshop_teacher === true)
+            // UC-008 BR-001, OQ-060: Only a current committee member sees the review option.
+            ->filter(fn (MenuItem $item): bool => $item->route_name !== 'committee-reviews.index'
+                || $this->isCurrentCommitteeMember($user))
             ->map(fn (MenuItem $item): array => [
                 'title' => $item->title,
                 'href' => route($item->route_name, absolute: false),
                 'icon' => $item->icon,
             ])
             ->all());
+    }
+
+    /**
+     * UC-008 BR-001: the permission is by role, but the option is only for a current committee member (OQ-060).
+     */
+    private function isCurrentCommitteeMember(User $user): bool
+    {
+        $teacherId = $user->teacher?->id;
+
+        if ($teacherId === null) {
+            return false;
+        }
+
+        return CommitteeMember::query()
+            ->where('teacher_id', $teacherId)
+            ->current()
+            ->exists();
     }
 }

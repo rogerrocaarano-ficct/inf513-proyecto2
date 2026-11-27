@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Accounts\AccountController;
 use App\Http\Controllers\Auth\InitialPasswordController;
+use App\Http\Controllers\CommitteeReviews\CommitteeReviewController;
 use App\Http\Controllers\Committees\CommitteeController;
 use App\Http\Controllers\Defenses\DefenseController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
@@ -74,6 +75,14 @@ Route::middleware(['auth', 'can:versiones.observar'])->prefix('tutelados')->name
     Route::get('versiones/{projectVersion}', [TutorObservationController::class, 'version'])->name('version');
     Route::post('versiones/{projectVersion}/observaciones', [TutorObservationController::class, 'store'])->name('store');
     Route::get('versiones/{projectVersion}/archivo', [TutorObservationController::class, 'download'])->name('download');
+});
+
+// UC-008: Revisar versión del proyecto como tribunal
+Route::middleware(['auth', 'can:versiones.revisar'])->prefix('revisiones')->name('committee-reviews.')->group(function () {
+    Route::get('/', [CommitteeReviewController::class, 'index'])->name('index');
+    Route::get('versiones/{projectVersion}', [CommitteeReviewController::class, 'show'])->name('show');
+    Route::post('versiones/{projectVersion}/pronunciamiento', [CommitteeReviewController::class, 'store'])->name('store');
+    Route::get('versiones/{projectVersion}/archivo', [CommitteeReviewController::class, 'download'])->name('download');
 });
 
 // UC-009: Programar pre-defensa y defensa formal
