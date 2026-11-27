@@ -6,6 +6,7 @@ use App\Http\Controllers\Committees\CommitteeController;
 use App\Http\Controllers\Defenses\DefenseController;
 use App\Http\Controllers\Defenses\DefenseReviewController;
 use App\Http\Controllers\Defenses\FormalDefenseReviewController;
+use App\Http\Controllers\GraduationProcesses\GraduationProcessArchiveController;
 use App\Http\Controllers\GraduationProcesses\GraduationProcessController;
 use App\Http\Controllers\ProjectProfiles\ProjectProfileController;
 use App\Http\Controllers\ProjectVersions\ProjectVersionController;
@@ -98,6 +99,15 @@ Route::middleware(['auth', 'can:defensas.calificar'])->prefix('calificaciones')-
     Route::get('{defense}', [FormalDefenseReviewController::class, 'show'])->name('show');
     Route::get('{defense}/versiones/{projectVersion}/archivo', [FormalDefenseReviewController::class, 'download'])->name('download');
     Route::post('{defense}', [FormalDefenseReviewController::class, 'store'])->name('store');
+});
+
+// UC-012: Archivar trámite de titulación
+Route::middleware(['auth', 'can:tramites.archivar'])->prefix('archivo-de-tramites')->name('graduation-archives.')->group(function () {
+    Route::get('/', [GraduationProcessArchiveController::class, 'index'])->name('index');
+    Route::get('{graduationProcess}', [GraduationProcessArchiveController::class, 'show'])->name('show');
+    Route::post('{graduationProcess}', [GraduationProcessArchiveController::class, 'store'])->name('store');
+    Route::get('{graduationProcess}/documentos/{requirementDocument}', [GraduationProcessArchiveController::class, 'document'])->name('documents');
+    Route::get('{graduationProcess}/versiones/{projectVersion}', [GraduationProcessArchiveController::class, 'version'])->name('versions');
 });
 
 require __DIR__.'/settings.php';

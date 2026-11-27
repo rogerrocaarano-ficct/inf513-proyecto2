@@ -1,5 +1,6 @@
 import { usePage } from '@inertiajs/react';
 import {
+    Archive,
     BookOpen,
     CalendarDays,
     ClipboardCheck,
@@ -18,6 +19,7 @@ import type { NavItem } from '@/types';
  * Icons a menu option can name in MENU_ITEM.icon.
  */
 const menuIcons: Record<string, LucideIcon> = {
+    archive: Archive,
     'book-open': BookOpen,
     'calendar-days': CalendarDays,
     'clipboard-check': ClipboardCheck,
