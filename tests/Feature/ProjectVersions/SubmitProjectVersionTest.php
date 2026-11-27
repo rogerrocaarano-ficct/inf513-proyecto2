@@ -299,6 +299,10 @@ test('UC-004 BR-002 A3: the page gives the reason when the phase admits no versi
             uc004HeldPreDefense($p, withObservation: true);
             Defense::factory()->for($p)->formalDefense()->held()->create(['scheduled_at' => now()->subDay()]);
         }),
+        'formal-defense-started' => tap(uc004Process($this->student, Phase::FormalDefense), function ($p) {
+            uc004HeldPreDefense($p, withObservation: true);
+            Defense::factory()->for($p)->formalDefense()->create(['scheduled_at' => now()->subHour()]);
+        }),
         'no-observations' => tap(uc004Process($this->student, Phase::FormalDefense), fn ($p) => uc004HeldPreDefense($p, withObservation: false)),
     };
 
@@ -335,6 +339,7 @@ test('UC-004 BR-002 A3: the page gives the reason when the phase admits no versi
     'pre-defense version in review' => ['pre-defense-in-review', 'Su versión 3 del proyecto sigue en revisión.'],
     'pre-defense version approved' => ['pre-defense-approved', 'Su versión de la fase pre-defensa ya fue aprobada y espera el siguiente paso.'],
     'formal defense already held' => ['formal-defense-held', 'Su defensa formal ya se realizó.'],
+    'formal defense already started' => ['formal-defense-started', 'Su defensa formal ya llegó a su hora de inicio.'],
     'pre-defense left no observations' => ['no-observations', 'Su pre-defensa no dejó observaciones que subsanar.'],
 ]);
 

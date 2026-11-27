@@ -877,6 +877,28 @@ mensaje, sin incluir el nombre de quien las escribió.
 **Answer:** los textos anteriores, con el nombre del estudiante y las observaciones del tribunal.  
 **Answered by:** OpenCode (supuesto pendiente de confirmación), 2026-11-26
 
+## OQ-062: ¿Qué versión se defiende si quedaron observaciones y no se presentó otra versión?
+
+**Element:** UC-011 step 4, UC-004 BR-006  
+**Raised by:** implementación de UC-011, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+**Answer:** Si la pre-defensa dejó observaciones y el estudiante no presentó una nueva versión, puede defender la versión aprobada de la pre-defensa.  
+**Answered by:** usuario, 2026-11-26  
+**Resolved in:** UC-004 BR-006  
+
+## OQ-063: ¿Se puede reprogramar una defensa formal con calificaciones parciales?
+
+**Element:** UC-009 BR-005, UC-011 BR-001 y A1  
+**Raised by:** implementación de UC-011, 2026-11-26  
+**Blocking:** No  
+**Status:** Answered  
+
+**Answer:** Las calificaciones parciales no impiden reprogramar una defensa formal pendiente. Se conservan las calificaciones definitivas ya registradas, según UC-011 BR-001.  
+**Answered by:** usuario, 2026-11-26  
+**Resolved in:** UC-009 BR-005, UC-011 BR-001  
+
 ## OQ-058: ¿Con qué textos notifica el sistema al estudiante el resultado de la revisión del tribunal?
 
 **Element:** UC-008 step 10  

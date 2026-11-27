@@ -74,6 +74,11 @@ class FindVersionAdmission
             return 'Su defensa formal ya se realizó.';
         }
 
+        if ($process->defenses()->where('type', DefenseType::FormalDefense)
+            ->where('scheduled_at', '<=', now())->exists()) {
+            return 'Su defensa formal ya llegó a su hora de inicio.';
+        }
+
         // UC-004 BR-006: Versions only when the held pre-defense left observations.
         $leftObservations = (clone $defenses)
             ->where('type', DefenseType::PreDefense)

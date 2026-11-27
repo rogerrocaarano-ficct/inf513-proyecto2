@@ -116,6 +116,8 @@ Una pre-defensa o defensa formal se programa o reprograma solo para una fecha y 
 
 Solo una pre-defensa o defensa formal que aún no se realizó se reprograma; al hacerlo se notifica el cambio al estudiante, al tutor y a los miembros vigentes del tribunal evaluador.
 
+Las calificaciones parciales no impiden reprogramar una defensa formal pendiente. Las calificaciones ya registradas se conservan (UC-011 BR-001).
+
 ### BR-006: Calendario de defensas
 
 El calendario muestra todas las pre-defensas y defensas formales programadas sin realizar, de todos los trámites de titulación, con su tutor y su tribunal evaluador, para que el director de carrera asigne fechas, y elija reemplazos (UC-002, UC-006), sin superponer al tutor ni al tribunal evaluador (FR-018).

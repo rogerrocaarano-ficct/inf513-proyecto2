@@ -108,7 +108,7 @@ Un perfil de proyecto presentado mientras no hay docente de taller de grado qued
 
 ### BR-006: Versión de la defensa formal
 
-En la fase defensa formal el estudiante presenta versiones solo si la pre-defensa dejó observaciones; entonces puede presentar las que necesite, sin límite, hasta la defensa formal, y la última presentada es la que se defiende. Si la pre-defensa no dejó observaciones, no presenta versiones en esa fase y se defiende la versión aprobada de la fase pre-defensa.
+En la fase defensa formal el estudiante presenta versiones solo si la pre-defensa dejó observaciones. Puede presentar las que necesite, sin límite, hasta la defensa formal, y se defiende la última que presentó en esa fase. Si no presentó una nueva versión, haya habido observaciones o no, se defiende la versión aprobada de la fase pre-defensa.
 
 ### BR-007: Título del proyecto de grado
 

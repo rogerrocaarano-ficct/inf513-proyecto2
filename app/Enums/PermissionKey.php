@@ -19,4 +19,5 @@ enum PermissionKey: string
     case ReviewProjectVersion = 'versiones.revisar';
     case ScheduleDefense = 'defensas.programar';
     case RegisterPreDefense = 'pre-defensas.registrar';
+    case GradeFormalDefense = 'defensas.calificar';
 }
